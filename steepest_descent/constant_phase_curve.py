@@ -53,6 +53,8 @@ def _positive_direction(z, derivative, start_point, print_derivative=False) -> t
     if print_derivative is True:
         print(f'derivative in start point = {complex(derivative.evalf(subs={z: z0}))}')
     second_derivative = np.complex_(sp.diff(derivative, z).evalf(subs={z: z0}))
+    if second_derivative == 0:
+        raise ZeroFPrimePrime('Алгоритм ожидает, что в перевальной точке ненулевая вторая производная')
     cos_2chi = - np.abs(np.real(second_derivative)) / np.abs(second_derivative)
     sin_chi_sign = np.sign(np.imag(second_derivative)) if np.imag(second_derivative) != 0 else 1
     return np.sqrt(1 / 2 * (1 + cos_2chi)), np.sqrt(1 / 2 * (1 - cos_2chi)) * sin_chi_sign
@@ -105,3 +107,7 @@ def _exact_next_z(num_func, num_derivative, current_point, current_direction, st
     t_sol = sc.optimize.root_scalar(lambda t: np.imag(num_func(z_of_t(t))) - phase, x0=0,
                                     fprime=lambda t: np.imag(num_derivative(z_of_t(t) * (sin_chi - 1j * cos_chi))))
     return np.complex_(z_of_t(t_sol.root))
+
+
+class ZeroFPrimePrime(Exception):
+    pass
