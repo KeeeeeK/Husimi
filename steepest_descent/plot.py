@@ -1,9 +1,10 @@
 import matplotlib.patches as _mp
 import matplotlib.pyplot as plt
 import numpy as np
+import numpy.typing as npt
 
 
-def plot_curve(points: np.ndarray[np.ndarray, np.ndarray]):
+def plot_curve(points: npt.NDArray[tuple[float, float]]):
     plot_beauty()
     plt.plot(*zip(*points))
 
