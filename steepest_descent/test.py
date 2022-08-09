@@ -3,9 +3,10 @@ import sympy
 from constant_phase_curve import constant_phase_curve
 from re_along_curve import re_along_curve
 from plot import plot_curve
+from F_research import F_const_phase_curve
 # как это должно быть использовано
 
-def test():
+def test1():
     z = sympy.symbols('z')
     analytic_func = sympy.atan(z) + z**2 - z
     x0, y0 = 0, 0
@@ -22,5 +23,9 @@ def test():
     plot_curve(points)
     plt.show()
 
+def test2():
+    points = F_const_phase_curve(10, 0.01, 0)
+    print(points)
+
 if __name__ == '__main__':
-    test()
+    test2()

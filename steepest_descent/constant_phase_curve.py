@@ -8,7 +8,7 @@ from numpy import ndarray
 
 def constant_phase_curve(z: sp.Symbol,
                          analytic_func: sp.Expr,
-                         start_point: tuple[int, int],
+                         start_point: tuple[float, float],
                          steps_params=tuple[float, int, int]) -> np.ndarray:
     """...
     Даёт координаты точек вдоль кривой постоянной фазы функции exp(analytic_func).
