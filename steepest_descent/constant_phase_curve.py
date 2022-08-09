@@ -10,14 +10,14 @@ def constant_phase_curve(z: sp.Symbol,
                          analytic_func: sp.Expr,
                          start_point: tuple[int, int],
                          steps_params=tuple[float, int, int]) -> np.ndarray:
-    """Даёт координаты точек вдоль кривой постоянной фазы функции exp(analytic_func)
+    """Даёт координаты точек вдоль кривой постоянной фазы функции exp(analytic_func).
 
     :param z: аргумент следующей аналитической фукнции
     :param analytic_func: аналитическая функция от z.
     :param start_point: x0, y0.
     Точка перевала от которой будет строиться кривая.
-    То есть именно в этой точке func'' зануляется. Алгоритм прохождения вдоль кривой постоянной фазы надеется на то,
-    что далее не будет переходов через перевальную точку
+    То есть именно в этой точке func'' зануляется.
+    Подразумевается, что кривая постоянной фазы не будет проходить через какие-либо иные перевальные точки.
     :param steps_params: step, steps_backward, steps_forward
     :var step - примерный размер шага вдоль кривой. Требуется сделать его сравнительно маленьким.
     :var steps_backward, steps_forward - количество шагов вперёд и назад вдоль искомой кривой.
@@ -52,8 +52,10 @@ def _positive_direction(z, derivative, start_point, print_derivative=False) -> t
     z0: complex = x0 + 1j * y0
     if print_derivative is True:
         print(f'derivative in start point = {complex(derivative.evalf(subs={z: z0}))}')
+    if not np.isclose(np.complex_(derivative.evalf(subs={z: z0})), 0):
+        raise NonZeroFPrime('Алгоритм ожидает, что в перевальной точке нулевая первая производная')
     second_derivative = np.complex_(sp.diff(derivative, z).evalf(subs={z: z0}))
-    if second_derivative == 0:
+    if np.isclose(second_derivative, 0):
         raise ZeroFPrimePrime('Алгоритм ожидает, что в перевальной точке ненулевая вторая производная')
     cos_2chi = - np.abs(np.real(second_derivative)) / np.abs(second_derivative)
     sin_chi_sign = np.sign(np.imag(second_derivative)) if np.imag(second_derivative) != 0 else 1
@@ -102,11 +104,16 @@ def _exact_next_z(num_func, num_derivative, current_point, current_direction, st
     # Натурально параметризованная прямая, проходящая через ожидаемую точку и перпендикулярная исходному направлению
     z_of_t = lambda t: x_es + sin_chi * t + 1j * (y_es - cos_chi * t)
     # Это вариант решения без использования производной
-    # t_real = sc.optimize.root_scalar(lambda t: np.imag(num_func(z_of_t(t))) - phase, x0=0, fprime=False)
-    # А это вариант с использованием производной
-    t_sol = sc.optimize.root_scalar(lambda t: np.imag(num_func(z_of_t(t))) - phase, x0=0,
-                                    fprime=lambda t: np.imag(num_derivative(z_of_t(t) * (sin_chi - 1j * cos_chi))))
+    t_sol = sc.optimize.root_scalar(lambda t: np.imag(num_func(z_of_t(t))) - phase, x0=-step, x1=step)
+    # А это вариант с использованием производной <-- в ходе тестов оказался забагованным(((
+    # Иногда полученная кривая постоянной ширины искривлялась до неузнаваемости
+    # t_sol = sc.optimize.root_scalar(lambda t: np.imag(num_func(z_of_t(t))) - phase, x0=0,
+    #                                 fprime=lambda t: np.imag(num_derivative(z_of_t(t) * (sin_chi - 1j * cos_chi))))
     return np.complex_(z_of_t(t_sol.root))
+
+
+class NonZeroFPrime(Exception):
+    pass
 
 
 class ZeroFPrimePrime(Exception):
