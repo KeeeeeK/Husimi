@@ -10,7 +10,8 @@ def constant_phase_curve(z: sp.Symbol,
                          analytic_func: sp.Expr,
                          start_point: tuple[int, int],
                          steps_params=tuple[float, int, int]) -> np.ndarray:
-    """Даёт координаты точек вдоль кривой постоянной фазы функции exp(analytic_func).
+    """...
+    Даёт координаты точек вдоль кривой постоянной фазы функции exp(analytic_func).
 
     :param z: аргумент следующей аналитической фукнции
     :param analytic_func: аналитическая функция от z.
