@@ -14,7 +14,9 @@ def F_decent_point(alpha_gamma, k: int) -> tuple[float, float]:
 def F_const_phase_curve(alpha: complex, gamma: float, k: int, steps_params=(0.1, 100, 100)) \
         -> npt.NDArray[tuple[float, float]]:
     z = sp.Symbol('z')
-    analytic_func = -1j * z ** 2 / gamma + alpha * sp.exp(2 * 1j * z)
+    # Да, эта строчка отличается от той, что представлена в дипломе, однако что f(z), что gamma*f(z) 
+    # - имеют одну и ту же кривую постоянной фазы
+    analytic_func = -1j * z ** 2 + alpha * gamma * sp.exp(2 * 1j * z)
     x_k, y_k = F_decent_point(alpha * gamma, k)
     return constant_phase_curve(z, analytic_func, (x_k, y_k), steps_params=steps_params)
 
