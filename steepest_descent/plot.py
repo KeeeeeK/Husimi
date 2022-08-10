@@ -4,6 +4,10 @@ import numpy as np
 import numpy.typing as npt
 
 
+def plot_point(point: tuple[float, float]):
+    # plot_beauty()
+    plt.scatter([point[0]], [point[1]],color='red', marker='o')
+
 def plot_curve(points: npt.NDArray[tuple[float, float]]):
     plot_beauty()
     plt.plot(*zip(*points))
