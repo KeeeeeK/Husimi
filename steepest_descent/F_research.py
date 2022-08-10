@@ -5,6 +5,8 @@ import numpy.typing as npt
 
 from constant_phase_curve import constant_phase_curve
 
+def F(alpha_gamma: complex):
+    return lambda z: -1j * z ** 2 + alpha_gamma * sp.exp(2 * 1j * z)
 
 def F_decent_point(alpha_gamma, k: int) -> tuple[float, float]:
     z_k = 1j / 2 * sc.special.lambertw(-2 * 1j * alpha_gamma, k=k)
