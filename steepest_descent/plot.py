@@ -4,19 +4,29 @@ import numpy as np
 import numpy.typing as npt
 
 
+def plot_beauty(func):
+    def decorator(*args, **kwargs):
+        axes = plt.gca()
+        _grid_lines(axes)
+        _arrows(axes)
+        return func(*args, **kwargs)
+
+    return decorator
+
+
+@plot_beauty
 def plot_point(point: tuple[float, float]):
-    # plot_beauty()
-    plt.scatter([point[0]], [point[1]],color='red', marker='o')
+    plt.scatter([point[0]], [point[1]], color='red', marker='o')
 
+
+@plot_beauty
 def plot_curve(points: npt.NDArray[tuple[float, float]]):
-    plot_beauty()
-    plt.plot(*zip(*points))
+    plt.plot(*zip(*points), color='#1f77b4')
 
 
-def plot_beauty():
-    axes = plt.gca()
-    _grid_lines(axes)
-    _arrows(axes)
+@plot_beauty
+def plot_values(steps_params, values):
+    plt.plot(np.arange(-steps_params[1], steps_params[2], steps_params[0]), values)
 
 
 def _grid_lines(axes):
