@@ -2,11 +2,14 @@ import scipy as sc
 import sympy as sp
 import numpy as np
 import numpy.typing as npt
+from typing import Callable
 
 from constant_phase_curve import constant_phase_curve
 
-def F(alpha_gamma: complex):
-    return lambda z: -1j * z ** 2 + alpha_gamma * sp.exp(2 * 1j * z)
+
+def F(alpha_gamma: complex) -> Callable[[complex], complex]:
+    return lambda z: -1j * z ** 2 + alpha_gamma * np.exp(2 * 1j * z)
+
 
 def F_decent_point(alpha_gamma, k: int) -> tuple[float, float]:
     z_k = 1j / 2 * sc.special.lambertw(-2 * 1j * alpha_gamma, k=k)
@@ -21,4 +24,3 @@ def F_const_phase_curve(alpha_gamma: complex, k: int, steps_params=(0.1, 100, 10
     analytic_func = -1j * z ** 2 + alpha_gamma * sp.exp(2 * 1j * z)
     x_k, y_k = F_decent_point(alpha_gamma, k)
     return constant_phase_curve(z, analytic_func, (x_k, y_k), steps_params=steps_params)
-

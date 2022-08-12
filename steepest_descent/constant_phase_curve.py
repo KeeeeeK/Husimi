@@ -58,7 +58,7 @@ def _positive_direction(z, derivative, start_point, print_derivative=False) -> t
     second_derivative = np.complex_(sp.diff(derivative, z).evalf(subs={z: z0}))
     if np.isclose(second_derivative, 0):
         raise ZeroFPrimePrime('Алгоритм ожидает, что в перевальной точке ненулевая вторая производная')
-    cos_2chi = - np.abs(np.real(second_derivative)) / np.abs(second_derivative)
+    cos_2chi = - (np.real(second_derivative)) / np.abs(second_derivative)
     sin_chi_sign = np.sign(np.imag(second_derivative)) if np.imag(second_derivative) != 0 else 1
     return np.sqrt(1 / 2 * (1 + cos_2chi)), np.sqrt(1 / 2 * (1 - cos_2chi)) * sin_chi_sign
 
