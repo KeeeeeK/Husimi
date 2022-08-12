@@ -26,7 +26,9 @@ def plot_curve(points: npt.NDArray[tuple[float, float]]):
 
 @plot_beauty
 def plot_values(steps_params, values):
-    plt.plot(np.arange(-steps_params[1], steps_params[2], steps_params[0]), values)
+    step, steps_backward, steps_forward = steps_params
+    x = np.linspace(-steps_backward * step, steps_forward * step, steps_backward + 1 + steps_forward)
+    plt.plot(x, values)
 
 
 def _grid_lines(axes):
