@@ -1,3 +1,5 @@
+from functools import wraps
+
 import matplotlib.patches as _mp
 import matplotlib.pyplot as plt
 import numpy as np
@@ -5,6 +7,7 @@ import numpy.typing as npt
 
 
 def plot_beauty(func):
+    @wraps(func)
     def decorator(*args, **kwargs):
         axes = plt.gca()
         _grid_lines(axes)
@@ -18,6 +21,10 @@ def plot_beauty(func):
 def plot_point(point: tuple[float, float]):
     plt.scatter([point[0]], [point[1]], color='red', marker='o')
 
+@plot_beauty
+def plot_scatter(points: npt.NDArray[tuple[float, float]]):
+    plt.scatter(*zip(*points), color='#1f77b4')
+
 
 @plot_beauty
 def plot_curve(points: npt.NDArray[tuple[float, float]]):
@@ -25,10 +32,10 @@ def plot_curve(points: npt.NDArray[tuple[float, float]]):
 
 
 @plot_beauty
-def plot_values(steps_params, values):
+def plot_values(steps_params, values, linewidth=2):
     step, steps_backward, steps_forward = steps_params
     x = np.linspace(-steps_backward * step, steps_forward * step, steps_backward + 1 + steps_forward)
-    plt.plot(x, values)
+    plt.plot(x, values, linewidth=linewidth)
 
 
 def _grid_lines(axes):
