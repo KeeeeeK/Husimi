@@ -21,9 +21,10 @@ def plot_beauty(func):
 def plot_point(point: tuple[float, float]):
     plt.scatter([point[0]], [point[1]], color='red', marker='o')
 
+
 @plot_beauty
-def plot_scatter(points: npt.NDArray[tuple[float, float]]):
-    plt.scatter(*zip(*points), color='#1f77b4')
+def plot_scatter(points: npt.NDArray[tuple[float, float]], color='#1f77b4'):
+    plt.scatter(*zip(*points), color=color)
 
 
 @plot_beauty

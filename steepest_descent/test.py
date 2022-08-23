@@ -72,6 +72,7 @@ def test_values_in_saddle_points():
 
 def test_maxes_of_saddle_points():
     alpha_gamma_array = np.linspace(10, 10000, 30)
+    # k - номер ветви W_k(z)
     k_max_lst = [np.argmax(F_values_in_saddle_points(int(alpha_gamma), alpha_gamma)) for alpha_gamma in
                  alpha_gamma_array]
     plot_scatter(np.array(tuple(zip(alpha_gamma_array, k_max_lst))))
@@ -94,16 +95,42 @@ def test_z_k_asymptotic():
     phi = 1
     alpha_gamma = 1j / 2 * r * np.exp(1j * phi)
     K = -int(10 ** 6 / 2 / pi)
+    # z_K = -pi*K + delta_K
     delta_K_real = 1j / 2 * sc.special.lambertw(-2 * 1j * alpha_gamma, K) + pi * K
-    delta_K_asymptotic = 1j / 2 * ln(r / (2 * pi * np.abs(K))) - phi / 2 +np.sign(K) * pi / 4  + \
-                         ln(2 * pi * np.abs(K)) / 4 / pi / K -\
-                         1j / 4 * phi / pi / K + 1j*np.sign(K)/2/4/K - 1 / 2 * ln(r) / 2 / pi / K
+    delta_K_asymptotic = 1j / 2 * ln(r / (2 * pi * np.abs(K))) - phi / 2 + np.sign(K) * pi / 4 + \
+                         ln(2 * pi * np.abs(K)) / 4 / pi / K - \
+                         1j / 4 * phi / pi / K + 1j / 8 / np.abs(K) - ln(r) / 4 / pi / K
     coord = lambda z: (np.real(z), np.imag(z))
     print(coord(delta_K_real),
           coord((delta_K_real - delta_K_asymptotic)),
           ln(r) / r,
           sep='\n')
+    z_k = -pi*K + delta_K_real
+    print(F_decent_point(alpha_gamma, K)[0] - np.real(z_k*(1-1j*z_k)))
+
+
+def test_re_f_z_k():
+    alpha_gamma_mod = 10 ** 4
+    r = alpha_gamma_mod * 2
+    k = - int(np.abs(alpha_gamma_mod) / np.pi) * 4
+    phi = np.linspace(-np.pi, np.pi, 1000)
+    alpha_gamma_array = 1j / 2 * r * np.exp(1j * phi)
+    # значение F в самой максимальной перевальной точке
+    F_values = np.array([F(alpha_gamma_array[i])(F_decent_point(alpha_gamma_array[i], k)[0] + 1j * F_decent_point(alpha_gamma_array[i], k)[1])
+                         for i in range(len(alpha_gamma_array))])
+
+    pi, ln = np.pi, np.log
+    big_ln = ln(2 * pi * np.abs(k) / r)
+    F_asymptotic = -1j * pi ** 2 * k ** 2 \
+                   - pi * k + pi * k * big_ln - 1j * pi * k * (phi - pi / 2 * np.sign(k)) \
+                   -1j/4*(phi - pi/2*np.sign(k))**2 + 1/2*big_ln*(phi - pi/2*np.sign(k)+1j/2*big_ln)
+
+    z_k = 1j / 2 * sc.special.lambertw(-2 * 1j * alpha_gamma_array, k)
+    F_expected = -1j * z_k ** 2 + z_k
+    plot_scatter(np.array(tuple(zip(phi, np.imag(F_asymptotic - F_expected)/pi))), color='blue')
+    plot_scatter(np.array(tuple(zip(phi, np.imag(F_expected - F_values)))), color='green')
+    plt.show()
 
 
 if __name__ == '__main__':
-    test_z_k_asymptotic()
+    test_re_f_z_k()
