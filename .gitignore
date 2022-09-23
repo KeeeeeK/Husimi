@@ -3,3 +3,9 @@
 venv
 daily.py
 *__pycache__*
+# no tex auxiliary files
+*.aux
+*.fls
+*.fdb_latexmk
+*.log
+*.synctex.gz
