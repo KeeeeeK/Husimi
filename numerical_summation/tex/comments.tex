@@ -24,5 +24,30 @@
 \author{Нугманов Булат}
 
 \begin{document}
-    Поскольку основным
+\section*{Приближение для ряда}
+Обозначение:
+\begin{equation}
+    \begin{aligned}
+        \alpha = r e^{i\phi}
+    \end{aligned}
+\end{equation}
+
+Стирлинг:
+\begin{equation}
+    \begin{aligned}
+        n! \approx \sqrt{2\pi n} \left(\frac{n}{e}\right)^n e^{\frac{1}{12n}+\dots}
+    \end{aligned}
+\end{equation}
+
+Логарифм одного слагаемого в $F-normalized$:
+\begin{equation}
+\begin{aligned}
+    &\ln\left(\frac{\alpha^n e^{i\phi n + i\gamma n(n+1)}}{n!}e^{-r}\right)  \approx 
+    \ln\left(\frac{r^n e^{i\phi n + i\gamma n(n+1)}}{\sqrt{2\pi n} \left(\frac{n}{e}\right)^n e^{\frac{1}{12n}}}e^{-r}\right) =\\
+    &=n \left(\ln r + i \phi + i \gamma (n+1)\right) - \frac{1}{2}\ln\left(2\pi\right) 
+    - \frac{1}{2}\ln n - n \left(\ln n - 1\right) - \frac{1}{12n} - r\\
+    &=n-r + n\cdot\ln\left(\frac{r}{n}\right) + i n \left(\phi + \gamma(n+1)\right)
+     -  \frac{1}{12n} - \frac{1}{2}\ln n - \frac{1}{2}\ln\left(2\pi\right) 
+\end{aligned}
+\end{equation}
 \end{document}
