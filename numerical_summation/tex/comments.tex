@@ -50,4 +50,19 @@
      -  \frac{1}{12n} - \frac{1}{2}\ln n - \frac{1}{2}\ln\left(2\pi\right) 
 \end{aligned}
 \end{equation}
+
+\section*{Из в $F$ в Хусими}
+Это формула 3.3 из моего диплома:
+\begin{equation}\label{QsimF}
+	Q(\beta) =
+	\frac{e^{-|\alpha|^2 -|\beta|^2}}{\pi} \left|F(\alpha \beta^* e^{2 i \Gamma}, e^{-i \Gamma} )\right|^2
+\end{equation}
+
+Если использовать $Fn$ --- $F\; normalized$, которое $Fn(r, \phi, \gamma) = F(r e^{i\phi}, e^{i\gamma}) \cdot e^{-r}$, то формула предстанет в следующем виде:
+
+\begin{equation}
+\begin{aligned}
+    Q(\beta) = \frac{e^{-\left(|\alpha|-|\beta|\right)^2}}{\pi}\left|Fn(|\alpha\beta|, 2 \Gamma + \arg\left(\alpha\beta^*\right), -\Gamma)\right|^2
+\end{aligned}
+\end{equation}
 \end{document}
