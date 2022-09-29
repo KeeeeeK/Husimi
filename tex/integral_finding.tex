@@ -1,0 +1,56 @@
+\documentclass[a4paper, 12pt]{article}
+
+%Русский язык
+\renewcommand{\familydefault}{\sfdefault}%шрифт
+\usepackage[T2A]{fontenc} %кодировка
+\usepackage[utf8]{inputenc} %кодировка исходного кода
+\usepackage[english,russian]{babel} %локализация и переносы
+%отступы 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=3cm,bindingoffset=0cm]{geometry}
+\usepackage{indentfirst}
+%Вставка картинок
+\usepackage{graphicx}
+\graphicspath{}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%Таблицы
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{booktabs}
+
+
+%Математика
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
+
+%Заголовок
+\author{Нугманов Булат}
+
+\begin{document}
+\section*{Разложение $z_k$}
+\subsection*{Разложение функции Ламберта из статьи}
+Следующая формула взята из статьи "On the Lambert W Function"(DOI:10.1007/BF02124750), формула (4.20):
+\begin{equation}
+\begin{aligned}
+    W_k(z) = \log z + 2\pi i k - \log\left(\log z + 2\pi i k\right) + \sum\limits_{k=0}^{\infty}\sum\limits_{m=1}^{\infty} c_{km}\log^m\left(\log z + 2\pi i k\right)\left(\log z + 2\pi i k \right)^{-k-m}
+\end{aligned}
+\end{equation}
+
+Для того, чтоб ветви функции Ламберта совпадали с общепринятыми, ветви $\log z$ необходимо так же брать привычными --- с разрезом на отрицательных числах и нулевой мнимой частью при положительных $z$. Коэффициенты $c_{km}$ определены в статье после формулы (4.18):
+\begin{equation}
+\begin{aligned}
+    c_{km} = \frac{(-1)^k}{m!} c(k+m, k+1)
+\end{aligned}
+\end{equation}
+
+$c(k+m, k+1)$ --- это беззнаковые числа Стирлинга первого рода. В вольфраме они обозначаются как "Abs@StirlingS1[k+m, k+1]".
+
+В нашей же задаче, требуется определить $z_k = \frac{i}{2}W_k(-2i\alpha\gamma)$. Обозначая $z=-2i\alpha\gamma$, $k+m=n$, получаем:
+\begin{equation}
+\begin{aligned}
+    -2iz_k &= W_k(z) \\
+    &= \log z + 2\pi i k - \log\left(\log z + 2\pi i k\right) + \dots \\
+    &\dots + \sum\limits_{n=1}^{\infty}\sum\limits_{k=0}^{\infty} 
+    \frac{(-1)^k}{(n-k)!} c(n, k+1)\left(\frac{\log\left(\log z + 2\pi i k\right)}{\log z + 2\pi i k}\right)^n\frac{1}{\log^k\left(\log z + 2\pi i k\right)}
+\end{aligned}
+\end{equation}
+В такой форме наглядно видно разложение по малости остаточных членов. В дальнейшем будет видно, что члены разложения большим параметром здесь является номер функции Ламберта --- $k$
+\end{document}
