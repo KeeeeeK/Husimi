@@ -48,9 +48,9 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{aligned}
     -2iz_k &= W_k(z) \\
     &= \log z + 2\pi i k - \log\left(\log z + 2\pi i k\right) + \dots \\
-    &\dots + \sum\limits_{n=1}^{\infty}\sum\limits_{k=0}^{\infty} 
-    \frac{(-1)^k}{(n-k)!} c(n, k+1)\left(\frac{\log\left(\log z + 2\pi i k\right)}{\log z + 2\pi i k}\right)^n\frac{1}{\log^k\left(\log z + 2\pi i k\right)}
+    &\dots + \sum\limits_{n=1}^{\infty}\sum\limits_{m=1}^{n} 
+    \frac{(-1)^{n-m}}{m!} c(n, n-m+1)\frac{\log^{m}\left(\log z + 2\pi i k\right)}{\left(\log z + 2\pi i k\right)^n}
 \end{aligned}
 \end{equation}
-В такой форме наглядно видно разложение по малости остаточных членов. В дальнейшем будет видно, что члены разложения большим параметром здесь является номер функции Ламберта --- $k$
+В такой форме наглядно видно разложение по малости остаточных членов. В дальнейшем будет видно, что большим параметром при разложении здесь является номер функции Ламберта --- $k$. Ещё можно использовать знаковые числа Стирлинга ($s(n, k) = (-1)^{n-k}c(n, k) \Rightarrow (-1)^{n-m} c(n, n-m+1) = (-1)^{n+1} s(n, n-m+1)$), однако в этом нет пока необходимости.
 \end{document}
