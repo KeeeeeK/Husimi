@@ -9,3 +9,4 @@ daily.py
 *.fdb_latexmk
 *.log
 *.synctex.gz
+*.out
