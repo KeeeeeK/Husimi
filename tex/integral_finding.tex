@@ -59,7 +59,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \subsection*{Общая теория метода перевала второго порядка}
 В википедии следующая штука имеет название "Campbell–Froman–Walles–Wojdylo formula". Если нужно куда-то сослаться, то подойдёт файл "Метод перевала с остаточными членами". Там это формула (1.11). (Для нас удобнее наблюдать за последней строчкой. Для случая второго порядка перевальной точки надо положить $\alpha=2$. Для случая отсутствующей при экспоненте функции под интегралом надо положить $b_k = \delta_{k0}, \: \beta = 1$.) Пример для случая перевальной точки второго порядка на контуре интегрирования можно найти в формулах (1.17 - 1.19). (Там пример с асимптотикой гамма-фукнции.) Перепишем то же самое для случая перевальной точки второго порядка $z_0$:
 
-\begin{equation}
+\begin{equation}\label{steepest_decent}
 \begin{aligned}
     &\int e^{\lambda f(z)} dz = \frac{e^{\lambda f(z_0)+i\chi}}{\sqrt{|a_0|\lambda}}\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^n} \\ 
     & \Gamma\left(n+\frac{1}{2}\right) c_{2n}= \frac{1}{a_0^n}\sum\limits_{j=0}^{2n}\frac{(-1)^j}{j! a_0^j} \Gamma\left(n+j+\frac{1}{2}\right) \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) \\
@@ -70,5 +70,15 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \subsection*{Обобщённые числа Стирлинга}
 Они упоминаются в английской вики на странице \href{https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind}{о числах Стирлинга}. Там же приводится ссылка на книгу Кометта, посвящённую комбинаторике. (см. papers)
 \subsection*{Применение теории}
-
+Как упоминается в приложении к диплому:
+\begin{equation}\label{steepest_decent}
+\begin{aligned}
+    \sum\limits_{n=0}^{\infty} \frac{\alpha^n e^{i\gamma n^2}}{n!} 
+    &= \frac{e^{\frac{i\pi}{4}}}{\sqrt{\pi\gamma}}
+    \int\limits_{-\infty}^{\infty}e^{-i \frac{x^2}{\gamma} + \alpha e^{2ix}}dx
+    &= \frac{e^{\frac{i\pi}{4}}}{\sqrt{\pi\gamma}}
+    \int\limits_{-\infty}^{\infty}e^{\frac{1}{\gamma}\left(-i x^2 + \alpha \gamma e^{2ix}\right)}dx
+\end{aligned}
+\end{equation}
+В таком виде очевидно, что в формуле \ref{steepest_decent} будут использоваться следующие замены: $\lambda\leadsto\frac{1}{\gamma}$, $f(x) = -i x^2 + \alpha \gamma e^{2ix} = -i x^2 + \frac{iz}{2} e^{2ix}$. (А так же вспомним обозначение из первой части $z=-2i\alpha\gamma$).
 \end{document}
