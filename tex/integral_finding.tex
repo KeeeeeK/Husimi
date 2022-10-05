@@ -63,15 +63,20 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{aligned}
     &\int e^{\lambda f(z)} dz = \frac{e^{\lambda f(z_0)+i\chi}}{\sqrt{|a_0|\lambda}}\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^n} \\ 
     & \Gamma\left(n+\frac{1}{2}\right) c_{2n}= \frac{1}{a_0^n}\sum\limits_{j=0}^{2n}\frac{(-1)^j}{j! a_0^j} \Gamma\left(n+j+\frac{1}{2}\right) \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) \\
-    & f(z) = f(z_0) + \sum\limits_{m=0}^{\infty} a_k (z-z_0)^{m+2},
+    & f(z) = f(z_0) + \sum\limits_{p=0}^{\infty} a_p (z-z_0)^{p+2},
 \end{aligned}
 \end{equation}
-где $\chi$ --- угол, характеризующий направление кривой постоянной фазы в окрестности точки перевала, а $\hat{B}_{2n, j}\left(\dots\right)$ --- обыкновенные полиномы Белла. В большинстве литературы рассматриваются исключительно экспоненциальные полиномы Белла, которые в обозначениях отличаются лишь шляпкой.
+где $\chi$ --- угол, характеризующий направление кривой постоянной фазы в окрестности точки перевала, а $\hat{B}_{2n, j}\left(\dots\right)$ --- обыкновенные полиномы Белла. В большинстве литературы рассматриваются исключительно экспоненциальные полиномы Белла, которые в обозначениях отличаются лишь шляпкой. 
 \subsection*{Обобщённые числа Стирлинга}
 Они упоминаются в английской вики на странице \href{https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind}{о числах Стирлинга}. Там же приводится ссылка на книгу Кометта, посвящённую комбинаторике. (см. papers)
+\begin{equation}
+\begin{aligned}
+    \exp\left(u\left(\frac{t^r}{r!}+\frac{t^{r+1}}{\left(r+1\right)!}+\dots\right)\right) = \sum\limits_{n, k = 0}^{\infty} S_{r}(n, k) u^k \frac{t^n}{n!}
+\end{aligned}
+\end{equation}
 \subsection*{Применение теории}
 Как упоминается в приложении к диплому:
-\begin{equation}\label{steepest_decent}
+\begin{equation}
 \begin{aligned}
     \sum\limits_{n=0}^{\infty} \frac{\alpha^n e^{i\gamma n^2}}{n!} 
     &= \frac{e^{\frac{i\pi}{4}}}{\sqrt{\pi\gamma}}
@@ -80,5 +85,13 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     \int\limits_{-\infty}^{\infty}e^{\frac{1}{\gamma}\left(-i x^2 + \alpha \gamma e^{2ix}\right)}dx
 \end{aligned}
 \end{equation}
-В таком виде очевидно, что в формуле \ref{steepest_decent} будут использоваться следующие замены: $\lambda\leadsto\frac{1}{\gamma}$, $f(x) = -i x^2 + \alpha \gamma e^{2ix} = -i x^2 + \frac{iz}{2} e^{2ix}$. (А так же вспомним обозначение из первой части $z=-2i\alpha\gamma$).
+В таком виде очевидно, что в формуле \ref{steepest_decent} будут использоваться следующие замены: $\lambda\leadsto\frac{1}{\gamma}$, $f(x) \leadsto -i x^2 + \alpha \gamma e^{2ix} = -i x^2 - \frac{z}{2i} e^{2ix}$. (А так же вспомним обозначение из первой части $z=-2i\alpha\gamma$).
+\begin{equation}
+\begin{aligned}
+    \frac{f(x) - f(z_k)}{(x-z_k)^2} 
+    &=  \sum\limits_{p=0}^{\infty} \frac{f^{(p+2)}(z_k)}{(p+2)!}(x-z_k)^{p}\\
+    &=  \underbrace{\left(-2i - 2iz e^{2iz_k}\right)}_{a_0} - \sum\limits_{p=1}^{\infty} \underbrace{\frac{(2i)^{p+1}ze^{2iz_k}}{(p+2)!}}_{a_1, a_2, \dots}(x-z_k)^{p}
+\end{aligned}
+\end{equation}
+
 \end{document}
