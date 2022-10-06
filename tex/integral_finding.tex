@@ -60,22 +60,19 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 Следует быть осторожным при использовании чужих формул по методу перевала. Сейчас будет сформулировано утверждение под названием ''Perron's formula''
 \footnote{Формула (2.5) в файле "Метод перевала с остаточными членами". Сразу рассмотрим более частный случай, имеющий непосредственное влияние на нашу задачу. А именно возьмём перевальную точку второго порядка $m=2$, положим функцию рядом с экспонентой под интегралом $g(z)=1$, будем считать, что контур проходит через перевальную точку, а не имеет в ней начало или конец, как это приведено в книге.}. 
 Это формула для нахождения интеграла через перевальную точку $z_0$ вдоль кривой наискорейшего спуска $\gamma$. 
-\begin{equation*}\label{steepest_decent}
+\begin{equation}\label{steepest_decent}
 \begin{aligned}
-    \int_{\gamma} e^{\lambda f(z)} dz = 2e^{\lambda f(z_0)}\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^{n+\frac{1}{2}}} \\
-    c_{2n} = \frac{1}{2(2n)!}\left[\left(\frac{d}{dz}\right)^{2n}\left\lbrace\frac{(z-z_0)^2}{f(z)-f(z_0)}\right\rbrace^{n+\frac{1}{2}}\right]_{z=z_0}
+    \int_{\gamma} e^{\lambda f(z)} dz = e^{\lambda f(z_0)}\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^{n+\frac{1}{2}}} \\
+    c_{2n} = \frac{1}{(2n)!}\left[\left(\frac{d}{dz}\right)^{2n}\left\lbrace\frac{(z-z_0)^2}{f(z)-f(z_0)}\right\rbrace^{n+\frac{1}{2}}\right]_{z=z_0}
 \end{aligned}
-\end{equation*}
-% В википедии следующая штука имеет название "Campbell–Froman–Walles–Wojdylo formula". Если нужно куда-то сослаться, то подойдёт файл "Метод перевала с остаточными членами". Там это формула (1.11). (Для нас удобнее наблюдать за последней строчкой. Для случая второго порядка перевальной точки надо положить $\alpha=2$. Для случая отсутствующей при экспоненте функции под интегралом надо положить $b_k = \delta_{k0}, \: \beta = 1$.) Пример для случая перевальной точки второго порядка на контуре интегрирования можно найти в формулах (1.17 - 1.19). (Там пример с асимптотикой гамма-фукнции.) Перепишем то же самое для случая перевальной точки второго порядка $z_0$:
-
-% \begin{equation}\label{steepest_decent}
-% \begin{aligned}
-%     &\int e^{\lambda f(z)} dz = \frac{e^{\lambda f(z_0)+i\chi}}{\sqrt{|a_0|\lambda}}\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^n} \\ 
-%     & \Gamma\left(n+\frac{1}{2}\right) c_{2n}= \frac{1}{a_0^n}\sum\limits_{j=0}^{2n}\frac{(-1)^j}{j! a_0^j} \Gamma\left(n+j+\frac{1}{2}\right) \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) \\
-%     & f(z) = f(z_0) + \sum\limits_{p=0}^{\infty} a_p (z-z_0)^{p+2},
-% \end{aligned}
-% \end{equation}
-% где $\chi$ --- угол, характеризующий направление кривой постоянной фазы в окрестности точки перевала, а $\hat{B}_{2n, j}\left(\dots\right)$ --- обыкновенные полиномы Белла. В большинстве литературы рассматриваются исключительно экспоненциальные полиномы Белла, которые в обозначениях отличаются лишь шляпкой. 
+\end{equation}
+Если же использовать разложение функции $f$ в ряд Тейлора, то можно получить ''Campbell – Froman – Walles – Wojdylo formula''\footnote{формула (1.11) в книжке по методу перевала.}.
+\begin{equation}\label{steepest_decent_taylor}
+\begin{aligned}
+    &f(z) = f(z_0) + \sum\limits_{p=0}^{\infty} a_p (z-z_0)^{p+2}\\
+    &c_{2n} = \frac{1}{a_0^{n+\frac{1}{2}}}\sum\limits_{j=0}^{2n} C_{-n-\frac{1}{2}}^j\frac{1}{a_0^j}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)
+\end{aligned}
+\end{equation}
 \subsection*{Обобщённые числа Стирлинга}
 Они упоминаются в английской вики на странице \href{https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind}{о числах Стирлинга}. Там же приводится ссылка на книгу Кометта, посвящённую комбинаторике. (см. papers)
 \begin{equation}
@@ -99,8 +96,40 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{aligned}
     \frac{f(x) - f(z_k)}{(x-z_k)^2} 
     &=  \sum\limits_{p=0}^{\infty} \frac{f^{(p+2)}(z_k)}{(p+2)!}(x-z_k)^{p}\\
-    &=  \underbrace{\left(-2i - 2iz e^{2iz_k}\right)}_{a_0} - \sum\limits_{p=1}^{\infty} \underbrace{\frac{(2i)^{p+1}ze^{2iz_k}}{(p+2)!}}_{a_1, a_2, \dots}(x-z_k)^{p}
+    &=  \underbrace{\left(-i - iz e^{2iz_k}\right)}_{a_0} - \sum\limits_{p=1}^{\infty} \underbrace{\frac{(2i)^{p+1}ze^{2iz_k}}{(p+2)!}}_{a_1, a_2, \dots}(x-z_k)^{p}
+\end{aligned}
+\end{equation}
+Теперь мы готовы воспользоваться формулой \ref{steepest_decent_taylor} и выразить интеграл по перевальному контуру через $z_k$ (а так же используем формулу 5.6 из моего диплома):
+\begin{equation}
+\begin{aligned}
+    &\int\limits_{\gamma_k}e^{\frac{1}{\gamma}\left(-i x^2 + \alpha \gamma e^{2ix}\right)}dx 
+    = \exp\left(\frac{z_k(1-i z_k)}{\gamma}\right)\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)c_{2n}\gamma^{n+\frac{1}{2}}\\
+    &c_{2n} = 
+    \sum\limits_{j=0}^{2n} C_{-n-\frac{1}{2}}^j\frac{1}{\left(-i - iz e^{2iz_k}\right)^{n+j+\frac{1}{2}}}
+    \hat{B}_{2n, j}\left(-\frac{(2i)^{2}ze^{2iz_k}}{3!}, -\frac{(2i)^{4}ze^{2iz_k}}{4!}, \dots, -\frac{(2i)^{2n-j+2}ze^{2iz_k}}{(2n-j+3)!}\right)
+\end{aligned}
+\end{equation}
+Для упрощения последнего выражения нам понадобиться пара свойств полиномов Белла. А именно можно использовать их однородность и экспоненциальные полиномы Белла:
+\begin{equation}
+\begin{aligned}
+    \hat{B}_{2n, j}(\zeta x_1, \zeta x_2, \dots, \zeta x_{2n-j+1}) &= \zeta^j \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})\\
+    \hat{B}_{2n, j}(\zeta x_1, \zeta^2 x_2, \dots, \zeta^{2n-j+1} x_{2n-j+1}) &= \zeta^{2n} \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})\\
+    \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1}) &= \frac{j!}{(2n)!}B_{2n, j}\left(x_1 1!, x_2 2!, \dots, x_{2n-j+1}(2n-j+1)!\right)
 \end{aligned}
 \end{equation}
 
+Из этого следует:
+\begin{equation}
+\begin{aligned}
+    \hat{B}_{2n, j}&\left(-\frac{(2i)^{2}ze^{2iz_k}}{3!}, -\frac{(2i)^{4}ze^{2iz_k}}{4!}, \dots, -\frac{(2i)^{2n-j+2}ze^{2iz_k}}{(2n-j+3)!}\right) = \\
+    &= \frac{(-2iz e^{2iz_k})^j (2i)^{2n}j!}{(2n)!}B_{2n, j}\left( \frac{1}{3\cdot 4}, \frac{1}{4\cdot 5} , \dots, \frac{(2n-j+1)!}{(2n-j+3)!}\right)
+\end{aligned}
+\end{equation}
+
+И вот тут нам как раз пригодятся обобщённые числа Стирлинга, потому что есть так же следующая формула:
+\begin{equation}
+\begin{aligned}
+    next day
+\end{aligned}
+\end{equation}
 \end{document}
