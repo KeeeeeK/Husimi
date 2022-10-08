@@ -77,7 +77,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 Они упоминаются в английской вики на странице \href{https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind}{о числах Стирлинга}. Там же приводится ссылка на книгу Кометта, посвящённую комбинаторике. (см. papers)
 \begin{equation}
 \begin{aligned}
-    \exp\left(u\left(\frac{t^r}{r!}+\frac{t^{r+1}}{\left(r+1\right)!}+\dots\right)\right) = \sum\limits_{n, k = 0}^{\infty} S_{r}(n, k) u^k \frac{t^n}{n!}
+    \exp\left(u\left(\frac{t^r}{r!}+\frac{t^{r+1}}{\left(r+1\right)!}+\dots\right)\right) = \sum\limits_{n=(r+1)k, k = 0}^{\infty} S_{r}(n, k) u^k \frac{t^n}{n!}
 \end{aligned}
 \end{equation}
 \subsection*{Применение теории}
@@ -122,14 +122,35 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{equation}
 \begin{aligned}
     \hat{B}_{2n, j}&\left(-\frac{(2i)^{2}ze^{2iz_k}}{3!}, -\frac{(2i)^{4}ze^{2iz_k}}{4!}, \dots, -\frac{(2i)^{2n-j+2}ze^{2iz_k}}{(2n-j+3)!}\right) = \\
+    &= (-2iz e^{2iz_k})^j (2i)^{2n}\hat{B}_{2n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(2n-j+3)!}\right)\\
     &= \frac{(-2iz e^{2iz_k})^j (2i)^{2n}j!}{(2n)!}B_{2n, j}\left( \frac{1}{3\cdot 4}, \frac{1}{4\cdot 5} , \dots, \frac{(2n-j+1)!}{(2n-j+3)!}\right)
 \end{aligned}
 \end{equation}
-
-И вот тут нам как раз пригодятся обобщённые числа Стирлинга, потому что есть так же следующая формула:
+\subsection*{Рекуррентная формула для коэффициентов $B_{2n, j}$}
+К сожалению, полученные полиномы Белла никак не преобразуются к числам Стирлинга. Возлагались надежды на использование следующей формулы:
 \begin{equation}
 \begin{aligned}
-    next day
+    \exp\left(u \sum\limits_{j=1}^{\infty}x_j t^j\right) = \sum\limits_{n\geq k\geq 0} 
+    \hat{B}\left(x_1, x_2, \dots, x_{n-j+1}\right) u^n \frac{t^k}{k!}
+\end{aligned}
+\end{equation}
+
+Подставляя необходимые $x_j$ в нашем случае, получаем следующий ряд:
+
+\begin{equation}
+\begin{aligned}
+    \sum\limits_{n\geq k\geq 0} 
+    \hat{B}_{n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(n-j+3)!}\right) u^n \frac{t^k}{k!} = 
+    \exp\left(u \sum\limits_{j=1}^{\infty}\frac{1}{(j+2)!} t^j\right) = \\
+    = \exp\left(\frac{u}{t^3}\left(e^t - 1 -t - \frac{t^2}{2}\right)\right) = \sum\limits_{n=3k, k = 0}^{\infty} S_{2}(n, k) \frac{u^k}{t^{3k}}\frac{t^n}{n!} = 
+    \sum\limits_{n, k = 0}^{\infty} S_{2}(n, k+3n) u^n\frac{t^k}{k!}
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+    \hat{B}_{n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(n-j+3)!}\right) = S_{2}(n, k+3n)
 \end{aligned}
 \end{equation}
 \end{document}
