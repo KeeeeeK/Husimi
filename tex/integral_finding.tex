@@ -131,7 +131,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{equation}
 \begin{aligned}
     \exp\left(u \sum\limits_{j=1}^{\infty}x_j t^j\right) = \sum\limits_{n\geq k\geq 0} 
-    \hat{B}\left(x_1, x_2, \dots, x_{n-j+1}\right) u^n \frac{t^k}{k!}
+    \hat{B}_{n,k}\left(x_1, x_2, \dots, x_{n-k+1}\right) u^n \frac{t^k}{k!}
 \end{aligned}
 \end{equation}
 
@@ -140,18 +140,19 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{equation}
 \begin{aligned}
     \sum\limits_{n\geq k\geq 0} 
-    \hat{B}_{n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(n-j+3)!}\right) u^n \frac{t^k}{k!} = 
-    \exp\left(u \sum\limits_{j=1}^{\infty}\frac{1}{(j+2)!} t^j\right) = \\
-    = \exp\left(\frac{u}{t^3}\left(e^t - 1 -t - \frac{t^2}{2}\right)\right) = 
-    \sum\limits_{n=3k, k = 0}^{\infty} S_{2}(n, k) \frac{u^k}{t^{3k}}\frac{t^n}{n!} = 
-    \sum\limits_{n, k = 0}^{\infty} S_{2}(k+3n, n) u^n\frac{t^k}{k!}
+    \hat{B}_{n, k}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(n-k+3)!}\right) u^n \frac{t^k}{k!} &= 
+    \exp\left(u \sum\limits_{j=1}^{\infty}\frac{1}{(j+2)!} t^j\right) \\ 
+    &= \exp\left(\frac{u}{t^3}\left(e^t - 1 -t - \frac{t^2}{2}\right)\right) \\
+    &= \sum\limits_{n=3k, k = 0}^{\infty} S_{3}(n, k) \frac{u^k}{t^{3k}}\frac{t^n}{n!} \\
+    &= \sum\limits_{n=3k, k = 0}^{\infty} S_{3}(n+3k, k) u^k\frac{t^n}{(n+3k)!} \\
+    &= \sum\limits_{n, k = 0}^{\infty} \frac{k!}{(k+3n)!}S_{3}(k+3n, n) u^n\frac{t^k}{k!}
 \end{aligned}
 \end{equation}
 
 
 \begin{equation}
 \begin{aligned}
-    \hat{B}_{n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(n-j+3)!}\right) = S_{2}(k+3n, n)
+    \hat{B}_{n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(n-j+3)!}\right) = \frac{k!}{(k+3n)!}S_{3}(k+3n, n)
 \end{aligned}
 \end{equation}
 \end{document}
