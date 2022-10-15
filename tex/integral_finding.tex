@@ -21,7 +21,7 @@
 \usepackage{hyperref}
 %Математика
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
-
+\DeclareMathOperator*{\Res}{Res}
 %Заголовок
 \author{Нугманов Булат}
 
@@ -190,7 +190,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     \item Большие буквы обозначают неизменность, что важно в контексте множества сумм, парамтров и всего такого
     \item $A$ позволит не путать моё ошибочно выбранное обозначение с общепринятым
     \item $\Gamma$ совпадает с общепринятым обозначением
-    \item Большая буква $Z$ обозначает неизменную комплексную величину\footnote{Надеюсь на благоразумность читателей, потому что автор против Z-движения в России}
+    \item Большая буква $Z$ обозначает неизменную комплексную величину\footnote{Надеюсь на благоразумие читателей, потому что автор против Z-движения в России}
 \end{enumerate}
 
 Так же для упрощения формул с методом перевала немного переписать подынтегральную функцию:
@@ -247,5 +247,28 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     = \left(\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)\right)\left(\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^{n+\frac{1}{2}}}\right)
 \end{aligned}
 \end{equation}
+\subsection*{Смелые идеи}
+Полученную сумму $\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)$ можно было бы переписать в виде интеграла, а затем переписать полученное выражение с помощью метода перевала. Это получился бы метод перевала в квадрате! Покажу первые шаги:
+\begin{equation}
+\begin{aligned}
+    \sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right) = 
+    \frac{1}{2\pi i}\int\limits_C \frac{e^{\lambda f(z)}}{-ize^{-iz}-Z} g(z)dz
+\end{aligned}
+\end{equation}
 
+Контур $C$ необходимо выбрать так, чтоб он обходил все $z_k$. Функцию $g(z)$ необходимо выбрать из следующих соображений:
+\begin{equation}
+\begin{aligned}
+    \Res\limits_{z=z_k} \frac{e^{\lambda f(z)}}{-ize^{-iz}-Z} g(z) = e^{\lambda f(z_k)}
+\end{aligned}
+\end{equation}
+
+Или же, в предположении целости функции $g$:
+\begin{equation}
+\begin{aligned}
+    g(z_k) = \frac{d}{dz}\left(-ize^{-iz}-Z\right)_{z=z_k}  = \underbrace{-(i+z_k)e^{-iz_k}} = -(i+z_k)\frac{iZ}{z_k} = \underbrace{-i(1+Ze^{i z_k})e^{-iz_k}}
+\end{aligned}
+\end{equation}
+
+Любой из обведённых вариантов удобен для задании функции $g$ в зависимости от поведения модуля подынтегральной функции на комплексной плоскости. Очень важно, чтоб контур интегрирования деформировался удобным образом.
 \end{document}
