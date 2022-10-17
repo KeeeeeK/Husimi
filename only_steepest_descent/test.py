@@ -116,7 +116,8 @@ def test_re_f_z_k():
     phi = np.linspace(-np.pi, np.pi, 1000)
     alpha_gamma_array = 1j / 2 * r * np.exp(1j * phi)
     # значение F в самой максимальной перевальной точке
-    F_values = np.array([F(alpha_gamma_array[i])(F_decent_point(alpha_gamma_array[i], k)[0] + 1j * F_decent_point(alpha_gamma_array[i], k)[1])
+    F_values = np.array([F(alpha_gamma_array[i])(F_decent_point(alpha_gamma_array[i], k)[0] +
+                                                 1j * F_decent_point(alpha_gamma_array[i], k)[1])
                          for i in range(len(alpha_gamma_array))])
 
     pi, ln = np.pi, np.log
@@ -133,4 +134,4 @@ def test_re_f_z_k():
 
 
 if __name__ == '__main__':
-    test_re_f_z_k()
+    test_values_in_saddle_points()
