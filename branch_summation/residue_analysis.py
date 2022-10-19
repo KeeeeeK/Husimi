@@ -38,5 +38,5 @@ if __name__ == '__main__':
     # print(w * np.exp(w))
     # plot_saddle_points(w * np.exp(w), [0, 1])
     # plt.show()
-    plot_re_in_z_k(2j, np.arange(-2, 1))
+    plot_re_in_z_k(50*2*np.pi, np.arange(-10**2, 1))
     plt.show()
