@@ -226,8 +226,8 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 По-моему, такие обозначения просто прекрасны. Вот, например, разложение вокруг перевальной точки:
 \begin{equation}
 \begin{aligned}
-    f(z) = \underbrace{\frac{z_k^2}{2i} + z_k}_{f(z_k)} + \underbrace{\frac{2-i}{4}}_{a_0} (z-z_k)^2 + 
-    \sum_{n=1}^{\infty} \underbrace{\frac{-i^n}{(n+2)!}}_{a_1, \: a_2, \dots} (z-z_k)^{n+2}
+    f(z) = \underbrace{\frac{z_k^2}{2i} + z_k}_{f(z_k)} + \underbrace{\frac{-i-z_k}{2}}_{a_0} (z-z_k)^2 + 
+    \sum_{n=1}^{\infty} \underbrace{\frac{-i^n z_k}{(n+2)!}}_{a_1, \: a_2, \dots} (z-z_k)^{n+2}
 \end{aligned}
 \end{equation}
 
@@ -240,17 +240,8 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     \sum\limits_{j=0}^{2n} C_{-n-\frac{1}{2}}^j\frac{1}{a_0^{n+j+\frac{1}{2}}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)
 \end{aligned}
 \end{equation}
-
-Можно заметить, что сумма, стоящая после $\exp\left(\lambda f(z_k)\right)$ совершенно не зависит от $z_k$. Более того, все $c_{2n}$ --- это просто числа. 
-\begin{equation}
-\begin{aligned}
-    \int\limits_{-\infty}^{\infty} \exp\left(\lambda f(z)\right) dz = 
-    \sum\limits_{k=0}^{-\infty}\int\limits_{\gamma_k} \exp\left(\lambda f(z)\right) dz 
-    = \left(\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)\right)\left(\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^{n+\frac{1}{2}}}\right)
-\end{aligned}
-\end{equation}
 \subsection*{Смелые идеи}
-Полученную сумму $\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)$ можно было бы переписать в виде интеграла, а затем переписать полученное выражение с помощью метода перевала. Это получился бы метод перевала в квадрате! Покажу первые шаги:
+В полученной сумме выделим лидирующий вклад при $n=0$. Он оценивается как $\frac{\sqrt{\pi}}{2\sqrt{\lambda}}\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)$. Его можно было бы переписать в виде интеграла, а затем переписать полученное выражение с помощью метода перевала. Это получился бы метод перевала в квадрате! Покажу первые шаги:
 \begin{equation}
 \begin{aligned}
     \sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right) = 

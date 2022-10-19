@@ -12,8 +12,8 @@ from F_research import F_const_phase_curve, F_decent_point, F, F_values_in_saddl
 
 def test_constant_phase_curve():
     z = sp.symbols('z')
-    analytic_func = sp.atan(z) + z ** 2 - z
-    x0, y0 = 0, 0
+    analytic_func = z ** 2 / 2j + z
+    x0, y0 = 0, -1
     step = 0.01
     steps_backward = 1000
     steps_forward = 1000
@@ -54,9 +54,9 @@ def test_values_along_curve():
 
 
 def test_location_of_saddle_points():
-    n_dots = 101
+    k_arr = range(0, 20)
     alpha_gamma = 10
-    points = np.array([F_decent_point(alpha_gamma, -k) for k in range(n_dots)])
+    points = np.array([F_decent_point(alpha_gamma, k) for k in k_arr])
     plot_scatter(points)
     plt.show()
 
@@ -134,4 +134,7 @@ def test_re_f_z_k():
 
 
 if __name__ == '__main__':
-    test_values_in_saddle_points()
+    # x = np.linspace(-20, 20, 100)
+    # plt.plot(x, -x-1)
+
+    test_re_f_z_k()
