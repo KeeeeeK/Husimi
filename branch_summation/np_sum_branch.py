@@ -35,9 +35,9 @@ def _explicit_sum_integrals_by_k(Z: complex | float, Gamma: float):
     f_in_z_k_func = lambda z: z_k ** 2 / 2j + z_k
     z_k = np.array([1j * sc.special.lambertw(Z, k=k) for k in k_set])
     f_in_z_k = f_in_z_k_func(z_k)
-    return np.sum(np.exp(f_in_z_k * lambda_var - np.abs(A))) \
+    return np.sum(np.exp(f_in_z_k * lambda_var - np.abs(A)) / np.sqrt(-z_k - 1j)) \
            * np.sqrt(2 * np.pi) / (np.sqrt(lambda_var)) * \
-           (np.exp(1j * np.pi / 4) / 2 / np.sqrt(np.pi * Gamma))
+           (np.exp(1j * np.pi / 4) / 2 / np.sqrt(np.pi * Gamma)) * np.sqrt(np.abs(Z))
 
 
 def _simple_graph(R: float, Gamma: float):
@@ -52,6 +52,6 @@ def _simple_graph(R: float, Gamma: float):
 
 
 if __name__ == '__main__':
-    # _simple_graph(3, 10 ** -2)
-    # plt.show()
-    k_arr = needed_k_arr(1, 1)
+    _simple_graph(4, 10 ** -2)
+    plt.show()
+    # k_arr = needed_k_arr(1, 1)

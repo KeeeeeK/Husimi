@@ -22,6 +22,7 @@
 %Математика
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
 \DeclareMathOperator*{\Res}{Res}
+\DeclareMathOperator*{\sign}{sign}
 %Заголовок
 \author{Нугманов Булат}
 
@@ -237,9 +238,54 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     &\int\limits_{\gamma_k} \exp\left(\lambda f(z)\right) dz 
     = \exp\left(\lambda f(z_k)\right)\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^{n+\frac{1}{2}}}\\
     &c_{2n} =
-    \sum\limits_{j=0}^{2n} C_{-n-\frac{1}{2}}^j\frac{1}{a_0^{n+j+\frac{1}{2}}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)
+    \sum\limits_{j=0}^{2n} C_{-n-\frac{1}{2}}^j\frac{1}{a_0^{n+j+\frac{1}{2}}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) \\
+    &\;\;\;\;\; = \frac{1}{\left(\frac{-i-z_k}{2}\right)^{\frac{1}{2}}}
+    \sum\limits_{j=0}^{2n} \frac{\Gamma\left(-n+\frac{1}{2}\right)}{j!\Gamma\left(-n-j+\frac{1}{2}\right)}
+    \frac{1}{\left(\frac{-i-z_k}{2}\right)^{n+j}}
+    (-1)^n (-z_k)^j\hat B_{2n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(2n-j+3)!}\right)\\
+    &\;\;\;\;\; = \frac{1}{\left(\frac{-i-z_k}{2}\right)^{\frac{1}{2}}}
+    \sum\limits_{j=0}^{2n} \frac{\frac{n!}{(2n)!}}{j!\frac{(-4)^j(n+j)!}{(2n+2j)!}}
+    \frac{(-1)^n (-z_0)^j}{\left(\frac{-i-z_k}{2}\right)^{n+j}} \frac{j!}{(2n+2j)!}S_3(2n+2j, j)\\
+    &\;\;\;\;\; = \frac{(-1)^n n!}{(2n)!}\frac{1}{\left(\frac{-i-z_k}{2}\right)^{\frac{1}{2}}}
+    \sum\limits_{j=0}^{2n} \frac{1}{(-4)^j(n+j)!}
+    \frac{ (-z_k)^j}{\left(\frac{-i-z_k}{2}\right)^{n+j}} S_3(2n+2j, j)
 \end{aligned}
 \end{equation}
+\begin{equation}
+\begin{aligned}
+    \Gamma\left(n+\frac{1}{2}\right)c_{2n} &= \frac{\sqrt{2\pi}}{4^n \left(-i-z_k\right)^{\frac{1}{2}}}
+    \sum\limits_{j=0}^{2n} \frac{1}{(-4)^j(n+j)!}
+    \frac{ (-z_k)^j}{\left(\frac{-i-z_k}{2}\right)^{n+j}} S_3(2n+2j, j) \\
+    &=\frac{\sqrt{2\pi}}{\left(-i-z_k\right)^{\frac{1}{2}}}
+    \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{z_k}{i+z_k}\right)^{n+j}\frac{S_3(2n+2j, j)}{(n+j)!}
+\end{aligned}
+\end{equation}
+Резюмируя выше написанное одной формулой:
+\begin{equation}
+\begin{aligned}
+    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} &= e^{\frac{i\pi}{4}}
+    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{i+(z_k+i)^2}{4\Gamma}\right)}{(-i-z_k)^{\frac{1}{2}}}
+    \sum\limits_{n=0}^{\infty}\left(2\Gamma\right)^n
+    \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{z_k}{i+z_k}\right)^{n+j}\frac{S_3(2n+2j, j)}{(n+j)!},
+\end{aligned}
+\end{equation}
+где $z_k = i W_k(Z)$. От него так же можно избавиться и придти к следующую формулу:
+\begin{equation}
+\begin{aligned}
+    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} &= i
+    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{i-(1+W_k(Z))^2}{4\Gamma}\right)}{(1+W_k(Z))^{\frac{1}{2}}}
+    \sum\limits_{n=0}^{\infty}\left(2\Gamma\right)^n
+    \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{W_k(Z)}{1+W_k(Z)}\right)^{n+j}\frac{S_3(2n+2j, j)}{(n+j)!},
+\end{aligned}
+\end{equation}
+
+Поговорим немного о выборе ветви корня. Так как изначальный интеграл брался в пределах $\int\limits_{-\infty}^{\infty}$, то направление каждой из ветвей должно было выбираться из условия, чтоб $\arg\frac{dz}{ds}\in\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, где $s$ --- натуральный параметр кривой постоянной фазы. Это значит:
+\begin{equation}
+\begin{aligned}
+    \arg\left(-i-z_k\right)^{-\frac{1}{2}}\in\left(-\frac{\pi}{2}, \frac{\pi}{2}\right),
+\end{aligned}
+\end{equation}
+что соответствует определению корня с разрезом в $z: Re(z)\leq 0; Im(z)=0$. В последней же формуле используется разрез в $z: \arg(z) = -\frac{3\pi}{4}$, что соответствует $Im+Re(\sqrt{1+W(Z)})>0$.
 \subsection*{Смелые идеи}
 В полученной сумме выделим лидирующий вклад при $n=0$. Он оценивается как $\frac{\sqrt{\pi}}{2\sqrt{\lambda}}\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)$. Его можно было бы переписать в виде интеграла, а затем переписать полученное выражение с помощью метода перевала. Это получился бы метод перевала в квадрате! Покажу первые шаги:
 \begin{equation}
