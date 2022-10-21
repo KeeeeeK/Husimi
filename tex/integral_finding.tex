@@ -23,6 +23,8 @@
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
 \DeclareMathOperator*{\Res}{Res}
 \DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\Real}{Re}
+\DeclareMathOperator*{\Imag}{Im}
 %Заголовок
 \author{Нугманов Булат}
 
@@ -285,45 +287,74 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     \arg\left(-i-z_k\right)^{-\frac{1}{2}}\in\left(-\frac{\pi}{2}, \frac{\pi}{2}\right),
 \end{aligned}
 \end{equation}
-что соответствует определению корня с разрезом в $z: Re(z)\leq 0; Im(z)=0$. В последней же формуле используется разрез в $z: \arg(z) = -\frac{3\pi}{4}$, что соответствует $Im+Re(\sqrt{1+W(Z)})>0$.
-\subsection*{Смелые идеи}
-В полученной сумме выделим лидирующий вклад при $n=0$. Он оценивается как $\frac{\sqrt{\pi}}{2\sqrt{\lambda}}\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)$. Его можно было бы переписать в виде интеграла, а затем переписать полученное выражение с помощью метода перевала. Это получился бы метод перевала в квадрате! Покажу первые шаги:
-\begin{equation}
-\begin{aligned}
-    \sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right) = 
-    \frac{1}{2\pi i}\int\limits_C \frac{e^{\lambda \tilde f(z)}}{-ize^{-iz}-Z} g(z)dz
-\end{aligned}
-\end{equation}
+что соответствует определению корня с разрезом в $z: \Real(z)\leq 0; \Imag(z)=0$. В последней же формуле используется разрез в $z: \arg(z) = -\frac{3\pi}{4}$, что соответствует $\Imag+\Real(\sqrt{1+W(Z)})>0$.
 
-Контур $C$ необходимо выбрать так, чтоб он обходил все $z_k$. Функции $\tilde f(z)$ и $g(z)$ необходимо выбрать из следующих соображений:
-\begin{equation}
-\begin{aligned}
-    &\tilde f (z_k) = f(z_k) \\
-    &\Res\limits_{z=z_k} \frac{e^{\lambda \tilde f(z)}}{-ize^{-iz}-Z} g(z) = e^{\lambda f(z_k)}
-\end{aligned}
-\end{equation}
 
-Или же, в предположении целости функции $g$:
-\begin{equation}
-\begin{aligned}
-    g(z_k) = \frac{d}{dz}\left(-ize^{-iz}-Z\right)_{z=z_k}  = \underbrace{-(i+z_k)e^{-iz_k}} = -(i+z_k)\frac{iZ}{z_k} = \underbrace{-i(1+Ze^{i z_k})e^{-iz_k}}
-\end{aligned}
-\end{equation}
+% \subsection*{Смелые идеи}
+% В полученной сумме выделим лидирующий вклад при $n=0$. Он оценивается как $\frac{\sqrt{\pi}}{2\sqrt{\lambda}}\sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right)$. Его можно было бы переписать в виде интеграла, а затем переписать полученное выражение с помощью метода перевала. Это получился бы метод перевала в квадрате! Покажу первые шаги:
+% \begin{equation}
+% \begin{aligned}
+%     \sum\limits_{k=0}^{-\infty}\exp\left(\lambda f(z_k)\right) = 
+%     \frac{1}{2\pi i}\int\limits_C \frac{e^{\lambda \tilde f(z)}}{-ize^{-iz}-Z} g(z)dz
+% \end{aligned}
+% \end{equation}
 
-Любой из обведённых вариантов удобен для задании функции $g$ в зависимости от поведения модуля подынтегральной функции на комплексной плоскости. Очень важно, чтоб контур интегрирования деформировался удобным образом. Более простой вид для функции $\tilde f$ угадывается следующим образом:
-\begin{equation}
-\begin{aligned}
-    \tilde f(z) = \frac{z^2}{2i} + z = \frac{i}{2} + \frac{(z+i)^2}{2i}
-\end{aligned}
-\end{equation}
+% Контур $C$ необходимо выбрать так, чтоб он обходил все $z_k$. Функции $\tilde f(z)$ и $g(z)$ необходимо выбрать из следующих соображений:
+% \begin{equation}
+% \begin{aligned}
+%     &\tilde f (z_k) = f(z_k) \\
+%     &\Res\limits_{z=z_k} \frac{e^{\lambda \tilde f(z)}}{-ize^{-iz}-Z} g(z) = e^{\lambda f(z_k)}
+% \end{aligned}
+% \end{equation}
 
-Можно было бы выбрать и другие формы, однако в таком виде очевидным образом находится единственная перевальная точка:
-\begin{equation}
-\begin{aligned}
-    &\tilde z = -i\\
-    &\tilde f(\tilde z) = \frac{i}{2}
-\end{aligned}
-\end{equation}
+% Или же, в предположении целости функции $g$:
+% \begin{equation}
+% \begin{aligned}
+%     g(z_k) = \frac{d}{dz}\left(-ize^{-iz}-Z\right)_{z=z_k}  = \underbrace{-(i+z_k)e^{-iz_k}} = -(i+z_k)\frac{iZ}{z_k} = \underbrace{-i(1+Ze^{i z_k})e^{-iz_k}}
+% \end{aligned}
+% \end{equation}
+
+% Любой из обведённых вариантов удобен для задании функции $g$ в зависимости от поведения модуля подынтегральной функции на комплексной плоскости. Очень важно, чтоб контур интегрирования деформировался удобным образом. Более простой вид для функции $\tilde f$ угадывается следующим образом:
+% \begin{equation}
+% \begin{aligned}
+%     \tilde f(z) = \frac{z^2}{2i} + z = \frac{i}{2} + \frac{(z+i)^2}{2i}
+% \end{aligned}
+% \end{equation}
+
+% Можно было бы выбрать и другие формы, однако в таком виде очевидным образом находится единственная перевальная точка:
+% \begin{equation}
+% \begin{aligned}
+%     &\tilde z = -i\\
+%     &\tilde f(\tilde z) = \frac{i}{2}
+% \end{aligned}
+% \end{equation}
     
 
+\section*{Какое $k$ вносит основной вклад}
+В полученном выражении стоит сумма по $k$ с лидирующими вкладами вида $\exp\left(\frac{i+(z_k+i)^2}{4\Gamma}\right)$. Стоит заметить, что, например, при $\Gamma = 10^{-6}$ , а значит незначительная разница на $0.01$ в $\Real\left((z_k+i)^2\right)$ при различных $k$ приведёт к разнице слагаемых в $\sim e^{-10^4}$, что значит, что меньшим из слагаемых можно пренебречь, не сильно потеряв в точности. Найдём, при каком $k$ вносится основной вклад. 
+\begin{equation}
+\begin{aligned}
+    \Real\left((z_k+i)^2\right) = \Real(z_k)^2 - \left(\Imag(z_k)+1\right)^2 = \Imag(W_k(Z))^2 - \left(\Real(W_k(Z))+1\right)^2
+\end{aligned}
+\end{equation}
+Применим разложение, с которого начинается данный документ, огрубив его до суммирования ($R, |k| \rightarrow \infty$):
+\begin{equation}
+\begin{aligned}
+    &W_k\left(Z=R e^{i\Phi}\right) = \log R + i\Phi + 2\pi i k - \log\left(\log R + i\Phi+ 2\pi i k\right) + O\left(\frac{\log\left(\log R + i\Phi+ 2\pi i k\right)}{\log R + i\Phi + 2\pi i k}\right)\\
+    &= \log R + i\Phi + 2\pi i k - \log\left(\log R + 2\pi i k\right) + \underbrace{\log\left(1+\frac{i\Phi}{\log R +  2\pi i k}\right)}_{\sim \frac{1}{\log R  + 2\pi i k} \approx 0} + O\left(\frac{\log\left(\log R + 2\pi i k\right)}{\log R  + 2\pi i k}\right)\\
+    &= \log R - \frac{1}{2}\log\left(\log^2 R + (2\pi k)^2\right) + 
+    i\left(\Phi + 2\pi k - \arctan\left(\frac{2\pi k}{\log R}\right)\right) 
+    + O\left(\frac{\log\left(\log R + 2\pi i k\right)}{\log R  + 2\pi i k}\right)
+\end{aligned}
+\end{equation}
+Из этого, если ненадолго продолжить данное выражение на область действительных $k$:
+\begin{equation}
+\begin{aligned}
+    &\frac{1}{2}\frac{d}{dk} \Real\left((z_k+i)^2\right) = \Imag\left(W_k(Z)\right)\frac{d \Imag(W_k(Z))}{dk} - 
+    \left(\Real(W_k(Z))+1\right) \frac{d \Real(W_k(Z))}{dk} = 0 \\
+    &\left(\Phi + 2\pi k -\frac{\pi}{2}\sign k + O\left(\frac{\log R}{k}\right)\right)\left(2\pi + O\left(\frac{\log^2 R}{k^2}\right)\right) = \\
+    &= \left(\log R + 1 - \log\left(2\pi |k|\right)+O\left(\frac{\log^2 R}{k^2}\right)\right)\frac{-1}{k}\left( 1+ O\left(\frac{\log^2 R}{k^2}\right)\right)\\
+    &\left(2\pi k + \Phi -\frac{\pi}{2}\sign k\right)2\pi k \approx \log R + 1 - \log\left(2\pi |k|\right)
+\end{aligned}
+\end{equation}
 \end{document}
