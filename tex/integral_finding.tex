@@ -266,7 +266,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{equation}
 \begin{aligned}
     \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} &= e^{\frac{i\pi}{4}}
-    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{i+(z_k+i)^2}{4\Gamma}\right)}{(-i-z_k)^{\frac{1}{2}}}
+    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{-i-i(z_k+i)^2}{4\Gamma}\right)}{(-i-z_k)^{\frac{1}{2}}}
     \sum\limits_{n=0}^{\infty}\left(2\Gamma\right)^n
     \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{z_k}{i+z_k}\right)^{n+j}\frac{S_3(2n+2j, j)}{(n+j)!},
 \end{aligned}
@@ -275,7 +275,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{equation}
 \begin{aligned}
     \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} &= i
-    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{i-(1+W_k(Z))^2}{4\Gamma}\right)}{(1+W_k(Z))^{\frac{1}{2}}}
+    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{-i+i(1+W_k(Z))^2}{4\Gamma}\right)}{(1+W_k(Z))^{\frac{1}{2}}}
     \sum\limits_{n=0}^{\infty}\left(2\Gamma\right)^n
     \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{W_k(Z)}{1+W_k(Z)}\right)^{n+j}\frac{S_3(2n+2j, j)}{(n+j)!},
 \end{aligned}
@@ -334,7 +334,9 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 В полученном выражении стоит сумма по $k$ с лидирующими вкладами вида $\exp\left(\frac{i+(z_k+i)^2}{4\Gamma}\right)$. Стоит заметить, что, например, при $\Gamma = 10^{-6}$ , а значит незначительная разница на $0.01$ в $\Real\left((z_k+i)^2\right)$ при различных $k$ приведёт к разнице слагаемых в $\sim e^{-10^4}$, что значит, что меньшим из слагаемых можно пренебречь, не сильно потеряв в точности. Найдём, при каком $k$ вносится основной вклад. 
 \begin{equation}
 \begin{aligned}
-    \Real\left((z_k+i)^2\right) = \Real(z_k)^2 - \left(\Imag(z_k)+1\right)^2 = \Imag(W_k(Z))^2 - \left(\Real(W_k(Z))+1\right)^2
+    \Real\left(f(z_k)\right) = \frac{1}{2}\Real\left(-i(z_k+i)^2\right) = -\frac{1}{2}\Imag\left((z_k+i)^2\right) 
+    &= -\Real\left(z_k\right)\left(1+\Imag(z_k)\right)\\
+    &= \Imag(W_k(Z))\left(1+\Real(W_k(Z))\right)
 \end{aligned}
 \end{equation}
 Применим разложение, с которого начинается данный документ, огрубив его до суммирования ($R, |k| \rightarrow \infty$):
@@ -347,14 +349,57 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     + O\left(\frac{\log\left(\log R + 2\pi i k\right)}{\log R  + 2\pi i k}\right)
 \end{aligned}
 \end{equation}
-Из этого, если ненадолго продолжить данное выражение на область действительных $k$:
+% Из этого, если ненадолго продолжить данное выражение на область действительных $k$:
+% \begin{equation}
+% \begin{aligned}
+%     &\frac{1}{2}\frac{d}{dk} \Real\left((z_k+i)^2\right) = \Imag\left(W_k(Z)\right)\frac{d \Imag(W_k(Z))}{dk} - 
+%     \left(\Real(W_k(Z))+1\right) \frac{d \Real(W_k(Z))}{dk} = 0
+% \end{aligned}
+% \end{equation}
+
+Воспользуемся сначала самым простым и тупым приближением: $W_k(Z) \approx \log R + i\Phi + 2\pi i k$
 \begin{equation}
 \begin{aligned}
-    &\frac{1}{2}\frac{d}{dk} \Real\left((z_k+i)^2\right) = \Imag\left(W_k(Z)\right)\frac{d \Imag(W_k(Z))}{dk} - 
-    \left(\Real(W_k(Z))+1\right) \frac{d \Real(W_k(Z))}{dk} = 0 \\
-    &\left(\Phi + 2\pi k -\frac{\pi}{2}\sign k + O\left(\frac{\log R}{k}\right)\right)\left(2\pi + O\left(\frac{\log^2 R}{k^2}\right)\right) = \\
-    &= \left(\log R + 1 - \log\left(2\pi |k|\right)+O\left(\frac{\log^2 R}{k^2}\right)\right)\frac{-1}{k}\left( 1+ O\left(\frac{\log^2 R}{k^2}\right)\right)\\
-    &\left(2\pi k + \Phi -\frac{\pi}{2}\sign k\right)2\pi k \approx \log R + 1 - \log\left(2\pi |k|\right)
+    \Real\left(f(z_k)\right) \approx (2\pi k+\Phi)(1+\log R)
 \end{aligned}
 \end{equation}
+Получаем, что в первом приближении $k\approx \infty$.
+Воспользуемся следующим порядком приближения без учёта суммы:
+\begin{equation}
+\begin{aligned}
+    \Real\left(f(z_k)\right) &\approx
+    \left(\Phi + 2\pi k - \arctan\left(\frac{2\pi k}{\log R}\right)\right)\left(1+\log R - \frac{1}{2}\log\left(\log^2 R + (2\pi k)^2\right)\right)\\
+    &\approx \left(\Phi + 2\pi k - \frac{\pi}{2}\sign k\right)\left(1+\log R - \log|2\pi k|\right),
+\end{aligned}
+\end{equation}
+где мы пренебрегли всеми слагаемыми, которые при раскрытии скобок дадут вклад $O\left(\frac{\log^2 R}{R}\right)$. Попробуем оптимизировать данное выражение так, как если бы $k\in\mathbb{R}$:
+\begin{equation}
+\begin{aligned}
+    \frac{d}{k}\Real\left(f(z_k)\right) = 0\\
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+    2\pi\left(1+\log R - \log|2\pi k|\right) &= \frac{1}{k}\left(\Phi + 2\pi k - \frac{\pi}{2}\sign k\right)\\
+    \frac{2\pi |k|}{R}\log\left(\frac{2\pi |k|}{R}\right) &= \frac{\left|\Phi - \frac{\pi}{2}\sign k\right|}{R}
+\end{aligned}
+\end{equation}
+Введём временно обозначение $e^\varkappa = \frac{2\pi |k|}{R} > 0$:
+\begin{equation}
+\begin{aligned}
+    \varkappa e^{\varkappa} = \frac{\left|\Phi - \frac{\pi}{2}\sign k\right|}{R}\approx 0\\
+    \varkappa = W_0\left(\frac{\left|\Phi - \frac{\pi}{2}\sign k\right|}{R}\right)
+\end{aligned}
+\end{equation}
+Для нулевой функции Ламберта у нас так же есть небольшое разложение $W_0(x)\approx x$. Применим его и подставим $\varkappa$:
+\begin{equation}
+\begin{aligned}
+    2\pi |k|\approx R + \left|\Phi - \frac{\pi}{2}\sign k\right|
+\end{aligned}
+\end{equation}
+Такое приближённое решение почти всегда даёт наилучшее приближение, потому что при учёте высших порядков вклад будет $\ll 1$ при больших $R$. Значения функции Ламберта в окрестности малых $R$ требует уже численных расчётов. Далее мы будем обозначать это оптимальное $k$ через $\overline k$, подразумевая его зависимость от $Z$ и $\sign \Gamma$.
+
+\section*{Какой вклад вносит слагаемое под номером $\overline{k}$}
+
 \end{document}
