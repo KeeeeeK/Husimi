@@ -20,6 +20,7 @@
 
 %Математика
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
+\DeclareMathOperator{\Real}{Re}
 %Заголовок
 \author{Нугманов Булат}
 
@@ -64,5 +65,29 @@
 \begin{aligned}
     Q(\beta) = \frac{e^{-\left(|\alpha|-|\beta|\right)^2}}{\pi}\left|Fn(|\alpha\beta|, 2 \Gamma + \arg\left(\alpha\beta^*\right), -\Gamma)\right|^2
 \end{aligned}
+\end{equation}
+
+\section*{Вычисление функции Вигнера}
+Возьмём некоторый алгоритм расчёта функции $F$, указанной в дипломе. Это может быть как прямое суммирование, так и нахождение через $\max \Real f(z_k)$ или же ассимптотическое разложение при $|Z|\gg 1$. Для вычисления функции Вигнера лучше использовать формулу из диплома под номером (3.25):
+
+\begin{equation}\label{FtoWrow}
+	\begin{aligned}
+		W(\beta) = \frac{2}{\pi}e^{-|\alpha|^2-2|\beta|^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|F(2\alpha \beta^*\psi^{2m-2}, \psi)\right|^2
+	\end{aligned}
+\end{equation}
+
+Перепишем эту формулу через $Fn(|A|, \arg A, e^{i\Gamma}) = e^{-|A|}F(A, e^{i\Gamma})$:
+\begin{equation}
+	\begin{aligned}
+		W(\beta) = \frac{2}{\pi}e^{-|\beta|^2 -\left(|\alpha|-|\beta|\right)^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|Fn(2\alpha \beta^*\psi^{2m-2}, \psi)\right|^2
+	\end{aligned}
+\end{equation}
+
+В последнем ряду основной вклад вносят только члены c $n\sim|\alpha|^2 \pm 3|\alpha|$.
+\footnote{Данную оценку можно сузить ещё сильнее, если учесть, что $Q(\dots)$ имеет гауссов колокол. Ширина этого колокола $\sqrt{|\alpha\beta|}2\Gamma$. Так как теоретически это значение порядка может быть велико и зависеть  от $\beta$, мы лучше в тупую просто просуммируем при всех соответсвующих $n$.}
+
+Для дальнейшего разложения пригодится аналогичное уже упоминавшемуся разложение в Стирлинга:
+\begin{equation}
+    \ln\left(\frac{|\alpha|^{2m}}{m!}\right)\approx 2m \ln|\alpha| - \frac{1}{2}\ln m - m \left(\ln m - 1\right) - \frac{1}{12m}
 \end{equation}
 \end{document}
