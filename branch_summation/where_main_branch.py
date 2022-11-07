@@ -20,7 +20,7 @@ def plot_borders(k, freq):
         z_k = 1j*sc.special.lambertw(Z, k=k)
         return np.real(z_k ** 2 / 2j + z_k)
     r_arr, phi_arr = _step_algorithm(lambda z: re_f_in_z_k(z, k) - re_f_in_z_k(z, k+1), r_approx, r_approx+2, freq)
-    plot_polar(r_arr, phi_arr)
+    plot_polar(r_arr, phi_arr, c='green')
 
 def _best_k_slow(Z, k_sign):
     k_mean_abs, k_range = np.int_(np.abs(Z)/(2*np.pi)), 5
@@ -73,14 +73,15 @@ def plot_asymptotic_borders(k, freq):
 if __name__ == '__main__':
     # print(_step_algorithm(lambda z: np.abs(z)-1.2, 1, 2, 10))
 
-    Z_range, freq  = 10, 400
+    Z_range, freq  = 50, 400
     plot_best_k((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), 1)
     # plot_where_biggest_f(Z_range, -1)
     # for k_abs in range(int(Z_range / 2/np.pi)):
     #     plot_borders(k_abs + 0.0000001, 100)
     # _main_branch_curves(1)
     # plot_best_k((-30, 1, freq), (-0.01, 0.01, 20), -1)
-    plot_borders(0, 100)
+    for i in range(int(Z_range / 2 / np.pi) + 1):
+        plot_borders(i, 100)
     plt.show()
 
     # phi = np.linspace(-np.pi, np.pi)
