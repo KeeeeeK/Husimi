@@ -5,7 +5,7 @@ from numerical_summation.nb_sum_fn import sum_fn
 
 
 def plot_stripe(alpha, gamma):
-    r_n_dots, phi_n_dots = 500, 100
+    r_n_dots, phi_n_dots = 500, 5000
     n_sigma_r, n_sigma_summation = 1, 5
 
     # Следующие параметры определяют область пробегания beta
@@ -30,4 +30,4 @@ def plot_stripe(alpha, gamma):
 
 
 if __name__ == '__main__':
-    plot_stripe(10**3, 10 ** -6)
+    plot_stripe(5, 0)

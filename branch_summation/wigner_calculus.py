@@ -18,7 +18,10 @@ def np_wigner(alpha_abs, alpha_arg, beta_abs, beta_arg, Gamma, n_sigma):
     Fn_arr = Fn(2 * alpha_abs * beta_abs, alpha_arg - beta_arg + (2 * m_arr - 2) * Gamma, Gamma, n_sigma)
 
     partial_sum = np.sum(minus_one_powers * np.exp(coefficients_to_exp) * Fn_arr)
-    return 2 / np.pi * np.exp(-beta_abs ** 2 - (alpha_abs - beta_abs) ** 2) * np.abs(partial_sum) ** 2
+    additional_sum = Fn(2 * alpha_abs * beta_abs, alpha_arg - beta_arg - 2 * Gamma, Gamma, n_sigma) + \
+                     (-alpha_abs ** 2) * Fn(2 * alpha_abs * beta_abs, alpha_arg - beta_arg, Gamma, n_sigma) + \
+                     alpha_abs ** 4 / 2 * Fn(2 * alpha_abs * beta_abs, alpha_arg - beta_arg + 2 * Gamma, Gamma, n_sigma)
+    return 2 / np.pi * np.exp(-beta_abs ** 2 - (alpha_abs - beta_abs) ** 2) * np.abs(additional_sum + partial_sum) ** 2
 
 
 @nb.vectorize('float64(float64, float64, float64, float64, float64, float64)',
@@ -36,7 +39,10 @@ def nb_wigner(alpha_abs, alpha_arg, beta_abs, beta_arg, Gamma, n_sigma):
     partial_sum = 0
     for m_shifted in nb.prange(m_max - m_min):
         partial_sum += minus_one_powers[m_shifted] * np.exp(coefficients_to_exp[m_shifted]) * Fn_arr[m_shifted]
-    return 2 / np.pi * np.exp(-beta_abs ** 2 - (alpha_abs - beta_abs) ** 2) * np.abs(partial_sum) ** 2
+    additional_sum = Fn(2 * alpha_abs * beta_abs, alpha_arg - beta_arg - 2 * Gamma, Gamma, n_sigma) + \
+                     (-alpha_abs ** 2) * Fn(2 * alpha_abs * beta_abs, alpha_arg - beta_arg, Gamma, n_sigma) + \
+                     alpha_abs ** 4 / 2 * Fn(2 * alpha_abs * beta_abs, alpha_arg - beta_arg + 2 * Gamma, Gamma, n_sigma)
+    return 2 / np.pi * np.exp(-beta_abs ** 2 - (alpha_abs - beta_abs) ** 2) * np.abs(additional_sum + partial_sum) ** 2
 
 
 if __name__ == '__main__':

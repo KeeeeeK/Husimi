@@ -31,9 +31,10 @@ def _best_k_slow(Z, k_sign):
     return k_max
 
 def plot_best_k(x_step_params, y_step_params, k_sign):
+    """x_step_params is (x_min, x_max, n_dots)"""
     # print(tuple(it.product(np.arange(x_step_params[2]), np.arange(y_step_params[2]))))
     X, Y = np.mgrid[x_step_params[0]:x_step_params[1]:complex(0, x_step_params[2]),
-           y_step_params[0]:y_step_params[1]:complex(0, y_step_params[2])]
+                    y_step_params[0]:y_step_params[1]:complex(0, y_step_params[2])]
     K = np.zeros((x_step_params[2], y_step_params[2]))
     for i in range(x_step_params[2]):
         for j in range(y_step_params[2]):
