@@ -459,7 +459,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 
 \begin{equation}
 \begin{aligned}
-    \Real\left(f(z_k)\right) &= \Real\left(f(z_{k+1})\right) \\
+    \Real\left(f(z_k)\right) &= \Real\left(f(z_{k+\sign k})\right) \\
 \end{aligned}
 \end{equation}
 
@@ -474,6 +474,19 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
      O\left(\frac{\log^2 R}{R^2}\right)
 \end{aligned}
 \end{equation}
-
-
+Замена $k$ на $k+\sign k$ в данных обозначениях это замена $\varkappa$ на $\varkappa + 2\pi\sign k$. На границе:
+\begin{equation}
+\begin{aligned}
+    &\frac{\pi^2\sign k}{R} - \frac{\sign k }{R}
+    \left((\varkappa + 2\pi\sign k)\left(\Phi + \frac{\varkappa + 2\pi\sign k}{2}\right) - 
+    \varkappa \left(\Phi + \frac{\varkappa}{2}\right)\right) = O\left(\frac{\log^2 R}{R^2}\right)\\
+    &\varkappa + \Phi + \frac{\pi}{2}\sign k= O\left(\frac{\log^2 R}{R}\right)
+\end{aligned}
+\end{equation}
+Или если интересоваться только значением $\Phi$:
+\begin{equation}
+\begin{aligned}
+    \Phi \approx \left(R-\frac{\pi}{2}\right)\sign k \;\;\; \mod 2\pi
+\end{aligned}
+\end{equation}
 \end{document}

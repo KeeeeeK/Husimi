@@ -11,7 +11,6 @@ def _step_algorithm(f, r_min, r_max, freq):
     return r_opt, phi_arr
 
 
-
 def plot_borders(k, freq):
     r_approx = 2 * np.pi * np.abs(k) + np.pi / 2
     # теперь надо найти для каждого фи такую эр, чтоб была граница между той областью, где брать оптимально k и k+1.
@@ -68,21 +67,21 @@ def plot_where_biggest_f(r_max, k_sign):
 
 def plot_asymptotic_borders(k, freq):
     phi_arr = np.linspace(-np.pi, np.pi, freq)
-    r_arr = 2*np.pi*np.abs(k) + phi_arr * np.sign(k) + np.pi/2
+    r_arr = 2*np.pi*np.abs(k) + (phi_arr + np.pi/2)* np.sign(k) + np.pi
     plot_polar(r_arr, phi_arr, c='red')
 
 if __name__ == '__main__':
     # print(_step_algorithm(lambda z: np.abs(z)-1.2, 1, 2, 10))
 
-    Z_range, freq  = 50, 400
-    plot_best_k((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), 1)
+    Z_range, freq  = 5, 400
+    plot_best_k((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), -1)
     # plot_where_biggest_f(Z_range, -1)
     # for k_abs in range(int(Z_range / 2/np.pi)):
     #     plot_borders(k_abs + 0.0000001, 100)
     # _main_branch_curves(1)
     # plot_best_k((-30, 1, freq), (-0.01, 0.01, 20), -1)
     for i in range(int(Z_range / 2 / np.pi) + 1):
-        plot_borders(i, 100)
+        plot_asymptotic_borders(i-0.00001, 100)
     plt.show()
 
     # phi = np.linspace(-np.pi, np.pi)

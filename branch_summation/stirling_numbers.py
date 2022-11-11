@@ -26,10 +26,10 @@ def _small_stirling_3_args(n_max, k_max):
 if __name__ == '__main__':
     # print(stirling_3(10, 10))
     n_max, j_max = 6, 6
-    arr = stirling_3(n_max + 2 * j_max, j_max)
+    arr = stirling_3(2*n_max + 2 * j_max, 2*j_max)
     # print(arr)
     res = np.zeros((n_max + 1, j_max + 1), dtype=np.int_)
     for n in range(n_max + 1):
         for j in range(j_max + 1):
-            res[n][j] = arr[n + 2 * j][j]
-    print(res)
+            res[n][j] = arr[2*n + 2 * j][2*j]
+    print(res[2])
