@@ -341,7 +341,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \end{aligned}
 \end{equation}
 Применим разложение, с которого начинается данный документ, огрубив его до суммирования ($R, |k| \rightarrow \infty$):
-\begin{equation}
+\begin{equation}\label{W_k_approx}
 \begin{aligned}
     &W_k\left(Z=R e^{i\Phi}\right) = \log R + i\Phi + 2\pi i k - \log\left(\log R + i\Phi+ 2\pi i k\right) + O\left(\frac{\log\left(\log R + i\Phi+ 2\pi i k\right)}{\log R + i\Phi + 2\pi i k}\right)\\
     &= \log R + i\Phi + 2\pi i k - \log\left(\log R + 2\pi i k\right) + \underbrace{\log\left(1+\frac{i\Phi}{\log R +  2\pi i k}\right)}_{\sim \frac{1}{\log R  + 2\pi i k} \approx 0} + O\left(\frac{\log\left(\log R + 2\pi i k\right)}{\log R  + 2\pi i k}\right)\\
@@ -401,7 +401,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \end{equation}
 Такое приближённое решение почти всегда даёт наилучшее приближение, потому что при учёте высших порядков вклад будет $\ll 1$ при больших $R$. Значения функции Ламберта в окрестности малых $R$ требует уже численных расчётов. Далее мы будем обозначать это оптимальное $k$ через $\overline k$, подразумевая его зависимость от $Z$ и $\sign \Gamma$.
 
-\section*{Какой вклад вносит слагаемое под номером $\overline{k}$}
+\subsection*{Какой вклад вносит слагаемое под номером $\overline{k}$}
 Как бы нам не хотелось убрать знак округления (квадратные скобки в формуле выше), оно неизбежно. Введём следующее обозначение:
 \begin{equation}
 \begin{aligned}
@@ -410,7 +410,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \end{aligned}
 \end{equation}
 
-\subsection*{Максимум по $\Phi$}
+\subsubsection*{Максимум по $\Phi$}
 Будем рассматривать только показатель экспоненты основной ветви, считая, что она одна на всём промежутке $(-\pi, \pi)$.
 Нам понадобиться формула для производной функции Ламберта:
 \begin{equation}
@@ -453,7 +453,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     &\Phi = \left(R+\frac{\pi}{2}\right)\sign k \;\;\; \mod 2\pi
 \end{aligned}
 \end{equation}
-\section*{Граница выбора $z_k$}
+\subsection*{Граница выбора $z_k$}
 На комплексной плоскости для любого $Z$ можно указать, каков оптимальный выбор $\bar{k}$. Этот выбор полностью определяется максимумом $\Real\left(f(z_k)\right) = -\Imag(W_k(Z))\left(1+\Real(W_k(Z))\right)$. 
 Данная функция дискретна по $k$ и не имеет простого описания при малых $Z$. На границе:
 
@@ -463,23 +463,22 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \end{aligned}
 \end{equation}
 
-Давайте же посмотрим на асимптотику $|Z|\gg 1$. В этом случае мы снова применяем асимптотическое выражение для поиска пограничного $Z$ при $2\pi k= R\sign k + \varkappa$, где $\varkappa = O(1)$:
+Давайте посмотрим на асимптотику $|Z|\gg 1$. В этом случае мы снова применяем асимптотическое выражение\footnote{Чудовищные выкладки можно найти в моём вольфраме} для поиска пограничного $Z$ при $2\pi k= R\sign k + \varkappa$, где $\varkappa = O(1)$:
 \begin{equation}
 \begin{aligned}
     &L_1 = \log R + i \Phi + i\left(\underbrace{R\sign k + \varkappa}_{2\pi k}\right) = O(R)\\
     &L_2 = \log(L_1) = O(\log(R))\\
-    &\Real\left(f(z_k)\right) = L_1 - L_2 + \frac{L_2}{L_1} + O\left(\frac{\log^2 R}{R^2}\right)\\
-    &\;\;\;\approx -\Phi + \frac{\pi \varkappa}{2R} - \sign k 
-    \left(R + \frac{\pi}{2} + \frac{-\log^2 R + \log R - \varkappa\left(\Phi + \frac{\varkappa}{2}\right)}{R}\right) +
+    &W_k(Z) = L_1 - L_2 + \frac{L_2}{L_1} + O\left(\frac{\log^2 R}{R^2}\right) = \dots\\
+    &\Real(f(z_k)) =  -\frac{\pi \left(\Phi+\varkappa\right)}{2R} + \sign k 
+    \left(-R + \frac{\left(\Phi + \varkappa\right)^2}{2R}+\frac{\pi^2}{4R} + \frac{2\log R - \log^2 R}{2R}\right) +
      O\left(\frac{\log^2 R}{R^2}\right)
 \end{aligned}
 \end{equation}
 Замена $k$ на $k+\sign k$ в данных обозначениях это замена $\varkappa$ на $\varkappa + 2\pi\sign k$. На границе:
 \begin{equation}
 \begin{aligned}
-    &\frac{\pi^2\sign k}{R} - \frac{\sign k }{R}
-    \left((\varkappa + 2\pi\sign k)\left(\Phi + \frac{\varkappa + 2\pi\sign k}{2}\right) - 
-    \varkappa \left(\Phi + \frac{\varkappa}{2}\right)\right) = O\left(\frac{\log^2 R}{R^2}\right)\\
+    &-\frac{\pi\sign k}{R} + \frac{2}{R}
+    \left(\varkappa + \Phi + \pi\sign k\right) = O\left(\frac{\log^2 R}{R^2}\right)\\
     &\varkappa + \Phi + \frac{\pi}{2}\sign k= O\left(\frac{\log^2 R}{R}\right)
 \end{aligned}
 \end{equation}
@@ -489,4 +488,17 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     \Phi \approx \left(R-\frac{\pi}{2}\right)\sign k \;\;\; \mod 2\pi
 \end{aligned}
 \end{equation}
+
+\subsection*{И всё же об асимптотике}
+
+Окей, мы точно знаем, какое надо выбирать $\bar k$ для каждого $Z$. Мы знаем, что вклад от остальных слагаемых крайне мал. Ещё, если немного углубиться в вычисления чисел Стирлинга 2 рода 3 типа, то можно заметить, что $S(2, 2+2k)=0$, а значит первый необнуляющийся член в разложении метода перевала вносит коррекцию по относительной величине порядка $\Gamma^2$. Временно пренебрежём и этим вкладом:
+
+\begin{equation}
+\begin{aligned}
+    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \approx 
+    e^{\frac{i\pi}{4}} \frac{\exp\left(\frac{-i-i(z_{\bar k}+i)^2}{4\Gamma}\right)}{(-i-z_{\bar k})^{\frac{1}{2}}}
+\end{aligned}
+\end{equation}
+
+Эту же формулу можно ещё упростить, если считать $|Z|\gg 1$. Чудовищные выкладки опять же в вольфраме. Отмечу лишь, что при рассчёте $W_k(Z)$ необходимо удерживать члены $O\left(\frac{1}{R^2}\right)$, чтоб получить значение $f(z_k)$ с точностью $O\left(\frac{1}{R}\right)$, так как $W_k(Z) = O(R)$.
 \end{document}
