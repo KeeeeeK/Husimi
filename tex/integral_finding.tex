@@ -440,7 +440,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{equation}
 \begin{aligned}
     \sign\left(\frac{f(z_k)}{\Gamma}\right) = \sign k \sign\left(\Imag W_k(Z)\right) = 1 \Rightarrow \\\Imag W_k(Z) = R\sign k \Rightarrow \\
-    \left(\frac{f(z_k)}{2\Gamma}\right)_{\Phi = \Phi_{max}} = \frac{R}{2\Gamma}
+    \left(\frac{f(z_k)}{2\Gamma}\right)_{\Phi = \Phi_{max}} = \frac{R}{2|\Gamma|}
 \end{aligned}
 \end{equation}
 
@@ -453,6 +453,8 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
     &\Phi = \left(R+\frac{\pi}{2}\right)\sign k \;\;\; \mod 2\pi
 \end{aligned}
 \end{equation}
+
+Важным здесь является то, что мы получили этот результат не использовав ни одного приближения.
 \subsection*{Граница выбора $z_k$}
 На комплексной плоскости для любого $Z$ можно указать, каков оптимальный выбор $\bar{k}$. Этот выбор полностью определяется максимумом $\Real\left(f(z_k)\right) = -\Imag(W_k(Z))\left(1+\Real(W_k(Z))\right)$. 
 Данная функция дискретна по $k$ и не имеет простого описания при малых $Z$. На границе:
@@ -468,10 +470,9 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \begin{aligned}
     &L_1 = \log R + i \Phi + i\left(\underbrace{R\sign k + \varkappa}_{2\pi k}\right) = O(R)\\
     &L_2 = \log(L_1) = O(\log(R))\\
-    &W_k(Z) = L_1 - L_2 + \frac{L_2}{L_1} + O\left(\frac{\log^2 R}{R^2}\right) = \dots\\
-    &\Real(f(z_k)) =  -\frac{\pi \left(\Phi+\varkappa\right)}{2R} + \sign k 
-    \left(-R + \frac{\left(\Phi + \varkappa\right)^2}{2R}+\frac{\pi^2}{4R} + \frac{2\log R - \log^2 R}{2R}\right) +
-     O\left(\frac{\log^2 R}{R^2}\right)
+    &W_k(Z) = L_1 - L_2 + \frac{L_2}{L_1} + \frac{L_2(-2+L_2)}{2L_1^2} + O\left(\frac{\log^3 R}{R^3}\right) = \dots\\
+    &\Real(f(z_k)) =  -R\sign k + \frac{\left(\Phi + \varkappa - \frac{\pi}{2}\sign k\right)^2}{2R} +
+     O\left(\frac{\log^3 R}{R^2}\right)
 \end{aligned}
 \end{equation}
 Замена $k$ на $k+\sign k$ в данных обозначениях это замена $\varkappa$ на $\varkappa + 2\pi\sign k$. На границе:
@@ -500,5 +501,22 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \end{aligned}
 \end{equation}
 
-Эту же формулу можно ещё упростить, если считать $|Z|\gg 1$. Чудовищные выкладки опять же в вольфраме. Отмечу лишь, что при рассчёте $W_k(Z)$ необходимо удерживать члены $O\left(\frac{1}{R^2}\right)$, чтоб получить значение $f(z_k)$ с точностью $O\left(\frac{1}{R}\right)$, так как $W_k(Z) = O(R)$.
+Эту же формулу можно ещё упростить, если считать $|Z|\gg 1$. Ещё проще она станет, если мы будем интересоваться лишь модулем полученного выражения. Чудовищные выкладки опять же в вольфраме. Отмечу лишь, что при рассчёте $W_k(Z)$ необходимо удерживать члены $O\left(\frac{1}{R^2}\right)$, чтоб получить значение $f(z_k)$ с точностью $O\left(\frac{1}{R}\right)$, так как $W_k(Z) = O(R)$.
+
+\begin{equation}
+\begin{aligned}
+    \left|\sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \right|\approx 
+    \frac{\exp\left(\frac{R}{2|\Gamma|} - \frac{\delta^2}{4R|\Gamma|}+\dots\right)}
+    {\sqrt{R}}\exp\left(-\frac{\delta\sign k}{2R} + \frac{\delta^2}{4R^2}\right)\left(1-\frac{1}{4 R^2} + \frac{5}{32 R^4}+\dots\right),
+\end{aligned}
+\end{equation}
+где мы ввели обозначение $\Phi + \varkappa - \frac{\pi}{2}\sign k  = \delta$. Эти из поправки к максимуму по $\Phi$ вымученные $\frac{5}{32}$ очень похожи на еле различимую $\frac{1}{6}$ в моём дипломе. А линейная добавка в экспоненту $\sim\frac{\delta}{R}$ так же отлично согласуется с численными расчётами, потому что в действительности максимум наблюдался не при $\delta=0$:
+\begin{equation}
+\begin{aligned}
+    \left|\sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \right|\approx 
+    \frac{1}{\sqrt{R}}\left(1-\frac{1}{4 R^2} + \frac{5}{32 R^4}\right)
+    \exp\left(\frac{R}{2|\Gamma|} - \frac{\left(\delta -\Gamma\right)^2 - \Gamma^2}{4R|\Gamma|}\right)
+\end{aligned}
+\end{equation}
+И это просто превосходно сходится с моим дипломом!!!
 \end{document}
