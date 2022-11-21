@@ -137,4 +137,4 @@ if __name__ == '__main__':
     # x = np.linspace(-20, 20, 100)
     # plt.plot(x, -x-1)
 
-    test_re_f_z_k()
+    test_F_consant_phase_curve()

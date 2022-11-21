@@ -10,3 +10,4 @@ daily.py
 *.log
 *.synctex.gz
 *.out
+tex/cspell.json
