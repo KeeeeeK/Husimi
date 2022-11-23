@@ -54,18 +54,46 @@
 \section*{Вступление}
 Целью данного документа является подсчёт асимптотики ряда следующего вида:
 \begin{eqw}
-    \sum\limits_{n=0}^\infty
+    \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} 
 \end{eqw}
 
 \section*{Переход от суммы к интегралу}
-
-
+Первым делом избавимся от $\exp\left(i\Gamma n^2\right)$
+\begin{eqw}
+    \exp\left(i\Gamma n^2\right) = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
+    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i n z\right) dz
+\end{eqw}
 
 \begin{eqw}
-    \sum\limits_{n=0}^{\infty} \frac{\alpha^n e^{i\gamma n^2}}{n!} 
-    &= \frac{e^{\frac{i\pi}{4}}}{\sqrt{\pi\gamma}}
-    \int\limits_{-\infty}^{\infty}e^{-i \frac{x^2}{\gamma} + \alpha e^{2ix}}dx
-    &= \frac{e^{\frac{i\pi}{4}}}{\sqrt{\pi\gamma}}
-    \int\limits_{-\infty}^{\infty}e^{\frac{1}{\gamma}\left(-i x^2 + \alpha \gamma e^{2ix}\right)}dx
+    \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
+    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i A z\right) dz
+\end{eqw}
+
+\begin{eqw}
+    Z = -2i A \Gamma = R e^{i\Phi}
+\end{eqw}
+
+\begin{eqw}
+    \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
+    \int\limits_{-\infty}^{\infty}\exp\left(\frac{-i\frac{z^2}{2} + i Z e^{iz}}{2\Gamma}\right)dz 
+\end{eqw}
+
+\begin{eqw}
+    f(z) =  \frac{z^2}{2i} + i Z e^{iz}
+\end{eqw}
+
+\begin{eqw}
+    e^{i z_k} = \frac{z_k}{iZ} \Rightarrow   z_k = i W_k(Z)
+\end{eqw}
+
+\begin{eqw}
+    f(z) = \underbrace{\frac{z_k^2}{2i} + z_k}_{f(z_k)} + \underbrace{\frac{-i-z_k}{2}}_{a_0} (z-z_k)^2 + 
+    \sum_{n=1}^{\infty} \underbrace{\frac{-i^n z_k}{(n+2)!}}_{a_1, \: a_2, \dots} (z-z_k)^{n+2}
+\end{eqw}
+
+Считая $1$:
+\begin{eqw}
+    \int\limits_{\gamma_k} \exp\left(\frac{f(z)}{2\Gamma}\right) dz 
+    = \exp\left(\frac{ f(z_k)}{2\Gamma} \right)\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\left(2\Gamma\right)^{n+\frac{1}{2}} \sum\limits_{j=0}^{2n} \frac{C_{-n-\frac{1}{2}}^j}{a_0^{n+j+\frac{1}{2}}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)
 \end{eqw}
 \end{document}
