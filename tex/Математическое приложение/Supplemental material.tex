@@ -12,13 +12,13 @@
 \usepackage{graphicx}
 \graphicspath{}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
-
 %Таблицы
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{booktabs}
-
 % Ссылки
 \usepackage{hyperref}
+% Цветной текст
+\usepackage{xcolor}
 %Математика
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
 \DeclareMathOperator*{\Res}{Res}
@@ -41,8 +41,8 @@
 \begin{enumerate}
     \item Переписывание ряда через интеграл
     \item Нахождение перевальных точек
-    \item Асимптотика кривых постоянной фазы через перевальные точки --- ???
-    \item Деформация контура в зависимости от знака $\Gamma$
+    \item Асимптотика кривых постоянной фазы через перевальные точки --- \textcolor{red}{не знаю, надо ли об этом писать?}
+    \item Деформация контура в зависимости от знака $\Gamma$ --- \textcolor{red}{пока нет}
     \item Подсчёт вкладов по методу перевала
     \item Вставка с полиномами Белла и числами Стирлинга для явного подсчёта коэффициентов в методе перевала
     \item Слова о том, что при $|\Gamma| \ll 1$ достаточно учитывать лишь одно слагаемое
@@ -72,12 +72,12 @@
 \begin{eqw}
     Z = -2i A \Gamma = R e^{i\Phi}
 \end{eqw}
-
+$\Phi\in\left(-\pi, \pi\right]$
 \begin{eqw}
     \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
     \int\limits_{-\infty}^{\infty}\exp\left(\frac{-i\frac{z^2}{2} + i Z e^{iz}}{2\Gamma}\right)dz 
 \end{eqw}
-
+\section*{Нахождение перевальных точек}
 \begin{eqw}
     f(z) =  \frac{z^2}{2i} + i Z e^{iz}
 \end{eqw}
@@ -87,13 +87,165 @@
 \end{eqw}
 
 \begin{eqw}
+    \int\limits_{-\infty}^{\infty}\exp\left(\frac{f(z)}{2\Gamma}\right) dz = \sum\limits_{k=0}^{-\sign\Gamma \cdot \infty}
+    \int\limits_{\gamma_k} \exp\left(\frac{f(z)}{2\Gamma}\right) dz
+\end{eqw}
+
+\begin{eqw}
     f(z) = \underbrace{\frac{z_k^2}{2i} + z_k}_{f(z_k)} + \underbrace{\frac{-i-z_k}{2}}_{a_0} (z-z_k)^2 + 
     \sum_{n=1}^{\infty} \underbrace{\frac{-i^n z_k}{(n+2)!}}_{a_1, \: a_2, \dots} (z-z_k)^{n+2}
 \end{eqw}
-
-Считая $1$:
+\section*{Подсчёт вкладов по методу перевала}
 \begin{eqw}
     \int\limits_{\gamma_k} \exp\left(\frac{f(z)}{2\Gamma}\right) dz 
-    = \exp\left(\frac{ f(z_k)}{2\Gamma} \right)\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\left(2\Gamma\right)^{n+\frac{1}{2}} \sum\limits_{j=0}^{2n} \frac{C_{-n-\frac{1}{2}}^j}{a_0^{n+j+\frac{1}{2}}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)
+    &= \exp\left(\frac{ f(z_k)}{2\Gamma} \right)\sqrt{\frac{2\Gamma}{a_0}}\sum\limits_{n=0}^{\infty} 
+    \Gamma\left(n+\frac{1}{2}\right)\left(2\Gamma\right)^n c_{2n}\\
+    c_{2n} &= \sum\limits_{j=0}^{2n} \frac{C_{-n-\frac{1}{2}}^j}{a_0^{n+j}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)
 \end{eqw}
+\section*{Полезная формула}
+Итогом должно стать:
+\begin{eqw}
+    \hat{B}_{n, k}\left(\frac{1}{r!}, \frac{1}{(r+1)!}, \dots, \frac{1}{(n-k+r)!}\right) = 
+    \frac{k!}{(n+(r-1)k)!}S_{r}(n+(r-1)k, k)
+\end{eqw}
+где далее можно использовать
+\begin{eqw}
+    S_r(n+1, k) = k S_r(n, k) + C_n^{r} S_r(n-r+1, k-1)
+\end{eqw}
+\subsection*{Полиномы Белла}
+\begin{eqw}
+    \exp\left(u \sum\limits_{j=1}^{\infty}x_j t^j\right) = \sum\limits_{n\geq k\geq 0} 
+    \hat{B}_{n,k}\left(x_1, x_2, \dots, x_{n-k+1}\right) t^n \frac{u^k}{k!}
+\end{eqw}
+
+\begin{eqw}
+    \hat{B}_{2n, j}(\zeta x_1, \zeta x_2, \dots, \zeta x_{2n-j+1}) &= \zeta^j \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})\\
+    \hat{B}_{2n, j}(\zeta x_1, \zeta^2 x_2, \dots, \zeta^{2n-j+1} x_{2n-j+1}) &= \zeta^{2n} \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})
+\end{eqw}
+В нашем случае:
+\begin{eqw}
+    \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) &= 
+    \hat{B}_{2n, j}\left(\frac{-i z_k}{3!}, \frac{-i^2 z_k}{4!}, \dots, \frac{-i^{2n-j+1} z_k}{(2n-j+3)!}\right) \\
+    &= (-1)^n(-z_k)^{j}\hat{B}_{2n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(2n-j+3)!}\right)
+\end{eqw}
+
+\subsection*{Числа Стирлинга}
+\begin{eqw}
+    \exp\left(u\left(\frac{t^r}{r!}+\frac{t^{r+1}}{\left(r+1\right)!}+\dots\right)\right) = \sum\limits_{n=(r+1)k, k = 0}^{\infty} S_{r}(n, k) u^k \frac{t^n}{n!}
+\end{eqw}
+
+Сравнивая данную строчку с определением полиномов Белла,
+\begin{eqw}
+    \sum\limits_{n\geq k\geq 0} 
+    \hat{B}_{n, k}\left(\frac{1}{r!}, \frac{1}{(r+1)!}, \dots, \frac{1}{(n-k+r)!}\right) t^n \frac{u^k}{k!} &= 
+    \exp\left(\frac{u}{t^{r-1}} \left(\frac{t^r}{r!} + \frac{t^{r+1}}{(r+1)!}+\dots \right)\right) \\ 
+    &= \sum\limits_{n, k}^{\infty} S_{r}(n, k) \frac{u^k}{t^{(r-1)k}}\frac{t^n}{n!} \\
+    &= \sum\limits_{n, k}^{\infty} S_{r}(n+(r-1)k, k) u^k\frac{t^n}{(n+(r-1)k)!}
+\end{eqw}
+
+
+\section*{Наилучшее $\bar k$}
+Используя всё выше перечисленное и обозначение для $z_k$:
+\begin{eqw}
+    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} &= e^{\frac{i\pi}{4}}
+    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{-i-i(z_k+i)^2}{4\Gamma}\right)}{(-i-z_k)^{\frac{1}{2}}}
+    \sum\limits_{n=0}^{\infty}\left(2\Gamma\right)^n
+    \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{z_k}{i+z_k}\right)^{n+j}\frac{S_3(2n+2j, j)}{(n+j)!},
+\end{eqw}
+Далее мы переходим к менее точным оценкам.
+\begin{eqw}\label{approx_exact_row}
+    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \approx 
+    e^{\frac{i\pi}{4}} \frac{\exp\left(\frac{-i-i(z_{\bar k}+i)^2}{4\Gamma}\right)}{(-i-z_{\bar k})^{\frac{1}{2}}}
+\end{eqw}
+Выпишем действительную часть показателя экспоненты:
+\begin{eqw}
+    \Real\left(f(z_k)\right) = \frac{1}{2}\Real\left(-i(z_k+i)^2\right) = -\Imag(W_k(Z))\left(1+\Real(W_k(Z))\right)
+\end{eqw}
+\subsection*{Точное поведение $\Real f(z_k)$}
+Найдём поведение $\Real f(z_k)\sign \Gamma$ как функцию от $\Phi$ в окрестности точки максимума. Для сокращения дальнейших формул используем в данном параграфе сокращение $W = W_k(Z=R e^{i\Phi})$. Для этого нам понадобиться:
+
+\begin{eqw}
+    \frac{\partial W}{\partial \Phi} = \frac{iW}{1+W}
+\end{eqw}
+
+\begin{eqw}
+    \frac{\partial}{\partial\Phi}\Real\left(f(z_k)\right) = -\Real(W)
+\end{eqw}
+
+В точке максимума $\frac{\partial}{\partial\Phi}\Real\left(f(z_k)\right) = 0$. Отсюда из определения $W$-функции Ламберта
+\begin{eqw}
+    i\Imag W e^{i\Imag W} = R e^{i\Phi_{\max}} \Rightarrow \left|\Imag W\right| = R
+\end{eqw}
+
+\begin{eqw}
+    \sign\left(\frac{f(z_k)}{2\Gamma}\right)_{\Phi = \Phi_{max}} = 1 \Rightarrow \Imag W = R\sign k 
+    &\Rightarrow \left(\frac{f(z_k)}{2\Gamma}\right)_{\Phi = \Phi_{max}} = \frac{R}{2|\Gamma|}
+\end{eqw}
+
+\begin{eqw}
+    i R \sign k  e^{i R \sign k } = R e^{i\Phi_{\max}} &\Rightarrow \Phi_{\max} = \left(R+\frac{\pi}{2}\right)\sign k \;\;\; \mod 2\pi
+\end{eqw}
+Взятием производных более высоких порядков можно получить, что:
+
+\begin{eqw}
+    \Real f(z_k) = R\sign \Gamma - \sum\limits_{m=1}^{\infty} \Real\left(\frac{i^m q_{m}\left(-iR\sign \Gamma\right)}{\left(1-iR\sign \Gamma\right)^{2m-1}}\right)\frac{\left(\Phi - \Phi_{\max}\right)^{m+1}}{(m+1)!}
+\end{eqw}
+\begin{eqw}
+    \Real f(z_k) = R\sign \Gamma + \sum\limits_{m=1}^{\infty} \frac{\left(\Phi - \Phi_{\max}\right)^{m+1}}{(m+1)!}
+    \sum\limits_{k=0}^{m-1}\left\langle\left\langle{m-1}\atop {k}\right\rangle\right\rangle 
+    \Real\left(\frac{i^{m}\left(i R\sign \Gamma\right)^{k+1} }{\left(1-iR\sign\Gamma\right)^{2m-1}},\right)
+\end{eqw}
+где принято обозначение $\left\langle\left\langle{m-1}\atop {k}\right\rangle\right\rangle$ --- Эйлеровы числа второго рода
+\subsection*{Асимптотика $W$ при $R \to \infty$}
+Несмотря на заявленное в заголовке, асимптотика хорошо работает и при небольших $R$.
+\begin{eqw}
+    W_k(z) &= \log z + 2\pi i k - \log\left(\log z + 2\pi i k\right) + \sum\limits_{k=0}^{\infty}\sum\limits_{m=1}^{\infty} c_{km}\log^m\left(\log z + 2\pi i k\right)\left(\log z + 2\pi i k \right)^{-k-m}\\
+    c_{km} &= \frac{(-1)^k}{m!} c(k+m, k+1),
+\end{eqw}
+где $c(k+m, k+1)$ ---  беззнаковые числа Стирлинга первого рода.
+
+% В первом приближении:
+% \begin{eqw}
+%     W_{k}\left(Z=R e^{i\Phi}\right) &\approx \log R + i\Phi + 2\pi i k \\
+%     \Real\left(f(z_k)\right) &\approx -(2\pi k+\Phi)(1+\log R)
+% \end{eqw}
+% Из данного разложения находим: $\bar k\to\infty$, при $R\to\infty$
+
+% Попробуем учесть следующий порядок. В разложении будем считать, что $|k|\gg \log R$:
+
+Пренебрегая членами $O\left(\frac{\log\left(\log R + 2\pi i k\right)}{\log R  + 2\pi i k}\right)$ в разложении функции Ламберта:
+\begin{eqw}
+    W_k\left(Z\right) &\approx \log R + i\Phi + 2\pi i k - \log\left(\log R + i\Phi+ 2\pi i k\right) \\
+    &\approx \log R - \frac{1}{2}\log\left(\log^2 R + (2\pi k)^2\right) + 
+    i\left(\Phi + 2\pi k - \arctan\left(\frac{2\pi k}{\log R}\right)\right) \\
+    \Real\left(f(z_k)\right) &\approx
+    -\left(\Phi + 2\pi k - \arctan\left(\frac{2\pi k}{\log R}\right)\right)\left(1-
+    \frac{1}{2}\log \left(\left(\frac{2\pi k}{R}\right)^2+\frac{\log^2 R}{R^2}\right)
+    \right)
+\end{eqw}
+
+Из этого выражения мы видим, что $\bar k = O(R)$. Более детальный расчёт максимума последнего выражения по $k$ приводит к:
+
+\begin{eqw}\label{optimal_k}
+    |\bar k|\approx \left[ \frac{1}{2\pi}\left(R + \left|\Phi + \frac{\pi}{2}\sign \Gamma\right|\right)\right]
+\end{eqw}
+
+Эта формула однозначно делит комплексную плоскость для $Z$ на области выбора оптимального $\bar k$. Разложение $W_{k}(Z)$ с точностью до $O\left(\frac{\log^3 R}{R^3}\right)$ приводит к следующей формуле:
+\begin{eqw}
+    \Real(f(z_k)) =  R\sign \Gamma + \frac{\left(\Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma\right)^2}{2R} +
+     O\left(\frac{\log^3 R}{R^2}\right)
+\end{eqw}
+
+Решение уравнения $\Real(f(z_{k-\sign \Gamma})) = \Real(f(z_{k}))$ приводит к тому, что оптимум $\bar k$, найденный в уравнении \ref{optimal_k}, имеет точность определения границы областей оптимального $\bar k$ на комплексной плоскости для $Z$ порядка $O\left(\frac{\log^3 R}{R}\right)$.
+
+\section*{Финал}
+Таким образом, можно получать либо достаточно точную асимптотику из выражения \ref{approx_exact_row}, либо, при желании сэкономить на расчёте функции Ламберта, можно использовать более наглядную формулу для модуля в окрестности точки максимума:
+
+\begin{eqw}
+    \left|\sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \right|\approx 
+    \frac{1}{\sqrt{R}}\left(1-\frac{1}{4 R^2} + \frac{5}{32 R^4}+\dots\right)
+    \exp\left(\frac{R}{2|\Gamma|} - \frac{\left(\delta -\Gamma\right)^2}{4R|\Gamma|}+\dots\right),
+\end{eqw}
+где ввели обозначение $\delta = \Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma$
+
 \end{document}
