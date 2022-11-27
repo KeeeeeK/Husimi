@@ -52,13 +52,15 @@
     \item Итог: асимптотика ряда
 \end{enumerate}
 \section*{Вступление}
-Целью данного документа является подсчёт асимптотики ряда следующего вида:
+In this section we will find the asymptotics of the series of the following form:
 \begin{eqw}
-    \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} 
+    F(A, e^{i\Gamma}) = \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!},
 \end{eqw}
+when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\gtrsim 1$. 
 
+Наметим примерный план дальнейшего рассказа. Первым делом мы перейдём от суммы к расчёту интеграла по действительной оси. Далее мы воспользуемся отсутствием полюсов подынтегральной функции и деформируем контур так, чтоб он проходил через перевальные точки по кривым постоянной фазы. Перевальных точек будет бесконечное количество, однако наиболее существенный вклад будет вносить интеграл только одна из кривых постоянной фазы. Для пущей точности мы найдём все остаточные члены метода перевала. 
 \section*{Переход от суммы к интегралу}
-Первым делом избавимся от $\exp\left(i\Gamma n^2\right)$
+Первым делом избавимся от $\exp\left(i\Gamma n^2\right)$.
 \begin{eqw}
     \exp\left(i\Gamma n^2\right) = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
     \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i n z\right) dz
@@ -246,6 +248,6 @@ $\Phi\in\left(-\pi, \pi\right]$
     \frac{1}{\sqrt{R}}\left(1-\frac{1}{4 R^2} + \frac{5}{32 R^4}+\dots\right)
     \exp\left(\frac{R}{2|\Gamma|} - \frac{\left(\delta -\Gamma\right)^2}{4R|\Gamma|}+\dots\right),
 \end{eqw}
-где ввели обозначение $\delta = \Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma$
+где ввели обозначение $\delta = \Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma$.
 
 \end{document}
