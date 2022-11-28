@@ -53,46 +53,51 @@
 \end{enumerate}
 \section*{Вступление}
 In this section we will find the asymptotics of the series of the following form:
-\begin{eqw}
+\begin{eqw}\label{F def}
     F(A, e^{i\Gamma}) = \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!},
 \end{eqw}
 when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\gtrsim 1$. 
 
 Наметим примерный план дальнейшего рассказа. Первым делом мы перейдём от суммы к расчёту интеграла по действительной оси. Далее мы воспользуемся отсутствием полюсов подынтегральной функции и деформируем контур так, чтоб он проходил через перевальные точки по кривым постоянной фазы. Перевальных точек будет бесконечное количество, однако наиболее существенный вклад будет вносить интеграл только одна из кривых постоянной фазы. Для пущей точности мы найдём все остаточные члены метода перевала. 
 \section*{Переход от суммы к интегралу}
-Первым делом избавимся от $\exp\left(i\Gamma n^2\right)$.
+Вычисление суммы "табличными" методами существенно осложняется множителем $\exp\left(i\Gamma n^2\right)$. Воспользуемся следующей формулой (здесь и далее мы будем подразумевать все интегралы в смысле главного значения):
 \begin{eqw}
     \exp\left(i\Gamma n^2\right) = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
     \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i n z\right) dz
 \end{eqw}
-
+Применим данную формулу для ряда \ref{F def}:
 \begin{eqw}
     \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
     \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i A z\right) dz
 \end{eqw}
-
+Приведём данную формулу к более удобному для применения метода перевала виду. Для этого введём обозначения
 \begin{eqw}
-    Z = -2i A \Gamma = R e^{i\Phi}
+    f(z) =  \frac{z^2}{2i} + i Z e^{iz}\\
+    Z = -2i A \Gamma = R e^{i\Phi},
 \end{eqw}
-$\Phi\in\left(-\pi, \pi\right]$
+где $\Phi\in\left(-\pi, \pi\right]$ и $R\in\mathbb{R}$. И наконец, 
 \begin{eqw}
     \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
-    \int\limits_{-\infty}^{\infty}\exp\left(\frac{-i\frac{z^2}{2} + i Z e^{iz}}{2\Gamma}\right)dz 
-\end{eqw}
-\section*{Нахождение перевальных точек}
-\begin{eqw}
-    f(z) =  \frac{z^2}{2i} + i Z e^{iz}
+    \int\limits_{-\infty}^{\infty}\exp\left(\frac{f(z)}{2\Gamma}\right)dz 
 \end{eqw}
 
+\section*{Применение метода перевала}
+\subsection*{Перевальные точки}
+Начнём с поиска перевальных точек, которые являются решением $f'(z)=0$. Бесконечное множество таких решений можно занумеровать номером $k$:
 \begin{eqw}
-    e^{i z_k} = \frac{z_k}{iZ} \Rightarrow   z_k = i W_k(Z)
+    e^{i z_k} = \frac{z_k}{iZ} \Rightarrow   z_k = i W_k(Z),
 \end{eqw}
+где $W_k$ --- $k$-ая ветвь $W$-функции Ламберта. 
+\subsection*{Деформация контура через кривые постоянной фазы}
+\textcolor{red}{Здесь должно быть объяснение того, почему мы выбриаем только некоторые из всего множества точек. График с положением перевальных точек, кривыми постоянных фаз через каждую из точек, доказательство того, что номера выбора перевальных точек должны быть инвариантны относительно $Z$ и пара слов про расходимость теории при особом случае $Z=-e^{-1}$. А ещё пара слов о том, почему контур действительно деформируется и удалённых областях интеграл по дополнительным (непервальным) контурам стремится к нулю.}
 
+Правильно выбрав контура интегрирования $\gamma_k$, мы можем сформулировать следующее:
 \begin{eqw}
     \int\limits_{-\infty}^{\infty}\exp\left(\frac{f(z)}{2\Gamma}\right) dz = \sum\limits_{k=0}^{-\sign\Gamma \cdot \infty}
     \int\limits_{\gamma_k} \exp\left(\frac{f(z)}{2\Gamma}\right) dz
 \end{eqw}
-
+\subsection*{Интеграл по $\gamma_k$}
+Для расчёта интеграла вдоль некоторой $\gamma_k$, мы воспользуемся формулой CFWW \textcolor{red}{вставка книги по методу перевала}. Для её применения нам необходимо разложение в ряд Тейлора функции $f$ в окрестности перевальной точки:
 \begin{eqw}
     f(z) = \underbrace{\frac{z_k^2}{2i} + z_k}_{f(z_k)} + \underbrace{\frac{-i-z_k}{2}}_{a_0} (z-z_k)^2 + 
     \sum_{n=1}^{\infty} \underbrace{\frac{-i^n z_k}{(n+2)!}}_{a_1, \: a_2, \dots} (z-z_k)^{n+2}
