@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+
+\bibitem{bleistein1975asymptotic}
+Norman Bleistein and Richard~A Handelsman.
+\newblock {\em Asymptotic expansions of integrals}.
+\newblock Ardent Media, 1975.
+
+\bibitem{comtet2012advanced}
+Louis Comtet.
+\newblock {\em Advanced Combinatorics: The art of finite and infinite
+  expansions}.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem{corless1996lambertw}
+Robert~M Corless, Gaston~H Gonnet, David~EG Hare, David~J Jeffrey, and Donald~E
+  Knuth.
+\newblock On the lambertw function.
+\newblock {\em Advances in Computational mathematics}, 5(1):329--359, 1996.
+
+\end{thebibliography}

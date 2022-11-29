@@ -3,7 +3,7 @@
 %Русский язык
 \renewcommand{\familydefault}{\sfdefault}%шрифт
 \usepackage[T2A]{fontenc} %кодировка
-\usepackage[utf8]{inputenc} % кодировка исходного кода
+\usepackage[utf8]{inputenc} %кодировка исходного кода
 \usepackage[english,russian]{babel} %локализация и переносы
 %отступы 
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=3cm,bindingoffset=0cm]{geometry}
@@ -12,13 +12,14 @@
 \usepackage{graphicx}
 \graphicspath{}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
 %Таблицы
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{booktabs}
-% Ссылки
+
+% Cсылки
 \usepackage{hyperref}
-% Цветной текст
-\usepackage{xcolor}
+\bibliographystyle{unsrt}
 %Математика
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
 \DeclareMathOperator*{\Res}{Res}
@@ -58,7 +59,9 @@ In this section we will find the asymptotics of the series of the following form
 \end{eqw}
 when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\gtrsim 1$. 
 
-Наметим примерный план дальнейшего рассказа. Первым делом мы перейдём от суммы к расчёту интеграла по действительной оси. Далее мы воспользуемся отсутствием полюсов подынтегральной функции и деформируем контур так, чтоб он проходил через перевальные точки по кривым постоянной фазы. Перевальных точек будет бесконечное количество, однако наиболее существенный вклад будет вносить интеграл только одна из кривых постоянной фазы. Для пущей точности мы найдём все остаточные члены метода перевала. 
+Наметим примерный план дальнейшего рассказа. Первым делом мы перейдём от суммы к расчёту интеграла по действительной оси. Далее мы воспользуемся отсутствием полюсов подынтегральной функции и деформируем контур так, чтоб он проходил через перевальные точки по кривым постоянной фазы. 
+После этого математическая мысль может двигаться в двух направлениях. С одной стороны мы можем строго вывести все остаточные члены, используя формулу CFWW и ассоциированные числа Стирлинга. С другой стороны мы можем использовать то, что при $|\Gamma| \ll 1$ основной вклад в получившуюся сумму вносит лишь одно слагаемое с номером $\bar k$. Можно воспользоваться приближёнными вычислениями для определения $\bar k$, а далее можно найти простую асимптотику при $|A\Gamma|\gg1$. Эти направления мысли почти не связаны. И если первая служит больше для теоретической полноты описания, то вторая больше служит для численных расчётов. 
+
 \section*{Переход от суммы к интегралу}
 Вычисление суммы "табличными" методами существенно осложняется множителем $\exp\left(i\Gamma n^2\right)$. Воспользуемся следующей формулой (здесь и далее мы будем подразумевать все интегралы в смысле главного значения):
 \begin{eqw}
@@ -96,19 +99,39 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
     \int\limits_{-\infty}^{\infty}\exp\left(\frac{f(z)}{2\Gamma}\right) dz = \sum\limits_{k=0}^{-\sign\Gamma \cdot \infty}
     \int\limits_{\gamma_k} \exp\left(\frac{f(z)}{2\Gamma}\right) dz
 \end{eqw}
-\subsection*{Интеграл по $\gamma_k$}
-Для расчёта интеграла вдоль некоторой $\gamma_k$, мы воспользуемся формулой CFWW \textcolor{red}{вставка книги по методу перевала}. Для её применения нам необходимо разложение в ряд Тейлора функции $f$ в окрестности перевальной точки:
-\begin{eqw}
+\section*{Интеграл по $\gamma_k$}
+Для расчёта интеграла вдоль некоторой $\gamma_k$, мы воспользуемся формулой CFWW \cite{bleistein1975asymptotic}. Для её применения нам необходимо разложение в ряд Тейлора функции $f$ в окрестности перевальной точки:
+\begin{eqw}\label{f taylor}
     f(z) = \underbrace{\frac{z_k^2}{2i} + z_k}_{f(z_k)} + \underbrace{\frac{-i-z_k}{2}}_{a_0} (z-z_k)^2 + 
     \sum_{n=1}^{\infty} \underbrace{\frac{-i^n z_k}{(n+2)!}}_{a_1, \: a_2, \dots} (z-z_k)^{n+2}
 \end{eqw}
-\section*{Подсчёт вкладов по методу перевала}
-\begin{eqw}
+Для использовании CFWW мысленно разделим контур интегрирования на две части, начинающиеся в $z_k$ уходящие на бесконечность. Учитывая, что перевальная точка имеет второй порядок\footnote{Особый случай $z_k = -i$ или, что то же самое $W_k(Z) = -1$ соответствует точке ветвления $W$-функции Ламберта. При этом $Z=-e^{-1}$, а перевальные точки соответствующие $k=-1, 0, 1$ схлопываются в одну. Мы не будем рассматривать этот крайне редкий случай.}, запишем итоговый результат:
+\begin{eqw}\label{asymptotic gamma_k int raw}
     \int\limits_{\gamma_k} \exp\left(\frac{f(z)}{2\Gamma}\right) dz 
     &= \exp\left(\frac{ f(z_k)}{2\Gamma} \right)\sqrt{\frac{2\Gamma}{a_0}}\sum\limits_{n=0}^{\infty} 
     \Gamma\left(n+\frac{1}{2}\right)\left(2\Gamma\right)^n c_{2n}\\
-    c_{2n} &= \sum\limits_{j=0}^{2n} \frac{C_{-n-\frac{1}{2}}^j}{a_0^{n+j}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)
+    c_{2n} &= \sum\limits_{j=0}^{2n} \frac{C_{-n-\frac{1}{2}}^j}{a_0^{n+j}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right),
 \end{eqw}
+где $\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)$ --- экспоненциальные полиномы Белла от коэффициентов в разложении  $f$ по ряду Тейлора \ref{f taylor}. 
+
+\subsection*{Полиномы Белла}
+Полиномы Белла задаются имеют производящую функцию:
+\begin{eqw}
+    \exp\left(u \sum\limits_{j=1}^{\infty}x_j t^j\right) = \sum\limits_{n\geq k\geq 0} 
+    \hat{B}_{n,k}\left(x_1, x_2, \dots, x_{n-k+1}\right) t^n \frac{u^k}{k!}
+\end{eqw}
+Из этого определения легко можно вывести:
+\begin{eqw}
+    \hat{B}_{2n, j}(\zeta x_1, \zeta x_2, \dots, \zeta x_{2n-j+1}) &= \zeta^j \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})\\
+    \hat{B}_{2n, j}(\zeta x_1, \zeta^2 x_2, \dots, \zeta^{2n-j+1} x_{2n-j+1}) &= \zeta^{2n} \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})
+\end{eqw}
+Применим эти формулы для полиномов Белла, встречающихся в \ref{asymptotic gamma_k int raw}:
+\begin{eqw}
+    \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) &= 
+    \hat{B}_{2n, j}\left(\frac{-i z_k}{3!}, \frac{-i^2 z_k}{4!}, \dots, \frac{-i^{2n-j+1} z_k}{(2n-j+3)!}\right) \\
+    &= (-1)^n(-z_k)^{j}\hat{B}_{2n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(2n-j+3)!}\right)
+\end{eqw}
+
 \section*{Полезная формула}
 Итогом должно стать:
 \begin{eqw}
@@ -118,22 +141,6 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
 где далее можно использовать
 \begin{eqw}
     S_r(n+1, k) = k S_r(n, k) + C_n^{r} S_r(n-r+1, k-1)
-\end{eqw}
-\subsection*{Полиномы Белла}
-\begin{eqw}
-    \exp\left(u \sum\limits_{j=1}^{\infty}x_j t^j\right) = \sum\limits_{n\geq k\geq 0} 
-    \hat{B}_{n,k}\left(x_1, x_2, \dots, x_{n-k+1}\right) t^n \frac{u^k}{k!}
-\end{eqw}
-
-\begin{eqw}
-    \hat{B}_{2n, j}(\zeta x_1, \zeta x_2, \dots, \zeta x_{2n-j+1}) &= \zeta^j \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})\\
-    \hat{B}_{2n, j}(\zeta x_1, \zeta^2 x_2, \dots, \zeta^{2n-j+1} x_{2n-j+1}) &= \zeta^{2n} \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})
-\end{eqw}
-В нашем случае:
-\begin{eqw}
-    \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) &= 
-    \hat{B}_{2n, j}\left(\frac{-i z_k}{3!}, \frac{-i^2 z_k}{4!}, \dots, \frac{-i^{2n-j+1} z_k}{(2n-j+3)!}\right) \\
-    &= (-1)^n(-z_k)^{j}\hat{B}_{2n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(2n-j+3)!}\right)
 \end{eqw}
 
 \subsection*{Числа Стирлинга}
@@ -150,7 +157,10 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
     &= \sum\limits_{n, k}^{\infty} S_{r}(n+(r-1)k, k) u^k\frac{t^n}{(n+(r-1)k)!}
 \end{eqw}
 
-
+\begin{eqw}
+    \hat{B}_{n, k}\left(\frac{1}{r!}, \frac{1}{(r+1)!}, \dots, \frac{1}{(n-k+r)!}\right) = 
+    \frac{k!}{(n+(r-1)k)!}S_{r}(n+(r-1)k, k)
+\end{eqw}
 \section*{Наилучшее $\bar k$}
 Используя всё выше перечисленное и обозначение для $z_k$:
 \begin{eqw}
@@ -255,4 +265,7 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
 \end{eqw}
 где ввели обозначение $\delta = \Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma$.
 
+
+\nocite{*}
+\bibliography{references}
 \end{document}
