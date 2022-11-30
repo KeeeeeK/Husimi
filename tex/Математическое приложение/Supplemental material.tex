@@ -57,7 +57,7 @@ In this section we will find the asymptotics of the series of the following form
 \begin{eqw}\label{F def}
     F(A, e^{i\Gamma}) = \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!},
 \end{eqw}
-when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\gtrsim 1$. 
+when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$ and $|\Gamma| \ll 1$. 
 
 Наметим примерный план дальнейшего рассказа. Первым делом мы перейдём от суммы к расчёту интеграла по действительной оси. Далее мы воспользуемся отсутствием полюсов подынтегральной функции и деформируем контур так, чтоб он проходил через перевальные точки по кривым постоянной фазы. 
 После этого математическая мысль может двигаться в двух направлениях. С одной стороны мы можем строго вывести все остаточные члены, используя формулу CFWW и ассоциированные числа Стирлинга. С другой стороны мы можем использовать то, что при $|\Gamma| \ll 1$ основной вклад в получившуюся сумму вносит лишь одно слагаемое с номером $\bar k$. Можно воспользоваться приближёнными вычислениями для определения $\bar k$, а далее можно найти простую асимптотику при $|A\Gamma|\gg1$. Эти направления мысли почти не связаны. И если первая служит больше для теоретической полноты описания, то вторая больше служит для численных расчётов. 
@@ -68,7 +68,7 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
     \exp\left(i\Gamma n^2\right) = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
     \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i n z\right) dz
 \end{eqw}
-Применим данную формулу для ряда \ref{F def}:
+Применим данную формулу для ряда \eqref{F def}:
 \begin{eqw}
     \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
     \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i A z\right) dz
@@ -79,7 +79,7 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
     Z = -2i A \Gamma = R e^{i\Phi},
 \end{eqw}
 где $\Phi\in\left(-\pi, \pi\right]$ и $R\in\mathbb{R}$. И наконец, 
-\begin{eqw}
+\begin{eqw}\label{row to integral}
     \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
     \int\limits_{-\infty}^{\infty}\exp\left(\frac{f(z)}{2\Gamma}\right)dz 
 \end{eqw}
@@ -95,7 +95,7 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
 \textcolor{red}{Здесь должно быть объяснение того, почему мы выбриаем только некоторые из всего множества точек. График с положением перевальных точек, кривыми постоянных фаз через каждую из точек, доказательство того, что номера выбора перевальных точек должны быть инвариантны относительно $Z$ и пара слов про расходимость теории при особом случае $Z=-e^{-1}$. А ещё пара слов о том, почему контур действительно деформируется и удалённых областях интеграл по дополнительным (непервальным) контурам стремится к нулю.}
 
 Правильно выбрав контура интегрирования $\gamma_k$, мы можем сформулировать следующее:
-\begin{eqw}
+\begin{eqw}\label{contour deformation}
     \int\limits_{-\infty}^{\infty}\exp\left(\frac{f(z)}{2\Gamma}\right) dz = \sum\limits_{k=0}^{-\sign\Gamma \cdot \infty}
     \int\limits_{\gamma_k} \exp\left(\frac{f(z)}{2\Gamma}\right) dz
 \end{eqw}
@@ -112,11 +112,11 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
     \Gamma\left(n+\frac{1}{2}\right)\left(2\Gamma\right)^n c_{2n}\\
     c_{2n} &= \sum\limits_{j=0}^{2n} \frac{C_{-n-\frac{1}{2}}^j}{a_0^{n+j}}\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right),
 \end{eqw}
-где $\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)$ --- экспоненциальные полиномы Белла от коэффициентов в разложении  $f$ по ряду Тейлора \ref{f taylor}. 
+где $\hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right)$ --- экспоненциальные полиномы Белла от коэффициентов в разложении  $f$ по ряду Тейлора \eqref{f taylor}. 
 
 \subsection*{Полиномы Белла}
 Полиномы Белла задаются имеют производящую функцию:
-\begin{eqw}
+\begin{eqw}\label{Bell generating func}
     \exp\left(u \sum\limits_{j=1}^{\infty}x_j t^j\right) = \sum\limits_{n\geq k\geq 0} 
     \hat{B}_{n,k}\left(x_1, x_2, \dots, x_{n-k+1}\right) t^n \frac{u^k}{k!}
 \end{eqw}
@@ -125,54 +125,82 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
     \hat{B}_{2n, j}(\zeta x_1, \zeta x_2, \dots, \zeta x_{2n-j+1}) &= \zeta^j \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})\\
     \hat{B}_{2n, j}(\zeta x_1, \zeta^2 x_2, \dots, \zeta^{2n-j+1} x_{2n-j+1}) &= \zeta^{2n} \hat{B}_{2n, j}( x_1,  x_2, \dots,  x_{2n-j+1})
 \end{eqw}
-Применим эти формулы для полиномов Белла, встречающихся в \ref{asymptotic gamma_k int raw}:
-\begin{eqw}
+Применим эти формулы для полиномов Белла, встречающихся в \eqref{asymptotic gamma_k int raw}:
+\begin{eqw}\label{Bell simplification}
     \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) &= 
     \hat{B}_{2n, j}\left(\frac{-i z_k}{3!}, \frac{-i^2 z_k}{4!}, \dots, \frac{-i^{2n-j+1} z_k}{(2n-j+3)!}\right) \\
     &= (-1)^n(-z_k)^{j}\hat{B}_{2n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(2n-j+3)!}\right)
 \end{eqw}
 
-\section*{Полезная формула}
-Итогом должно стать:
-\begin{eqw}
+\section*{Связь полиномов Белла и чисел Стирлинга}
+В данном разделе мы докажем следующую формулу:
+\begin{eqw}\label{Bell and Stirling connection}
     \hat{B}_{n, k}\left(\frac{1}{r!}, \frac{1}{(r+1)!}, \dots, \frac{1}{(n-k+r)!}\right) = 
     \frac{k!}{(n+(r-1)k)!}S_{r}(n+(r-1)k, k)
 \end{eqw}
-где далее можно использовать
+где далее можно использовать рекуррентную формулу \cite[~p. 222]{comtet2012advanced}
 \begin{eqw}
     S_r(n+1, k) = k S_r(n, k) + C_n^{r} S_r(n-r+1, k-1)
 \end{eqw}
 
-\subsection*{Числа Стирлинга}
-\begin{eqw}
+\subsection*{Доказательство}
+Ассоциированные числа Стирлинга имеют следующее определение \cite[~p. 222]{comtet2012advanced}
+\begin{eqw}\label{Stirling generating func}
     \exp\left(u\left(\frac{t^r}{r!}+\frac{t^{r+1}}{\left(r+1\right)!}+\dots\right)\right) = \sum\limits_{n=(r+1)k, k = 0}^{\infty} S_{r}(n, k) u^k \frac{t^n}{n!}
 \end{eqw}
 
-Сравнивая данную строчку с определением полиномов Белла,
+Сравнивая производящую функцию чисел Стирлинга \eqref{Stirling generating func} и полиномов Бернулли \eqref{Bell generating func}, можно заметить некоторое сходство:
 \begin{eqw}
     \sum\limits_{n\geq k\geq 0} 
-    \hat{B}_{n, k}\left(\frac{1}{r!}, \frac{1}{(r+1)!}, \dots, \frac{1}{(n-k+r)!}\right) t^n \frac{u^k}{k!} &= 
+    \hat{B}_{n, k}&\left(\frac{1}{r!}, \frac{1}{(r+1)!}, \dots, \frac{1}{(n-k+r)!}\right) t^n \frac{u^k}{k!} = 
     \exp\left(\frac{u}{t^{r-1}} \left(\frac{t^r}{r!} + \frac{t^{r+1}}{(r+1)!}+\dots \right)\right) \\ 
     &= \sum\limits_{n, k}^{\infty} S_{r}(n, k) \frac{u^k}{t^{(r-1)k}}\frac{t^n}{n!} \\
     &= \sum\limits_{n, k}^{\infty} S_{r}(n+(r-1)k, k) u^k\frac{t^n}{(n+(r-1)k)!}
 \end{eqw}
+Сравнивая первую и последнюю строчку полученного выражения получаем требуемое \eqref{Bell and Stirling connection}.
+\section*{Точная формула}
+Собирая воедино формулы \eqref{asymptotic gamma_k int raw}, \eqref{Bell simplification}, \eqref{Bell and Stirling connection} приходим к следующему:
+\begin{eqw}
+    &\Gamma\left(n+\frac{1}{2}\right) c_{2n} =
+    \Gamma\left(n+\frac{1}{2}\right) \sum\limits_{j=0}^{2n} C_{-n-\frac{1}{2}}^j\frac{1}{a_0^{n+j}}
+    \hat{B}_{2n, j}\left(a_1, a_2, \dots, a_{2n-j+1}\right) \\
+    &\;\;\;\;\; = 
+    \sum\limits_{j=0}^{2n} \frac{\Gamma\left(n+\frac{1}{2}\right)\Gamma\left(-n+\frac{1}{2}\right)}{j!\Gamma\left(-n-j+\frac{1}{2}\right)}
+    \frac{1}{\left(\frac{-i-z_k}{2}\right)^{n+j}}
+    (-1)^n (-z_k)^j\hat B_{2n, j}\left(\frac{1}{3!}, \frac{1}{4!}, \dots, \frac{1}{(2n-j+3)!}\right)\\
+    &\;\;\;\;\; = 
+    \sum\limits_{j=0}^{2n} \frac{\frac{\pi}{\sin\left(\pi n + \frac{\pi}{2}\right)}}{j!\frac{(-4)^{n+j}(n+j)!}{(2n+2j)!}\sqrt{\pi}}
+    \frac{(-1)^n (-z_k)^j}{\left(\frac{-i-z_k}{2}\right)^{n+j}} \frac{j!}{(2n+2j)!}S_3(2n+2j, j)\\
+    &\;\;\;\;\; = 
+    \sum\limits_{j=0}^{2n} \frac{\sqrt{\pi}}{(-4)^{n+j}(n+j)!}
+    \frac{(-z_k)^j}{\left(\frac{-i-z_k}{2}\right)^{n+j}} S_3(2n+2j, j) = 
+    \frac{\sqrt{\pi}}{2^n(i+z_k)^n}
+    \sum\limits_{j=0}^{2n} \left(-\frac{1}{2}\frac{z_k}{i+z_k}\right)^{j}\frac{S_3(2n+2j, j)}{(n+j)!}
+\end{eqw}
 
+Подставляя этот результат в \eqref{row to integral}, \eqref{contour deformation}, находим:
 \begin{eqw}
-    \hat{B}_{n, k}\left(\frac{1}{r!}, \frac{1}{(r+1)!}, \dots, \frac{1}{(n-k+r)!}\right) = 
-    \frac{k!}{(n+(r-1)k)!}S_{r}(n+(r-1)k, k)
+    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} &= e^{\frac{i\pi}{4}\sign\Gamma}
+    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{-i-i(z_k+i)^2}{4\Gamma}\right)}{\sqrt{-\sign \Gamma\left(i+z_k\right)}}
+    \times\dots\\
+    &\dots\times
+    \sum\limits_{n=0}^{\infty}\left(\frac{\Gamma}{i+z_k}\right)^n
+    \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{z_k}{i+z_k}\right)^{j}\frac{S_3(2n+2j, j)}{(n+j)!},
 \end{eqw}
+где выбор ветви корня определяется из условия:
+\begin{eqw}
+    \arg\sqrt{-\sign \Gamma\left(i+z_k\right)} \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)
+\end{eqw}
+Такое условие обусловлено направлением $\gamma_k$ в точке перевала. И так как изначальный интеграл \eqref{row to integral} брался в пределах $(-\infty, \infty)$, то $\gamma_k$ так же имеет направление слева направо. 
+
+\textcolor{red}{Если сделать нормальное пояснение картинок $\gamma_k$ в разделе про деформацию контура, то здесь всё станет понятно и очевидно...}
+
+
 \section*{Наилучшее $\bar k$}
-Используя всё выше перечисленное и обозначение для $z_k$:
-\begin{eqw}
-    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} &= e^{\frac{i\pi}{4}}
-    \sum\limits_{k=0}^{-\sign\Gamma\cdot\infty} \frac{\exp\left(\frac{-i-i(z_k+i)^2}{4\Gamma}\right)}{(-i-z_k)^{\frac{1}{2}}}
-    \sum\limits_{n=0}^{\infty}\left(2\Gamma\right)^n
-    \sum\limits_{j=0}^{2n}\left(-\frac{1}{2}\frac{z_k}{i+z_k}\right)^{n+j}\frac{S_3(2n+2j, j)}{(n+j)!},
-\end{eqw}
 Далее мы переходим к менее точным оценкам.
 \begin{eqw}\label{approx_exact_row}
-    \sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \approx 
-    e^{\frac{i\pi}{4}} \frac{\exp\left(\frac{-i-i(z_{\bar k}+i)^2}{4\Gamma}\right)}{(-i-z_{\bar k})^{\frac{1}{2}}}
+    \left|\sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \right|\approx 
+    \frac{\exp\left(\frac{-i-i(z_{\bar k}+i)^2}{4\Gamma}\right)}{\left|i+z_{\bar k}\right|^{\frac{1}{2}}}
 \end{eqw}
 Выпишем действительную часть показателя экспоненты:
 \begin{eqw}
@@ -253,10 +281,10 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$, $|\Gamma| \ll 1$ and $|A\Gamma|\
      O\left(\frac{\log^3 R}{R^2}\right)
 \end{eqw}
 
-Решение уравнения $\Real(f(z_{k-\sign \Gamma})) = \Real(f(z_{k}))$ приводит к тому, что оптимум $\bar k$, найденный в уравнении \ref{optimal_k}, имеет точность определения границы областей оптимального $\bar k$ на комплексной плоскости для $Z$ порядка $O\left(\frac{\log^3 R}{R}\right)$.
+Решение уравнения $\Real(f(z_{k-\sign \Gamma})) = \Real(f(z_{k}))$ приводит к тому, что оптимум $\bar k$, найденный в уравнении \eqref{optimal_k}, имеет точность определения границы областей оптимального $\bar k$ на комплексной плоскости для $Z$ порядка $O\left(\frac{\log^3 R}{R}\right)$.
 
 \section*{Финал}
-Таким образом, можно получать либо достаточно точную асимптотику из выражения \ref{approx_exact_row}, либо, при желании сэкономить на расчёте функции Ламберта, можно использовать более наглядную формулу для модуля в окрестности точки максимума:
+Таким образом, можно получать либо достаточно точную асимптотику из выражения \eqref{approx_exact_row}, либо, при желании сэкономить на расчёте функции Ламберта, можно использовать более наглядную формулу для модуля в окрестности точки максимума:
 
 \begin{eqw}
     \left|\sum\limits_{n=0}^{\infty}\left(\frac{iZ}{2\Gamma}\right)^n  \frac{e^{i\Gamma n^2}}{n!} \right|\approx 
