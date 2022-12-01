@@ -203,16 +203,16 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$ and $|\Gamma| \ll 1$.
     \frac{\exp\left(\frac{-i-i(z_{\bar k}+i)^2}{4\Gamma}\right)}{\left|i+z_{\bar k}\right|^{\frac{1}{2}}}
 \end{eqw}
 Выпишем действительную часть показателя экспоненты:
-\begin{eqw}
+\begin{eqw}\label{real f z k through W}
     \Real\left(f(z_k)\right) = \frac{1}{2}\Real\left(-i(z_k+i)^2\right) = -\Imag(W_k(Z))\left(1+\Real(W_k(Z))\right)
 \end{eqw}
 \subsection*{Точное поведение $\Real f(z_k)$}
-Найдём поведение $\Real f(z_k)\sign \Gamma$ как функцию от $\Phi$ в окрестности точки максимума. Для сокращения дальнейших формул используем в данном параграфе сокращение $W = W_k(Z=R e^{i\Phi})$. Для этого нам понадобиться:
+Рассмотрим функцию $\Real f(iW(R e^{i\Phi}))$ как функцию от $\Phi\in(-\infty, \infty)$, учитывая, что при изменении $\Phi$ на $2\pi$ меняется ветвь $W$-функции Ламберта. (Для сокращения дальнейших формул используем в данном параграфе сокращение $W = W(Z=R e^{i\Phi})$). Найдём максимум функции $\Real f(iW(R e^{i\Phi}))$ от $\Phi$.  Для этого нам понадобиться формула для производной \cite[formula 3.2]{corless1996lambertw}:
 
 \begin{eqw}
     \frac{\partial W}{\partial \Phi} = \frac{iW}{1+W}
 \end{eqw}
-
+Подставляя это выражение в \eqref{real f z k through W}:
 \begin{eqw}
     \frac{\partial}{\partial\Phi}\Real\left(f(z_k)\right) = -\Real(W)
 \end{eqw}
@@ -221,28 +221,29 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$ and $|\Gamma| \ll 1$.
 \begin{eqw}
     i\Imag W e^{i\Imag W} = R e^{i\Phi_{\max}} \Rightarrow \left|\Imag W\right| = R
 \end{eqw}
-
+Неопределённость знака $\Imag W$ можно снять, если учесть, что мы ищем именно максимум, а не произвольный экстремум:
 \begin{eqw}
-    \sign\left(\frac{f(z_k)}{2\Gamma}\right)_{\Phi = \Phi_{max}} = 1 \Rightarrow \Imag W = R\sign k 
+    \sign\left(\frac{f(z_k)}{2\Gamma}\right)_{\Phi = \Phi_{max}} = 1 \Rightarrow \Imag W = - R\sign \Gamma 
     &\Rightarrow \left(\frac{f(z_k)}{2\Gamma}\right)_{\Phi = \Phi_{max}} = \frac{R}{2|\Gamma|}
 \end{eqw}
-
+Используя определение $W$-функции Ламберта, находим $\Phi_{\max}$:
 \begin{eqw}
-    i R \sign k  e^{i R \sign k } = R e^{i\Phi_{\max}} &\Rightarrow \Phi_{\max} = \left(R+\frac{\pi}{2}\right)\sign k \;\;\; \mod 2\pi
+    - i R \sign \Gamma  e^{- i R \sign \Gamma } = R e^{i\Phi_{\max}} &\Rightarrow \Phi_{\max} = -\left(R+\frac{\pi}{2}\right)\sign \Gamma \;\;\; \mod 2\pi
 \end{eqw}
-Взятием производных более высоких порядков можно получить, что:
+Взятием производных более высоких порядков \cite[formula 3.5]{corless1996lambertw} можно получить поведение в окрестности точки максимума:
 
 \begin{eqw}
     \Real f(z_k) = R\sign \Gamma - \sum\limits_{m=1}^{\infty} \Real\left(\frac{i^m q_{m}\left(-iR\sign \Gamma\right)}{\left(1-iR\sign \Gamma\right)^{2m-1}}\right)\frac{\left(\Phi - \Phi_{\max}\right)^{m+1}}{(m+1)!}
 \end{eqw}
+
 \begin{eqw}
     \Real f(z_k) = R\sign \Gamma + \sum\limits_{m=1}^{\infty} \frac{\left(\Phi - \Phi_{\max}\right)^{m+1}}{(m+1)!}
     \sum\limits_{k=0}^{m-1}\left\langle\left\langle{m-1}\atop {k}\right\rangle\right\rangle 
     \Real\left(\frac{i^{m}\left(i R\sign \Gamma\right)^{k+1} }{\left(1-iR\sign\Gamma\right)^{2m-1}},\right)
 \end{eqw}
-где принято обозначение $\left\langle\left\langle{m-1}\atop {k}\right\rangle\right\rangle$ --- Эйлеровы числа второго рода
+где принято обозначение $\left\langle\left\langle{m-1}\atop {k}\right\rangle\right\rangle$ --- Эйлеровы числа второго рода.
 \subsection*{Асимптотика $W$ при $R \to \infty$}
-Несмотря на заявленное в заголовке, асимптотика хорошо работает и при небольших $R$.
+Несмотря на заявленное в заголовке, асимптотика хорошо работает и при небольших $R>e^{-1}$. Используем следующее асимптотическое выражение \cite[formula 4.20]{corless1996lambertw}
 \begin{eqw}
     W_k(z) &= \log z + 2\pi i k - \log\left(\log z + 2\pi i k\right) + \sum\limits_{k=0}^{\infty}\sum\limits_{m=1}^{\infty} c_{km}\log^m\left(\log z + 2\pi i k\right)\left(\log z + 2\pi i k \right)^{-k-m}\\
     c_{km} &= \frac{(-1)^k}{m!} c(k+m, k+1),
@@ -277,7 +278,7 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$ and $|\Gamma| \ll 1$.
 
 Эта формула однозначно делит комплексную плоскость для $Z$ на области выбора оптимального $\bar k$. Разложение $W_{k}(Z)$ с точностью до $O\left(\frac{\log^3 R}{R^3}\right)$ приводит к следующей формуле:
 \begin{eqw}
-    \Real(f(z_k)) =  R\sign \Gamma + \frac{\left(\Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma\right)^2}{2R} +
+    \Real(f(z_{\bar k})) =  R\sign \Gamma + \frac{\left(\Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma\right)^2}{2R} +
      O\left(\frac{\log^3 R}{R^2}\right)
 \end{eqw}
 

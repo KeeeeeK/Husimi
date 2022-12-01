@@ -27,16 +27,20 @@ def plot_re_in_z_k(Z: complex | float, k_arr):
 
 
 if __name__ == '__main__':
-    # x = np.linspace(-20, 20, 100)
-    # plt.plot(x, -x - 1)
-    # for Z_abs in np.linspace(0.1, 2**10, 20):
-    #     Z = Z_abs
-    #     print(Z)
-    #     plot_saddle_points(Z, np.arange(0, 2))
-    #
-    # w = np.pi + np.pi * 1j
-    # print(w * np.exp(w))
-    # plot_saddle_points(w * np.exp(w), [0, 1])
-    # plt.show()
-    plot_re_in_z_k(50*2*np.pi, np.arange(-10**2, 1))
+    k_sign = 1
+    # R = np.linspace(1, 10, 1)
+    # Phi = (R + np.pi / 2) * k_sign
+    R = 5
+
+    Phi = np.linspace(-np.pi, np.pi, 100)
+    Z = R*np.exp(1j*Phi)
+    k_arr = np.arange(-1, 2)
+
+    for k in k_arr:
+        z_k = 1j*sc.special.lambertw(Z, k=k)
+        x = Phi
+        y = 1/2*np.real(-1j*(z_k + 1j)**2)
+        plt.plot(x, y)
+    plt.axhline(0, c='red')
+
     plt.show()
