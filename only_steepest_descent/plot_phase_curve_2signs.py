@@ -24,6 +24,10 @@ def constant_phase_curve_2signs(Z: complex, k_range: np.ndarray):
         z_k = 1j * sc.special.lambertw(Z, k=k)
         x_k, y_k = np.real(z_k), np.imag(z_k)
         plt.scatter([np.real(z_k)], [np.imag(z_k)], color='red', marker='o')
+        if k!=0:
+            axes.annotate(f'$k={k}$', xy=(x_k, y_k), xytext=(x_k+0.4, y_k+0.2))
+        else:
+            axes.annotate(f'$k={k}$', xy=(x_k, y_k), xytext=(x_k + 0.6, y_k-0.25))
         for gamma_sign in (-1, 1):
             points = constant_phase_curve(z, analytic_func*gamma_sign, (x_k, y_k), steps_params=steps_params)
             plt.plot(*zip(*points), color=f'C{0 if gamma_sign == 1 else 1}')
