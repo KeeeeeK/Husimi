@@ -21,6 +21,10 @@
 \usepackage{hyperref}
 %Математика
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
+\newenvironment{eqw}{\begin{equation} \begin{aligned}}   
+    {\end{aligned}    \end{equation}}
+\newenvironment{eqw*}{\begin{equation*} \begin{aligned}}   
+    {\end{aligned}    \end{equation*}}
 \DeclareMathOperator*{\Res}{Res}
 \DeclareMathOperator*{\sign}{sign}
 \DeclareMathOperator*{\Real}{Re}
@@ -236,7 +240,7 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \end{equation}
 
 Полагая $\lambda = \frac{1}{2\Gamma}$ можно написать\footnote{Надеюсь, что читатель не перепутает $\Gamma$ и $\Gamma$-функцию. Для удобства чтения после использования числа $\Gamma$ не будет скобочек.}:
-\begin{equation}
+\begin{equation}\label{const curve implement}
 \begin{aligned}
     &\int\limits_{\gamma_k} \exp\left(\lambda f(z)\right) dz 
     = \exp\left(\lambda f(z_k)\right)\sum\limits_{n=0}^{\infty} \Gamma\left(n+\frac{1}{2}\right)\frac{c_{2n}}{\lambda^{n+\frac{1}{2}}}\\
@@ -519,4 +523,27 @@ $c(k+m, k+1)$ --- это беззнаковые числа Стирлинга п
 \end{aligned}
 \end{equation}
 И это просто превосходно сходится с моим дипломом!!!
+\section*{О кривых постоянной фазы}
+
+Ключевым в данном рассказе является формула \ref{const curve implement}. Для её применения необходимо доказать, что мы действительно можем деформировать контур так, чтоб при $\Gamma < 0$ необходимо было бы учитывать все кривые постоянной фазы с $k\geq 0$. Это мы сделаем в несколько этапов:
+\begin{enumerate}
+    \item Покажем, что кривая постоянной фазы, проходящая через $z_0$ имеет асимптотическое поведение вида слева $x+y=const.$. 
+    \item Покажем, что кривые постоянной фазы при $k>0$ имеют асимптотику вниз в области, где модуль стремится к нулю очень быстро
+    \item Укажем деформацию контура на промежутке $(-R, R)$. При этом вылезут остаточные члены от вкладов по вертикальным линиям
+    \item Заметим, что вклад от вертикальных линий асимптотически стремится к 0.
+\end{enumerate}
+Уравнение на кривую постоянной фазы $z(s)=x(s)+i y(s)$, $\left|\frac{dz}{ds}\right| = 1$:
+\begin{eqw}
+    \Imag f(z) = \Imag f(z_k) \\
+    0=\Imag \frac{df}{dz}\frac{dz}{ds} = -\Imag\left((iz+Ze^{iz})\frac{dz}{ds}\right) = u\frac{dx}{ds} + v\frac{dy}{ds}\\
+    \left\{
+    \begin{aligned}
+        \frac{dx}{ds} =\pm \frac{v}{\sqrt{u^2+v^2}}\\
+        \frac{dy}{ds} =\mp \frac{u}{\sqrt{u^2+v^2}}
+    \end{aligned}
+    \right.
+\end{eqw}
+Пойдём последовательно.
+\subsection*{Кривая постоянной фазы при $k=0$}
+
 \end{document}
