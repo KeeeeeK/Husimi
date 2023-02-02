@@ -11,8 +11,9 @@ from F_research import F_const_phase_curve, F_decent_point, F, F_values_in_saddl
 def constant_phase_curve_2signs(Z: complex, k_range: np.ndarray):
     steps_params = (0.1, 300, 300)
     x_min, x_max = -20, 20
-    y_min, y_max = -20, 20
+    y_min, y_max = -10, 15
 
+    plt.figure(figsize=((x_max-x_min)/2/2.54, (y_max-y_min)/2/2.54))
     axes = plt.gca()
     _grid_lines(axes)
     axes.set_xlim(x_min, x_max)
@@ -42,4 +43,4 @@ def _grid_lines(axes):
 
 if __name__ == '__main__':
     constant_phase_curve_2signs(1+1j, np.arange(-5, 6, 1))
-    plt.show()
+    plt.savefig('v')
