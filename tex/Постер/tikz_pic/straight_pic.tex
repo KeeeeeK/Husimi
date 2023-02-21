@@ -1,0 +1,64 @@
+
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, 
+    axis/.style={line width= 0.3pt, ->, >=stealth'}, scale=3]
+% \clip(-5.208032545829854,-6.506121870314113) rectangle (15.714449254128738,6.275612465660563);
+\definecolor{ccqqqq}{rgb}{0.8,0,0}
+\definecolor{lightred}{rgb}{1,0.6,0.6}
+\def\scal{0.65}
+% rect
+\draw [line width=2pt] (0,0) -- (3,0);
+\draw [line width=2pt] (3,1) -- (3,0);
+\draw [line width=2pt] (3,1) -- (0,1);
+\draw [line width=2pt] (0,1) -- (0,0);
+% triang
+\def\lev{0.5}
+\def\v{0.5}
+\draw [line width=2pt] (6,\lev-\v)-- (10,\lev-\v);
+\draw [line width=2pt] (8,\lev+\v)-- (10,\lev-\v);
+\draw [line width=2pt] (8,\lev+\v)-- (6,\lev-\v);
+% horisontal laser
+\draw [line width=2pt,color=ccqqqq] (3,\lev) -- (7,\lev);
+\draw [line width=2pt,color=ccqqqq] (9,\lev) -- (13,\lev);
+% nonhorizontal in triangle
+\draw [line width=2pt,color=ccqqqq] (7,\lev) -- (7.5,\lev-\v);
+\draw [line width=2pt,color=ccqqqq] (9,\lev) -- (8.5,\lev-\v);
+% resonator
+\def\centy{\lev-2.7}
+\draw [line width=2pt] (8,\centy) circle (2);
+% lines in resonator
+% circle
+\draw [line width=8pt,color=lightred] (8,\centy) circle (1.7);
+\draw [line width=2pt,color=ccqqqq] (8,\centy) circle (1.7);
+% tangent line
+\draw [line width=2pt,color=ccqqqq] (7.5,\lev-\v) -- (8.805956084154726, -0.7031917990557444);
+\draw [line width=2pt,color=ccqqqq] (8.5,\lev-\v) -- (7.194043915845274, -0.7031917990557441);
+% laser
+\fill [ccqqqq] (3cm - 1pt,\lev) -- ++(0.2, 0.2) -- (3+0.1,\lev);
+\fill [ccqqqq] (3cm - 1pt,\lev) -- ++(+0.2, -0.2) -- (3+0.1,\lev);
+\fill [ccqqqq] (3cm - 1pt,\lev) -- ++(0.3, 0.13) -- (3+0.15,\lev);
+\fill [ccqqqq] (3cm - 1pt,\lev) -- ++(+0.3, -0.13) -- (3+0.15,\lev);
+% TEXT
+% chi (3)
+\node[] at (5,\lev-2.5) {$\ket{\alpha}$};
+\node[] at (5+7+0.2*\scal,\lev-2.5) {$\ket{\psi}$};
+\node[align=center] at (8,\centy) {$\chi^{(3)}$};
+% Axis
+\draw[axis] (4-0.1, \lev - 1) -- (5.8, \lev - 1) node(xline)[right]{};
+\draw[axis] (4, \lev - 1.75) -- (4, \lev - 0.25) node(yline)[above] {};
+\draw[axis] (4-0.1 + 7, \lev - 1) -- (5.8+7, \lev - 1) node(xline)[right]{};
+\draw[axis] (4+7, \lev - 1.75) -- (4+7, \lev - 0.25) node(yline)[above] {};
+% Plot circles
+\draw [line width=0.5pt] (5,\lev - 1) circle (0.35);
+\draw [line width=0.5pt] (5,\lev - 1) circle (0.2);
+% Plot curves
+\draw[line width=0.5pt] (5+7+0.2*\scal, \lev - 1) to [out=120, in=0] ++(-0.2*\scal - 0.1*\scal, + 0.3)
+    to [out=180, in=90] ++ (-0.05*\scal, -0.05)
+    to [out=270, in=300] (5+7-0.05*\scal, \lev - 1)
+    to [out=300, in=180] (5+7, \lev-1 - 0.3)
+    to [out=0, in=300] (5+7+0.2*\scal, \lev - 1);
+\draw[line width=0.5pt] (5+7+0.33*\scal, \lev - 1) to [out=120, in=0] ++(-0.33*\scal - 0.2*\scal, + 0.4)
+    to [out=180, in=90] ++ (-0.07*\scal, -0.1)
+    to [out=270, in=300] (5+7-0.15*\scal, \lev - 1)
+    to [out=300, in=180] (5+7-0.1*\scal, \lev-1 - 0.4)
+    to [out=0, in=300] (5+7+0.33*\scal, \lev - 1);
+\end{tikzpicture}

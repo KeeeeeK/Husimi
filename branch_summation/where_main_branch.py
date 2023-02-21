@@ -33,7 +33,7 @@ def _best_k_slow(Z, k_sign):
     return k_max
 
 
-def plot_best_k(x_step_params, y_step_params, k_sign):
+def plot_best_k(x_step_params, y_step_params, k_sign, alpha: int | float =1):
     """x_step_params is (x_min, x_max, n_dots)"""
     # print(tuple(it.product(np.arange(x_step_params[2]), np.arange(y_step_params[2]))))
     X, Y = np.mgrid[x_step_params[0]:x_step_params[1]:complex(0, x_step_params[2]),
@@ -47,7 +47,7 @@ def plot_best_k(x_step_params, y_step_params, k_sign):
     # Z = [i+k for i, k in it.product(np.arange(x_step_params[2]), np.arange(y_step_params[2]))]
     ax = plt.gca()
     ax.pcolor(X, Y, K,
-              cmap='inferno', shading='nearest', alpha=1)
+              cmap='inferno', shading='nearest', alpha=alpha)
 
 
 def plot_sign_f(f, x_step_params, y_step_params):
@@ -76,6 +76,33 @@ def plot_asymptotic_borders(k, freq):
     plot_polar(r_arr, phi_arr, c='red')
 
 
+def plot_difference(x_step_params, y_step_params, k_sign, alpha: int | float =1):
+    X, Y = np.mgrid[x_step_params[0]:x_step_params[1]:complex(0, x_step_params[2]),
+           y_step_params[0]:y_step_params[1]:complex(0, y_step_params[2])]
+    Z = X + 1j*Y
+    diff = np.zeros((x_step_params[2], y_step_params[2]))
+    for i in range(x_step_params[2]):
+        for j in range(y_step_params[2]):
+            # if np.abs(Z[i, j]) < 2:
+            #     diff[i, j] = -10
+            #     continue
+            k_mean_abs, k_range = np.int_((np.abs(Z[i, j])+np.abs(np.angle(Z[i, j])-np.pi/2*k_sign)) / (2 * np.pi)), 3
+            k_arr = np.arange(np.max((0, k_mean_abs - k_range)), k_mean_abs + k_range + 1) * k_sign
+            z_k = np.array([1j * sc.special.lambertw(Z[i, j], k=k) for k in k_arr])
+            f_in_z_k = z_k ** 2 / 2j + z_k
+            vals = np.real(f_in_z_k * (-k_sign))
+
+            k_max_index = np.argmax(vals)
+            # k_max_index = list(k_arr).index(k_mean_abs * k_sign)
+            diff[i, j] = np.max(tuple(vals[i] - vals[k_max_index] for i in range(len(vals)) if abs(i - k_max_index) > 1))
+    ax = plt.gca()
+    ax.pcolor(X, Y, diff,
+              cmap='inferno', shading='nearest', alpha=alpha)
+    print(np.max(diff), np.argmax(diff))
+
+
+
+
 # next funcs are just for main (plotting in main simply 'mplot')
 
 def mplot_borders_near_minus_axes(Z_range, freq):
@@ -94,8 +121,15 @@ def mplot_asymptotic_border(Z_range, freq):
     for i in range(int(Z_range / 2 / np.pi) + 1):
         plot_asymptotic_borders(i - 0.00001, 100)
 
+def mplot_difference_with_borders(Z_range, freq):
+    plot_best_k((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), -1, alpha=0.5)
+    print('finished plotting best k')
+    plot_difference((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), -1, alpha=0.5)
+
+
 
 if __name__ == '__main__':
-    Z_range, freq = 5, 400
-
+    Z_range, freq = 20, 400
+    plot_difference((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), -1, alpha=1)
+    plot_where_biggest_f(Z_range, -1)
     plt.show()

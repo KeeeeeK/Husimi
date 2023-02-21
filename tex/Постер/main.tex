@@ -1,0 +1,193 @@
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+%Вставка картинок
+\usepackage{graphicx}
+\graphicspath{}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg}
+
+%Таблицы
+% \usepackage[table,xcdraw]{xcolor}
+% Cсылки
+\usepackage{hyperref}
+\bibliographystyle{unsrt}
+%Математика
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
+\DeclareMathOperator*{\Res}{Res}
+\DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\Real}{Re}
+\DeclareMathOperator*{\Imag}{Im}
+\newcommand{\groupn}{\mathbb{Z}_n}
+
+%%Окружение для многострочных уравнений
+\newenvironment{eqw}{\begin{equation} \begin{aligned}}   
+    {\end{aligned}    \end{equation}}
+\newenvironment{eqw*}{\begin{equation*} \begin{aligned}}   
+    {\end{aligned}    \end{equation*}}
+
+% for tikz
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{tikz}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+% from overleaf
+\usepackage{blindtext}
+\usepackage{comment}
+%table env
+\newcounter{tablecounter}
+\newenvironment{tikztable}[1][]{
+  \def \rememberparameter{#1}
+  \vspace{7mm}
+  \refstepcounter{tablecounter}
+  \begin{center}
+  }{
+    \ifx\rememberparameter\@empty
+    \else %nothing
+    \\[10pt]
+    {\rememberparameter}
+    \fi
+  \end{center}
+  \vspace{7mm}
+}
+
+\title{Quasiprobability distributions of bright ''banana'' states}
+\author{Bulat Nugmanov}
+\institute{RQC / MIPT}
+
+\usetheme{Board}
+
+\begin{document}
+\maketitle
+
+\begin{columns}
+\column{0.4}
+\block{Problem statement}
+{
+    We start with the following Hamiltonian:
+    \begin{equation*}
+        \hat{H}_{Kerr} = \hbar \omega \hat{a}^{\dagger}\hat{a} + \hbar\gamma \hat{a}^{\dagger2}\hat{a}^{2}
+    \end{equation*}
+    And let's study the evolution of the coherent state $\ket{\alpha}$:
+    \begin{equation*}
+        \ket{\psi} = e^{-\frac{i}{\hbar} \hat{H}_{Kerr} \tau} \ket{\alpha} \sim \frac{e^{-\frac{\abs{\alpha}^2}{2}}}{\pi^{1/4}} 
+        \sum\limits_{n=0}^{\infty}\frac{\alpha^n}{\sqrt{n!}}e^{i\Gamma n^2}\ket{n}
+    \end{equation*}
+    The main parametrs have the following orders:
+    \begin{equation*}
+    \left\{
+    \begin{aligned}
+        \gamma\tau = \abs{\Gamma}&\sim 10^{-6}\\
+        \abs{\alpha}^2&\sim 10^{+6}
+    \end{aligned}
+    \right.
+    \end{equation*}
+    The state $\ket{\psi}$ we study using Husimi and Wigner functions:
+    \begin{equation*}
+    \begin{aligned}
+        Q(\beta) = \frac{\left|\langle\psi |\beta\rangle\right|^2}{\pi} =
+        \frac{e^{-|\alpha|^2-|\beta|^2}}{\pi}\left|
+        \sum\limits_{n = 0}^{\infty}\dfrac{\left(\alpha \beta^*\right)^n e^{-i \Gamma n(n-1)}}{n!}\right|^2\\
+        W(\beta)=\frac{1}{\pi}\int\limits_{-\infty}^{\infty}dy\, \psi^*(\Real\beta+y)\psi(\Real \beta-y)e^{2ip\Imag \beta}
+    \end{aligned}
+    \end{equation*}
+    They have the following connection via Fourier transform:
+    \begin{equation*}
+        C_s(z) = \mathcal{F}\left\{W\right\}(z) = e^{\frac{\abs{z}^2}{2}} \mathcal{F}\left\{Q\right\}(z) = e^{\frac{\abs{z}^2}{2}} C_a(z)
+    \end{equation*}
+    \textit{The main problem is to calculate this quasi-probabilistic functions in a reasonable time.}
+    \innerblock{Table of nonlinearities}
+    {
+        \begin{tikztable}
+            [The best performance archived for cubically nonlinear media in microresonators. $\Gamma = \gamma \tau$ is defined by archived quality with non-linearity determined by the material.]
+            \centering
+            \begin{tabular}{|c|c|c|c|}
+                \hline
+                % \rowcolor[HTML]{EFEFEF} 
+                Material        & $Q$              & $\gamma$, Hz & $\Gamma\cdot10^{-6}$ \\ \hline
+                Al$_2$O$_3$     & $2\times10^9$    & 0.06         & 24       \\ \hline
+                CaF$_2$         & $3\times10^{11}$ & 0.4          & 24000    \\ \hline
+                MgF$_2$         & $6\times10^9$    & 0.03 (e, o)  & 36       \\ \hline
+                Quartz          & $5\times10^9$    & 0.1          & 100      \\ \hline
+                Fused silica    & $9\times10^9$    & 0.08         & 144      \\ \hline
+                LiNbO$_3$       & $10^9$           & 0.26 (o)     & 52       \\ \hline
+                Si$_3$N$_4$     & $8\times10^7$    & 0.39         & 6        \\ \hline
+                Si              & $10^9$           & 0.5          & 100      \\ \hline
+            \end{tabular}
+        \end{tikztable}
+    }
+}
+\column{0.6}
+\block{Basic idea}
+{
+    Instead of studing row which appears in Husimi function let's study function $F$ that has less arguments:
+    \begin{eqw}\label{F def}
+        F(A, e^{i\Gamma}) = \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!},
+    \end{eqw}
+    This function has relatively simple dependency on the z argument:
+    \begin{eqw}
+        \abs{F(A, e^{i\Gamma})}\approx 
+        \frac{1}{\sqrt{2\abs{A\Gamma}}}\left(1-\frac{1}{\left(4\abs{A\Gamma}\right)^2} + \frac{5/2}{\left(4\abs{A\Gamma}\right)^4}+\dots\right)
+        \exp\left(\abs{A} - \frac{\left(\arg\left( Ae^{iR\sign\Gamma}\right) - \Gamma\right)^2}{8|A\Gamma^2|}+\dots\right),
+    \end{eqw}
+    pic with dependence
+}
+\block{Scheme}
+{
+    \begin{center}
+        \include{tikz_pic/straight_pic.tex}
+    \end{center}
+}
+\end{columns}
+
+\begin{columns}
+    \column{0.5}
+    \block{Wigner calculation}
+    {
+        We use the interesting fact:\\
+        eq with func diff eq\\
+        So we find an alternative repr for F for $\Gamma = 2\pi \frac{k}{n}$:\\
+        \begin{align}
+           F(A, e^{i\Gamma}) = \frac{\sum_{j\in\groupn}\exp\left(-i\Gamma j^2 + A e^{2ij\Gamma}\right)}{\sum_{j\in\groupn}\exp\left(-i\Gamma j^2\right)}
+        \end{align}
+        picture with some peaks\\
+        Then using characteristic functions connection and finding a lot of Gaussian integrals we find:\\
+        \begin{eqw*}
+            W(\beta) &= \frac{2}{\pi}e^{\abs{\alpha}^2 - 2\left(\abs{\alpha} - \abs{\beta}\right)^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|F(2\alpha \beta^* e^{i\Gamma(2m-1)}, e^{i\Gamma})e^{-2\abs{\alpha\beta^*}}\right|^2\\
+            W(\beta) &= 2e^{2|\beta|^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}Q(2\beta \psi^{-2m})
+        \end{eqw*}
+        the work in this direction is in progress
+    }
+
+    \column{0.5}
+    \block{Husimi calculation}
+    {
+        Firstly we rewrite the expression for $F$ using integral:\\
+        \begin{eqw}
+            \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
+            \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i A z\right) dz
+        \end{eqw}
+        then we deform the integration contour:
+        \begin{center}
+            \begin{tikzfigure}
+                \includegraphics[width=0.45\textwidth]{v.png}
+            \end{tikzfigure}
+        \end{center}
+        we use the method of steepest descent:
+        \begin{eqw}
+            \int\exp\left(f(z)\right)dz = \sum\limits_{k} \int\limits_{\gamma_k} \exp\left(f(z)\right)dz \approx
+            \sum\limits_k \exp\left(f(z_k)\right)\sqrt{\frac{2\pi}{-f''(z_k)}}
+        \end{eqw}
+        concluding, we find the asymptotic expr for $F$:\\
+        \begin{eqw*}
+            \sum\limits_{n=0}^{\infty}\frac{A^n e^{i\Gamma n^2}}{n!} &\approx e^{\frac{i\pi}{4}\sign\Gamma}
+            \frac{\exp\left(\frac{-i+i( W_{\bar k}(-2i A\Gamma)+1)^2}{4\Gamma}\right)}
+            {\sqrt{-i\sign \Gamma\left(1+W_{\bar k}(-2i A\Gamma)\right)}}\\
+            \bar k&\approx -\sign \Gamma \left[ \frac{2\abs{A\Gamma} + \left|\arg A\right|}{2\pi}\right]
+        \end{eqw*}
+        where we've hidden bulky remainder.\\
+        pics with Q for 2 different alpha and gamma: small like banana and big which we've achived
+    }
+\end{columns}
+
+\end{document}

@@ -22,10 +22,13 @@
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
 \DeclareMathOperator{\Real}{Re}
 %Заголовок
+\title{Заметки по работе проги}
 \author{Нугманов Булат}
 
 \begin{document}
-\section*{Приближение для ряда}
+\maketitle
+\section{Про тупое суммирование Хусими}
+\subsection*{Приближение для ряда}
 Обозначение:
 \begin{equation}
 \begin{aligned}
@@ -52,7 +55,7 @@
 \end{aligned}
 \end{equation}
 
-\section*{Из в $F$ в Хусими}
+\subsection*{Из в $F$ в Хусими}
 Это формула 3.3 из моего диплома:
 \begin{equation}\label{QsimF}
 	Q(\beta) =
@@ -67,7 +70,7 @@
 \end{aligned}
 \end{equation}
 
-\section*{Вычисление функции Вигнера}
+\subsection*{Вычисление функции Вигнера}
 Возьмём некоторый алгоритм расчёта функции $F$, указанной в дипломе. Это может быть как прямое суммирование, так и нахождение через $\max \Real f(z_k)$ или же ассимптотическое разложение при $|Z|\gg 1$. Для вычисления функции Вигнера лучше использовать формулу из диплома под номером (3.25):
 
 \begin{equation}\label{FtoWrow}
@@ -79,7 +82,7 @@
 Перепишем эту формулу через $Fn(|A|, \arg A, e^{i\Gamma}) = e^{-|A|}F(A, e^{i\Gamma})$:
 \begin{equation}
 	\begin{aligned}
-		W(\beta) = \frac{2}{\pi}e^{-|\beta|^2 -\left(|\alpha|-|\beta|\right)^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|Fn(2\alpha \beta^*\psi^{2m-2}, \psi)\right|^2
+		W(\beta) = \frac{2}{\pi}e^{-2|\beta|^2 -|\alpha|^2 - 4|\alpha\beta|}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|Fn(2\alpha \beta^*\psi^{2m-2}, \psi)\right|^2
 	\end{aligned}
 \end{equation}
 
@@ -90,4 +93,14 @@
 \begin{equation}
     \ln\left(\frac{|\alpha|^{2m}}{m!}\right)\approx 2m \ln|\alpha| - \frac{1}{2}\ln m - m \left(\ln m - 1\right) - \frac{1}{12m}
 \end{equation}
+
+\section{Про суммирование Вигнера}
+Из моего диплома возьмём следующее:
+\begin{equation}\label{QtoW}
+	\begin{aligned}
+		W(\beta) = 2e^{2|\beta|^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}Q(2\beta \psi^{-2m})
+	\end{aligned}
+\end{equation}
+
+На бумажке проверил, что это выражение вроде совпадает c тем, что должно получится, для случая отсутствия нелинейности. Даже нормировано на 1!))) В таком виде выражение неудобно. 
 \end{document}

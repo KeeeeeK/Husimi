@@ -30,4 +30,4 @@ def plot_stripe(alpha, gamma):
 
 
 if __name__ == '__main__':
-    plot_stripe(5, 0)
+    plot_stripe(10, 0)
