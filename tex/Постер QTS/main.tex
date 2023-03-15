@@ -127,8 +127,8 @@
     This function has relatively simple dependency on the z argument:
     \begin{eqw}
         \abs{F(A, e^{i\Gamma})}\approx 
-        \frac{1}{\sqrt{2\abs{A\Gamma}}}\left(1-\frac{1}{\left(4\abs{A\Gamma}\right)^2} + \frac{5/2}{\left(4\abs{A\Gamma}\right)^4}+\dots\right)
-        \exp\left(\abs{A} - \frac{\left(\arg\left( Ae^{iR\sign\Gamma}\right) - \Gamma\right)^2}{8|A\Gamma^2|}+\dots\right),
+        \frac{1}{\sqrt{2\abs{A\Gamma}}}\left(1-\frac{1}{\left(4\abs{A\Gamma}\right)^2} + \frac{5/2}{\left(4\abs{A\Gamma}\right)^4}+\dots\right)\times\\
+        \times\exp\left(\abs{A} - \frac{\left(\arg\left( Ae^{2i\abs{A}\Gamma}\right) - \Gamma\right)^2}{8|A\Gamma^2|}+\dots\right)
     \end{eqw}
     pic with dependence
 }
@@ -144,8 +144,17 @@
     \column{0.5}
     \block{Wigner calculation}
     {
+        \begin{eqw}
+            O(1+\abs{\alpha\Gamma})\\
+            \abs{\alpha}^2 \gtrsim \Gamma^{-2}
+        \end{eqw}
+        \begin{eqw}
+            \Gamma = 2\pi \frac{k}{n}
+        \end{eqw}
         We use the interesting fact:\\
-        eq with func diff eq\\
+        \begin{align*}
+            \frac{dF}{dA}(A, e^{i\Gamma}) = e^{i\Gamma} F(Ae^{2i\Gamma}, e^{i\Gamma})
+        \end{align*}
         So we find an alternative repr for F for $\Gamma = 2\pi \frac{k}{n}$:\\
         \begin{align}
            F(A, e^{i\Gamma}) = \frac{\sum_{j\in\groupn}\exp\left(-i\Gamma j^2 + A e^{2ij\Gamma}\right)}{\sum_{j\in\groupn}\exp\left(-i\Gamma j^2\right)}
@@ -154,7 +163,7 @@
         Then using characteristic functions connection and finding a lot of Gaussian integrals we find:\\
         \begin{eqw*}
             W(\beta) &= \frac{2}{\pi}e^{\abs{\alpha}^2 - 2\left(\abs{\alpha} - \abs{\beta}\right)^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|F(2\alpha \beta^* e^{i\Gamma(2m-1)}, e^{i\Gamma})e^{-2\abs{\alpha\beta^*}}\right|^2\\
-            W(\beta) &= 2e^{2|\beta|^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}Q(2\beta \psi^{-2m})
+            W(\beta) &= 2e^{2|\beta|^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}Q(2\beta e^{-i\Gamma 2m})
         \end{eqw*}
         the work in this direction is in progress
     }
@@ -164,6 +173,7 @@
     {
         Firstly we rewrite the expression for $F$ using integral:\\
         \begin{eqw}
+            \Gamma = \frac{\pi}{6}\\
             \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
             \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i A z\right) dz
         \end{eqw}

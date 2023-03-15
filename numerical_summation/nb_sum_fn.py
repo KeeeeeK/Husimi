@@ -29,6 +29,6 @@ def _sum_fn(r: np.float_, phi: np.float_, gamma: np.float_, n_sigma: np.float_):
     sum_ = 0
     for n in nb.prange(n_min, n_max):
         sum_ += np.exp(n - r + n * np.log(r / n) - 0.5 * np.log(n) - 1 / 12 / n - half_ln_two_pi + \
-                       1j * np.mod((phi + gamma * (n+1)) * (n), two_pi))
+                       1j * np.mod((phi + gamma * n) * n, two_pi))
     return np.exp(-r) * (1 + r * np.exp(1j * (phi + gamma * 2)) + r ** 2 * np.exp(1j * (2 * phi + gamma * 6)) / 2) + \
            sum_

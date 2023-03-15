@@ -66,12 +66,12 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$ and $|\Gamma| \ll 1$.
 Вычисление суммы "табличными" методами существенно осложняется множителем $\exp\left(i\Gamma n^2\right)$. Воспользуемся следующей формулой (здесь и далее мы будем подразумевать все интегралы в смысле главного значения):
 \begin{eqw}
     \exp\left(i\Gamma n^2\right) = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
-    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i n z\right) dz
+    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{i z^2}{4\Gamma} + i n z\right) dz
 \end{eqw}
 Применим данную формулу для ряда \eqref{F def}:
 \begin{eqw}
     \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} = \frac{e^{i\frac{\pi}{4}\sign \Gamma}}{2\sqrt{\pi|\Gamma|}}
-    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{z^2}{4\Gamma} + i A z\right) dz
+    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{i z^2}{4\Gamma} +  A e^{iz}\right) dz
 \end{eqw}
 Приведём данную формулу к более удобному для применения метода перевала виду. Для этого введём обозначения
 \begin{eqw}
