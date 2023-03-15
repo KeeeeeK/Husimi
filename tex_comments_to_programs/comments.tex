@@ -19,8 +19,18 @@
 
 
 %Математика
-\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
-\DeclareMathOperator{\Real}{Re}
+\usepackage{physics}
+\usepackage{amssymb}
+% \DeclareMathOperator*{\Res}{Res}
+% \DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\Real}{Re}
+\DeclareMathOperator*{\Imag}{Im}
+
+%%Окружение для многострочных уравнений
+\newenvironment{eqw}{\begin{equation} \begin{aligned}}   
+    {\end{aligned}    \end{equation}}
+\newenvironment{eqw*}{\begin{equation*} \begin{aligned}}   
+    {\end{aligned}    \end{equation*}}
 %Заголовок
 \title{Заметки по работе проги}
 \author{Нугманов Булат}
@@ -95,12 +105,45 @@
 \end{equation}
 
 \section{Про суммирование Вигнера}
-Из моего диплома возьмём следующее:
+\subsection*{Про связь различных определений $F$}
+Возьмём формулу выше, которая следует из моего диплома при использовании старого определения $F$:
 \begin{equation}\label{QtoW}
 	\begin{aligned}
-		W(\beta) = 2e^{2|\beta|^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}Q(2\beta \psi^{-2m})
+		W(\beta) = \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|Fn(2\alpha \beta^*\psi^{2m-2}, \psi)\right|^2
 	\end{aligned}
 \end{equation}
 
-На бумажке проверил, что это выражение вроде совпадает c тем, что должно получится, для случая отсутствия нелинейности. Даже нормировано на 1!))) В таком виде выражение неудобно. 
+Нормализация старого и нового определений совпадает, но сами они чуток отличаюся:
+\begin{eqw}
+     F_{\text{старое}}(A, \psi = e^{i\Gamma}) &= \sum\limits_{n=0}^{\infty} \frac{A^n}{n!}e^{i\Gamma n(n+1)}\\
+     F_{\text{новое}}(A, e^{i\Gamma}) &= \sum\limits_{n=0}^{\infty} \frac{A^n}{n!}e^{i\Gamma n^2}\\
+     F_{\text{старое}}(A, e^{i\Gamma}) &= F_{\text{новое}}(Ae^{i\Gamma}, e^{i\Gamma})
+\end{eqw}
+
+Такое определение соответствует исходно поставленной задаче с заменой $\Gamma$ на $-\Gamma$. Это не очень существенно для вычислений, но об этом нельзя забывать при выписывании конечного ответа.
+
+Следующая формула использует новое определение $F$:
+\begin{eqw}
+    W(\beta) = \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|Fn(2\alpha \beta^*e^{i\Gamma(2m-1)}, e^{i\Gamma})\right|^2
+\end{eqw}
+
+Основной идеей суммирования последнего выражения является преобразование Фурье над $\abs{Fn}$:
+\begin{eqw}
+    \abs{Fn(Re^{i\Phi}, e^{i\Gamma})}^2 = \sum\limits_k A_k(R)e^{ik\Phi}
+\end{eqw}
+Суммирование ведётся по частотам $k$, которые пробегают значения из $\frac{2\pi}{N}\mathbb{Z}_N$.
+
+\begin{eqw}
+    W(\beta) &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+    \sum\limits_k A_k(2\abs{\alpha\beta^*})
+    \sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}e^{ik\times\left(\arg(\alpha\beta^*) -\Gamma + 2m\Gamma\right)}\\
+    &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+    \sum\limits_k A_k(2\abs{\alpha\beta^*})e^{ik\times\left(\arg(\alpha\beta^*) -\Gamma\right)}
+    \exp\left(-\abs{\alpha}^2 e^{2ik\Gamma}\right)\\
+    &= \frac{2}{\pi}e^{-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+    \sum\limits_k A_k(2\abs{\alpha\beta^*})e^{ik\times\left(\arg(\alpha\beta^*) -\Gamma\right)}
+    \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})\right)
+\end{eqw}
+
+Далее это выражение можно упрощать, раскладывать последнюю экспоненту по малости $\Gamma$ или в ряд Фурье, но так или иначе, сначала надо посчитать коэффициенты $A_k$. Важно также отметить, что количество членов ряда Фурье надо брать достаточно высоким, чтоб было хорошее разложение в Фурье в окрестности пика $Fn$
 \end{document}
