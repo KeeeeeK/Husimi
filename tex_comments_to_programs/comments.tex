@@ -131,7 +131,7 @@
 \begin{eqw}
     \abs{Fn(re^{i\Phi}, e^{i\Gamma})}^2 = \sum\limits_k A_k(r)e^{ik\Phi}
 \end{eqw}
-Суммирование ведётся по частотам $k$, которые пробегают значения из $\frac{2\pi}{N}\mathbb{Z}_N$.
+Суммирование ведётся по частотам $k$, которые пробегают значения из $\mathbb{Z}$ (<-ПРОБЛЕМА).
 
 \begin{eqw}
     W(\beta) &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
@@ -168,7 +168,7 @@ $R=2r\abs{\Gamma}$
      \frac{iW_k(Re^{i\Phi_{\max}})}{1+W_k(Re^{i\Phi_{\max}})}\left(\Phi - \Phi_{\max}\right) - \dots\\
      &\dots-\frac{W_k(Re^{i\Phi_{\max}}) - 2W_k(Re^{i\Phi_{\max}})^2}{\left(1+W_k(Re^{i\Phi_{\max}})\right)^3}\frac{\left(\Phi - \Phi_{\max}\right)^2}{2}\\
      &\approx 1- i R \sign \Gamma + \underbrace{\frac{R \sign \Gamma}{1-i R \sign \Gamma}}_{b_1}\left(\Phi - \Phi_{\max}\right) +
-     \underbrace{\frac{i R \sign \Gamma + 2 R^2}{\left(1-i R \sign \Gamma\right)^3}}_{b_2}\frac{\left(\Phi - \Phi_{\max}\right)^2}{2}
+     \underbrace{\frac{i R \sign \Gamma - 2 R^2}{\left(1-i R \sign \Gamma\right)^3}}_{b_2}\frac{\left(\Phi - \Phi_{\max}\right)^2}{2}
 \end{eqw}
 
 \begin{eqw}
@@ -183,10 +183,10 @@ $R=2r\abs{\Gamma}$
     \exp\left(-\frac{\Real b_1}{\Gamma}\phi^2 -ik\phi \right)d\phi\times\dots\\
     &\dots\times\exp\left(-\frac{\Real b_2}{6\Gamma}\phi^3 - \frac{\Real b_3}{24\Gamma}\phi^4 + O(\phi^5)\right)(p_0 + p_1\phi + p_2\phi^2 + O(\phi^3)) \\
     &= \frac{\exp\left(\frac{R}{\abs{\Gamma}}-ik\Phi_{\max}\right)}{2\pi}\int\limits_{-\infty}^{\infty}\
-    \exp\left(-x^2 - ik\sqrt{\frac{\Gamma}{\Real b_1}}x\right)\times\dots\\
+    \exp\left(-x^2 - ik\sqrt{\frac{\Gamma}{\Real b_1}}x\right) \sqrt{\frac{\Gamma}{\Real b_1}} dx\times\dots\\
     &\dots\times \exp\left(-\frac{\Real b_2}{6\left(\Real b_1\right)^{3/2}}\sqrt{\Gamma}x^3 - \frac{\Real b_3}{24\left(\Real b_1\right)^{2}}\Gamma x^4 + O(\Gamma^{3/2})\right)
     \left(p_0 + p_1\sqrt{\frac{\Gamma}{\Real b_1}}x +\frac{p_2\Gamma}{\Real b_1}x^2 + O(\Gamma^{3/2})\right)
 \end{eqw}
 
-Таким образом, ожидаемая относительная точность вычислений $O(\Gamma^{3/2})$.
+Таким образом, ожидаемая относительная точность вычислений $O(\Gamma^{2})$.
 \end{document}
