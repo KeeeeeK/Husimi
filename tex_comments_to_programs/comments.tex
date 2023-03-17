@@ -22,7 +22,7 @@
 \usepackage{physics}
 \usepackage{amssymb}
 % \DeclareMathOperator*{\Res}{Res}
-% \DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\sign}{sign}
 \DeclareMathOperator*{\Real}{Re}
 \DeclareMathOperator*{\Imag}{Im}
 
@@ -129,7 +129,7 @@
 
 Основной идеей суммирования последнего выражения является преобразование Фурье над $\abs{Fn}$:
 \begin{eqw}
-    \abs{Fn(Re^{i\Phi}, e^{i\Gamma})}^2 = \sum\limits_k A_k(R)e^{ik\Phi}
+    \abs{Fn(re^{i\Phi}, e^{i\Gamma})}^2 = \sum\limits_k A_k(r)e^{ik\Phi}
 \end{eqw}
 Суммирование ведётся по частотам $k$, которые пробегают значения из $\frac{2\pi}{N}\mathbb{Z}_N$.
 
@@ -145,5 +145,48 @@
     \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})\right)
 \end{eqw}
 
-Далее это выражение можно упрощать, раскладывать последнюю экспоненту по малости $\Gamma$ или в ряд Фурье, но так или иначе, сначала надо посчитать коэффициенты $A_k$. Важно также отметить, что количество членов ряда Фурье надо брать достаточно высоким, чтоб было хорошее разложение в Фурье в окрестности пика $Fn$
+Далее это выражение можно упрощать, раскладывать последнюю экспоненту по малости $\Gamma$ или в ряд Фурье, но так или иначе, сначала надо посчитать коэффициенты $A_k$. Важно также отметить, что количество членов ряда Фурье надо брать достаточно высоким, чтоб было хорошее разложение в Фурье в окрестности пика $Fn$. 
+
+$R=2r\abs{\Gamma}$
+
+\begin{eqw}
+     A_k(r) &= \frac{1}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\Phi} \abs{Fn(Re^{i\Phi}, e^{i\Gamma})}^2 d\Phi \\
+    &\approx \frac{1}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\Phi} 
+    \frac{\exp\left(\frac{\Real f(z_k)}{\Gamma}\right)}{\abs{i+z_k}}d\Phi 
+\end{eqw}
+Введём следующее обозначение:
+\begin{eqw}
+    b_m = \frac{i^m q_m(-iR\sign\Gamma)}{\left(1-iR\sign \Gamma\right)^{2m-1}}
+\end{eqw}
+Приведём парочку разложений для подынтгральных функций:
+\begin{eqw}
+    \Real f(z_k) = R\sign\Gamma - \Real b_1 \frac{\left(\Phi - \Phi_{\max}\right)^2}{2} - \Real b_2 \frac{\left(\Phi - \Phi_{\max}\right)^3}{6} - \Real b_3 \frac{\left(\Phi - \Phi_{\max}\right)^4}{24}+o\left(\left(\Phi - \Phi_{\max}\right)^4\right)
+\end{eqw}
+
+\begin{eqw}
+     1+W_k(Re^{i\Phi}) &\approx 1+W_k(Re^{i\Phi_{\max}}) + 
+     \frac{iW_k(Re^{i\Phi_{\max}})}{1+W_k(Re^{i\Phi_{\max}})}\left(\Phi - \Phi_{\max}\right) - \dots\\
+     &\dots-\frac{W_k(Re^{i\Phi_{\max}}) - 2W_k(Re^{i\Phi_{\max}})^2}{\left(1+W_k(Re^{i\Phi_{\max}})\right)^3}\frac{\left(\Phi - \Phi_{\max}\right)^2}{2}\\
+     &\approx 1- i R \sign \Gamma + \underbrace{\frac{R \sign \Gamma}{1-i R \sign \Gamma}}_{b_1}\left(\Phi - \Phi_{\max}\right) +
+     \underbrace{\frac{i R \sign \Gamma + 2 R^2}{\left(1-i R \sign \Gamma\right)^3}}_{b_2}\frac{\left(\Phi - \Phi_{\max}\right)^2}{2}
+\end{eqw}
+
+\begin{eqw}
+    \Real f(z_k) \approx R\sign\Gamma - \Real b_1 \frac{\left(\Phi - \Phi_{\max}\right)^2}{2} - \Real b_2 \frac{\left(\Phi - \Phi_{\max}\right)^3}{6} - \Real b_3 \frac{\left(\Phi - \Phi_{\max}\right)^4}{24}+o\left(\left(\Phi - \Phi_{\max}\right)^4\right)
+\end{eqw}
+
+Наконец, произведём оценку того, какой точности мы сможем добиться при указанных разложениях ($\phi = \Phi - \Phi_{\max}, x=\sqrt{\frac{{\Re b_1}}{{\Gamma}}}\phi = \sqrt{\frac{R}{\Gamma\left(1+R^2\right)}}\phi$):
+\begin{eqw}
+     A_k &= \frac{e^{-ik\Phi_{\max}}}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\phi} 
+     \frac{\exp\left(\frac{\Real f(z_k)}{\Gamma}\right)}{\abs{i+z_k}}d\phi \\
+    &=\frac{\exp\left(\frac{R}{\abs{\Gamma}}-ik\Phi_{\max}\right)}{2\pi}\int\limits_{-\pi}^\pi
+    \exp\left(-\frac{\Real b_1}{\Gamma}\phi^2 -ik\phi \right)d\phi\times\dots\\
+    &\dots\times\exp\left(-\frac{\Real b_2}{6\Gamma}\phi^3 - \frac{\Real b_3}{24\Gamma}\phi^4 + O(\phi^5)\right)(p_0 + p_1\phi + p_2\phi^2 + O(\phi^3)) \\
+    &= \frac{\exp\left(\frac{R}{\abs{\Gamma}}-ik\Phi_{\max}\right)}{2\pi}\int\limits_{-\infty}^{\infty}\
+    \exp\left(-x^2 - ik\sqrt{\frac{\Gamma}{\Real b_1}}x\right)\times\dots\\
+    &\dots\times \exp\left(-\frac{\Real b_2}{6\left(\Real b_1\right)^{3/2}}\sqrt{\Gamma}x^3 - \frac{\Real b_3}{24\left(\Real b_1\right)^{2}}\Gamma x^4 + O(\Gamma^{3/2})\right)
+    \left(p_0 + p_1\sqrt{\frac{\Gamma}{\Real b_1}}x +\frac{p_2\Gamma}{\Real b_1}x^2 + O(\Gamma^{3/2})\right)
+\end{eqw}
+
+Таким образом, ожидаемая относительная точность вычислений $O(\Gamma^{3/2})$.
 \end{document}
