@@ -129,29 +129,28 @@
 
 Основной идеей суммирования последнего выражения является преобразование Фурье над $\abs{Fn}$:
 \begin{eqw}
-    \abs{Fn(re^{i\Phi}, e^{i\Gamma})}^2 = \sum\limits_k A_k(r)e^{ik\Phi}
+    \abs{Fn(Re^{i\Phi}, e^{i\Gamma})}^2 = \sum\limits_k A_k(R)e^{ik\Phi}\\
+    Re^{i\Phi} = -2i\times 2\alpha \beta^*e^{i\Gamma(2m-1)}\times \Gamma = Re^{i\Phi_0+2im\Gamma}
 \end{eqw}
-Суммирование ведётся по частотам $k$, которые пробегают значения из $\mathbb{Z}$ (<-ПРОБЛЕМА).
+Суммирование ведётся по частотам $k$, которые пробегают значения из $\mathbb{Z}$.
 
 \begin{eqw}
     W(\beta) &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
-    \sum\limits_k A_k(2\abs{\alpha\beta^*})
-    \sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}e^{ik\times\left(\arg(\alpha\beta^*) -\Gamma + 2m\Gamma\right)}\\
+    \sum\limits_k A_k(4\abs{\alpha\beta^*\Gamma})
+    \sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}e^{ik\times\left(\Phi_0+2im\Gamma\right)}\\
     &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
-    \sum\limits_k A_k(2\abs{\alpha\beta^*})e^{ik\times\left(\arg(\alpha\beta^*) -\Gamma\right)}
+    \sum\limits_k A_k(4\abs{\alpha\beta^*\Gamma})e^{ik\Phi_0}
     \exp\left(-\abs{\alpha}^2 e^{2ik\Gamma}\right)\\
     &= \frac{2}{\pi}e^{-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
-    \sum\limits_k A_k(2\abs{\alpha\beta^*})e^{ik\times\left(\arg(\alpha\beta^*) -\Gamma\right)}
+    \sum\limits_k A_k(4\abs{\alpha\beta^*\Gamma})e^{ik\Phi_0}
     \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})\right)
 \end{eqw}
 
 Далее это выражение можно упрощать, раскладывать последнюю экспоненту по малости $\Gamma$ или в ряд Фурье, но так или иначе, сначала надо посчитать коэффициенты $A_k$. Важно также отметить, что количество членов ряда Фурье надо брать достаточно высоким, чтоб было хорошее разложение в Фурье в окрестности пика $Fn$. 
 
-$R=2r\abs{\Gamma}$
-
 \begin{eqw}
-     A_k(r) &= \frac{1}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\Phi} \abs{Fn(Re^{i\Phi}, e^{i\Gamma})}^2 d\Phi \\
-    &\approx \frac{1}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\Phi} 
+     A_k(R) &= \frac{1}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\Phi} \abs{Fn(Re^{i\Phi}, e^{i\Gamma})}^2 d\Phi \\
+    &\approx \frac{e^{-\frac{R}{\abs{\Gamma}}}}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\Phi} 
     \frac{\exp\left(\frac{\Real f(z_k)}{\Gamma}\right)}{\abs{i+z_k}}d\Phi 
 \end{eqw}
 Введём следующее обозначение:
@@ -177,16 +176,34 @@ $R=2r\abs{\Gamma}$
 
 Наконец, произведём оценку того, какой точности мы сможем добиться при указанных разложениях ($\phi = \Phi - \Phi_{\max}, x=\sqrt{\frac{{\Re b_1}}{{\Gamma}}}\phi = \sqrt{\frac{R}{\Gamma\left(1+R^2\right)}}\phi$):
 \begin{eqw}
-     A_k &= \frac{e^{-ik\Phi_{\max}}}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\phi} 
+     A_k &= \frac{e^{-ik\Phi_{\max}-\frac{R}{\abs{\Gamma}}}}{2\pi}\int\limits_{-\pi}^\pi e^{-ik\phi} 
      \frac{\exp\left(\frac{\Real f(z_k)}{\Gamma}\right)}{\abs{i+z_k}}d\phi \\
-    &=\frac{\exp\left(\frac{R}{\abs{\Gamma}}-ik\Phi_{\max}\right)}{2\pi}\int\limits_{-\pi}^\pi
+    &=\frac{\exp\left(-ik\Phi_{\max}\right)}{2\pi}\int\limits_{-\pi}^\pi
     \exp\left(-\frac{\Real b_1}{\Gamma}\phi^2 -ik\phi \right)d\phi\times\dots\\
     &\dots\times\exp\left(-\frac{\Real b_2}{6\Gamma}\phi^3 - \frac{\Real b_3}{24\Gamma}\phi^4 + O(\phi^5)\right)(p_0 + p_1\phi + p_2\phi^2 + O(\phi^3)) \\
-    &= \frac{\exp\left(\frac{R}{\abs{\Gamma}}-ik\Phi_{\max}\right)}{2\pi}\int\limits_{-\infty}^{\infty}\
+    &= \frac{\exp\left(-ik\Phi_{\max}\right)}{2\pi}\int\limits_{-\infty}^{\infty}\
     \exp\left(-x^2 - ik\sqrt{\frac{\Gamma}{\Real b_1}}x\right) \sqrt{\frac{\Gamma}{\Real b_1}} dx\times\dots\\
     &\dots\times \exp\left(-\frac{\Real b_2}{6\left(\Real b_1\right)^{3/2}}\sqrt{\Gamma}x^3 - \frac{\Real b_3}{24\left(\Real b_1\right)^{2}}\Gamma x^4 + O(\Gamma^{3/2})\right)
     \left(p_0 + p_1\sqrt{\frac{\Gamma}{\Real b_1}}x +\frac{p_2\Gamma}{\Real b_1}x^2 + O(\Gamma^{3/2})\right)
 \end{eqw}
 
 Таким образом, ожидаемая относительная точность вычислений $O(\Gamma^{2})$.
+
+Дальнейшие вычисления интеграла содержатся в вольфраме. В целом, их можно охарактеризовать следующей важной формулой:
+\begin{eqw}
+    \int\limits_{-\infty}^{\infty}\
+    e^{-x^2 - ik\sqrt{\frac{\Gamma}{\Real b_1}}x} \exp\left(-\frac{\Real b_2 \times\sqrt{\Gamma} x^3}{6\left(\Real b_1\right)^{3/2}} - \frac{\Real b_3\times \Gamma x^4}{24\left(\Real b_1\right)^{2}} \right)
+    \left(p_0 + p_1\sqrt{\frac{\Gamma}{\Real b_1}}x +\frac{p_2\Gamma}{\Real b_1}x^2\right) dx = \\
+    = \left(A^0 + A^1 2i\Gamma k + O(\Gamma^2)\right) e^{-\varkappa \abs{\alpha}^2 \left(2k{\Gamma}\right)^2}
+\end{eqw}
+Коэффициенты $A^0$ и $A^1$ можно найти в вольфрам документе. В формуле выше было использовано:
+\begin{eqw}
+    4\varkappa \abs{\alpha}^2\Gamma^2 = \frac{\abs{\Gamma (1+R^2)}}{4R}
+\end{eqw}
+Такое обозначение выполнено не случайно:
+\begin{eqw}
+     W(\beta) = \frac{2}{\pi}e^{-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+     \sum\limits_k \frac{e^{ik\left(\Phi_0-\Phi_{\max}\right)}}{2\pi}
+     \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma}-\varkappa \left(2k{\Gamma}\right)^2)\right) \left(A^0 + A^1 2i\Gamma k + O(\Gamma^2)\right)
+\end{eqw}
 \end{document}
