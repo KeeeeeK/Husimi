@@ -146,6 +146,9 @@
     \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})\right)
 \end{eqw}
 
+\subsection*{Приблизительный путь... (заброшен)}
+\textit{Данный путь основывается на разложении $W$ в ряд Фурье по $\Phi$. Это же самое рассуждение можно применить без приближений, что реализует следующий метод. Если придётся возрождать данный метод, то я бы делал не совсем так, как показано далее. $Re\left(\frac{i}{2}(1+W_k(Re^{i\Phi}))^2\right)$ можно аналитически продолжить по $\Phi$ до $-i\left(\left(1+W_k(Re^{i\Phi})\right)^2 - \left(1+W_k(Re^{-i\Phi})\right)^2\right)$. Это выражение позволяет применить комплексный метод перевала, найдя точку в которой при $k\Gamma\sim 1$ наблюдается перевал. Наивные рассуждения с разложением по малости $\Gamma$ без учёта $k\Gamma\sim 1$ являются ошибочными. Тем не менее я не буду их пока удалять, потому что схожие выкладки могут возникнуть вновь.}
+
 Далее это выражение можно упрощать, раскладывать последнюю экспоненту по малости $\Gamma$ или в ряд Фурье, но так или иначе, сначала надо посчитать коэффициенты $A_k$. Важно также отметить, что количество членов ряда Фурье надо брать достаточно высоким, чтоб было хорошее разложение в Фурье в окрестности пика $Fn$. 
 
 \begin{eqw}
@@ -206,4 +209,17 @@
      \sum\limits_k \frac{e^{ik\left(\Phi_0-\Phi_{\max}\right)}}{2\pi}
      \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma}-\varkappa \left(2k{\Gamma}\right)^2)\right) \left(A^0 + A^1 2i\Gamma k + O(\Gamma^2)\right)
 \end{eqw}
+\subsection*{Новый путь (в разработке)}
+\begin{eqw}
+     &\abs{F\left(Ae^{i\phi}, e^{i\Gamma}\right)}^2 =\\
+     =&\sum_{m, n = 0}^{\infty} \frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!} e^{i\Gamma(n^2 - m^2)} = -\sum_{n=0}^{\infty} \frac{\abs{A}^{2n}}{n!^2} + \left(\sum_{m, n = 0, n>m}^{\infty}\frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!} e^{i\Gamma(n^2 - m^2)} + c.c.\right)
+\end{eqw}
+Сделаем далее замену $n-m=k$. В таких обозначениях $n+m = 2m+k$.
+
+\begin{eqw}
+    &\sum_{m, n = 0, n>m}^{\infty}\frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!}e^{i\Gamma(n^2 - m^2)} = \sum_{k=0}^{\infty}\sum_{m=0}^{\infty}\frac{\abs{A}^{2m+k}e^{i\phi k}}{m!(m+k)!}e^{i\Gamma k(2m+k)} = \\
+    &=\sum_{k=0}^{\infty}\left(\abs{A} e^{i\phi}\right)^{k}e^{i\Gamma k^2}\sum_{m=0}^{\infty}\frac{\left(\abs{A}e^{i\Gamma k}\right)^{2m}}{m!(m+k)!} = \sum_{k=0}^{\infty}e^{ik(\phi - 2\Gamma)+i\Gamma k^2}I_{k}\left(\abs{A}e^{i\Gamma k}\right)=\\
+    &=\frac{1}{\pi}\sum_{k=0}^{\infty}e^{ik(\phi - 2\Gamma)+i\Gamma k^2}\int\limits_0^{\pi}\cos\left(k x\right)\exp\left(\abs{A}e^{i\Gamma k}\cos(x)\right)dx
+\end{eqw}
+Суммирование во второй строчке произведено при помощи модифицированной функции Бесселя $I_k$.
 \end{document}

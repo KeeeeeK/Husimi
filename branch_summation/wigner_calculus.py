@@ -10,7 +10,6 @@ def Fn_zero_gamma(r, phi, gamma, n_sigma):
     return np.exp(r*np.exp(1j*phi) - r)
 
 def np_wigner(alpha_abs, alpha_arg, beta_abs, beta_arg, Gamma, n_sigma):
-    print(alpha_abs)
     Fn = Fn_zero_gamma
     type_ = np.double
     m_min = max((np.int_(3), np.int_(np.round(alpha_abs ** 2 - n_sigma * alpha_abs))))
@@ -64,11 +63,12 @@ def nb_wigner(alpha_abs, alpha_arg, beta_abs, beta_arg, Gamma, n_sigma):
 if __name__ == '__main__':
     # print(nb_wigner(10, 1, np.array([10, 2]), np.array([1, 2]), 0, 100))
     alpha_abs = 0.345
-    print(np_wigner(alpha_abs, 1, alpha_abs, 1, 0, 10) * np.pi/2)
+    # print(np_wigner(alpha_abs, 1, alpha_abs, 1, 0, 10) * np.pi/2)
 
     x = np.linspace(0.1, 1, 100)
-    y = [np_wigner(xi, 1, xi, 1, 0, 10) * np.pi/2 - 1 for xi in x]
-    plt.plot(x, y)
+    y = [np_wigner(xi, 1, xi, 1, 0, 200) * np.pi/2 - 1 for xi in x]
+    print(np.max(y))
+    plt.plot(np.log(x), np.log(np.abs(y)))
     plt.axhline(0, 0, np.max(x))
     plt.show()
 
