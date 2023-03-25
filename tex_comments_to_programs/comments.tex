@@ -211,8 +211,8 @@
 \end{eqw}
 \subsection*{Новый путь (в разработке)}
 \begin{eqw}
-     &\abs{F\left(Ae^{i\phi}, e^{i\Gamma}\right)}^2 =\\
-     =&\sum_{m, n = 0}^{\infty} \frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!} e^{i\Gamma(n^2 - m^2)} = -\sum_{n=0}^{\infty} \frac{\abs{A}^{2n}}{n!^2} + \left(\sum_{m, n = 0, n>m}^{\infty}\frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!} e^{i\Gamma(n^2 - m^2)} + c.c.\right)
+     &\abs{F\left(\abs{A}e^{i\phi}, e^{i\Gamma}\right)}^2 =\\
+     =&\sum_{m, n = 0}^{\infty} \frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!} e^{i\Gamma(n^2 - m^2)} = -\sum_{n=0}^{\infty} \frac{\abs{A}^{2n}}{n!^2} + \left(\sum_{m, n = 0, n\ge m}^{\infty}\frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!} e^{i\Gamma(n^2 - m^2)} + c.c.\right)
 \end{eqw}
 Сделаем далее замену $n-m=k$. В таких обозначениях $n+m = 2m+k$.
 
@@ -222,4 +222,11 @@
     &=\frac{1}{\pi}\sum_{k=0}^{\infty}e^{ik(\phi - 2\Gamma)+i\Gamma k^2}\int\limits_0^{\pi}\cos\left(k x\right)\exp\left(\abs{A}e^{i\Gamma k}\cos(x)\right)dx
 \end{eqw}
 Суммирование во второй строчке произведено при помощи модифицированной функции Бесселя $I_k$.
+
+Подставим данное соотношение в формулу для функции Вигнера. Это формула 13 в этом документе с точностью до следующих переобозначений:
+\begin{eqw}
+     &\abs{A}e^{i\Phi_0} = 2\alpha\beta^*e^{-i\Gamma}\\
+     &A_k = e^{-2ik\Gamma+i\Gamma k^2}I_{k}\left(\abs{A}e^{i\Gamma k}\right)\\
+     &A_{-k} = A_k^*
+\end{eqw}
 \end{document}
