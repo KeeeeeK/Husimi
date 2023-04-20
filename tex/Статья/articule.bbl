@@ -2,8 +2,21 @@
 
 \bibitem{milburn1986quantum}
 Gerard~J Milburn.
-\newblock Quantum and classical liouville dynamics of the anharmonic
-  oscillator.
+\newblock Quantum and classical liouville dynamics of the anharmonic oscillator.
 \newblock {\em Physical Review A}, 33(1):674, 1986.
+
+\bibitem{stobinska2008wigner}
+Magdalena Stobi{\'n}ska, GJ~Milburn, and Krzysztof W{\'o}dkiewicz.
+\newblock Wigner function evolution of quantum states in the presence of self-kerr interaction.
+\newblock {\em Physical Review A}, 78(1):013810, 2008.
+
+\bibitem{bateman1953higher}
+Harry Bateman.
+\newblock {\em Higher transcendental functions}, volume~2.
+\newblock McGRAW-HILL book company, 1953.
+\newblock p. 104.
+
+\bibitem{mygit}
+\url{https://github.com/KeeeeeK/Bright-banana-states}.
 
 \end{thebibliography}

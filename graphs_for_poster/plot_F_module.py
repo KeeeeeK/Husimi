@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from only_steepest_descent.plot import plot_beauty
 from numerical_summation.nb_sum_fn import sum_fn
-from decimal import Decimal
 
 n_sigma = 5
 

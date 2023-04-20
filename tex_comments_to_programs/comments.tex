@@ -115,9 +115,9 @@
 
 Нормализация старого и нового определений совпадает, но сами они чуток отличаюся:
 \begin{eqw}
-     F_{\text{старое}}(A, \psi = e^{i\Gamma}) &= \sum\limits_{n=0}^{\infty} \frac{A^n}{n!}e^{i\Gamma n(n+1)}\\
+     F_{\text{старое}}(A, \psi = e^{-i\Gamma}) &= \sum\limits_{n=0}^{\infty} \frac{A^n}{n!}e^{-i\Gamma n(n+1)}\\
      F_{\text{новое}}(A, e^{i\Gamma}) &= \sum\limits_{n=0}^{\infty} \frac{A^n}{n!}e^{i\Gamma n^2}\\
-     F_{\text{старое}}(A, e^{i\Gamma}) &= F_{\text{новое}}(Ae^{i\Gamma}, e^{i\Gamma})
+     F_{\text{старое}}(A, e^{-i\Gamma}) &= F_{\text{новое}}(Ae^{-i\Gamma}, e^{-i\Gamma})
 \end{eqw}
 
 Такое определение соответствует исходно поставленной задаче с заменой $\Gamma$ на $-\Gamma$. Это не очень существенно для вычислений, но об этом нельзя забывать при выписывании конечного ответа.
@@ -147,7 +147,7 @@
 \end{eqw}
 
 \subsection*{Приблизительный путь... (заброшен)}
-\textit{Данный путь основывается на разложении $W$ в ряд Фурье по $\Phi$. Это же самое рассуждение можно применить без приближений, что реализует следующий метод. Если придётся возрождать данный метод, то я бы делал не совсем так, как показано далее. $Re\left(\frac{i}{2}(1+W_k(Re^{i\Phi}))^2\right)$ можно аналитически продолжить по $\Phi$ до $-i\left(\left(1+W_k(Re^{i\Phi})\right)^2 - \left(1+W_k(Re^{-i\Phi})\right)^2\right)$. Это выражение позволяет применить комплексный метод перевала, найдя точку в которой при $k\Gamma\sim 1$ наблюдается перевал. Наивные рассуждения с разложением по малости $\Gamma$ без учёта $k\Gamma\sim 1$ являются ошибочными. Тем не менее я не буду их пока удалять, потому что схожие выкладки могут возникнуть вновь.}
+\textit{Данный путь основывается на разложении $W$ в ряд Фурье по $\Phi$. Это же самое рассуждение можно применить без приближений, что реализует следующий метод. Если придётся возрождать данный метод, то я бы делал не совсем так, как показано далее. $Re\left(\frac{i}{2}(1+W_k(Re^{i\Phi}))^2\right)$ можно аналитически продолжить по $\Phi$ до $-i\left(\left(1+W_k(Re^{i\Phi})\right)^2 - \left(1+W_{-k}(Re^{-i\Phi})\right)^2\right)$. Это выражение позволяет применить комплексный метод перевала, найдя точку в которой при $k\Gamma\sim 1$ наблюдается перевал. Наивные рассуждения с разложением по малости $\Gamma$ без учёта $k\Gamma\sim 1$ являются ошибочными. Тем не менее я не буду их пока удалять, потому что схожие выкладки могут возникнуть вновь.}
 
 Далее это выражение можно упрощать, раскладывать последнюю экспоненту по малости $\Gamma$ или в ряд Фурье, но так или иначе, сначала надо посчитать коэффициенты $A_k$. Важно также отметить, что количество членов ряда Фурье надо брать достаточно высоким, чтоб было хорошее разложение в Фурье в окрестности пика $Fn$. 
 
@@ -217,16 +217,100 @@
 Сделаем далее замену $n-m=k$. В таких обозначениях $n+m = 2m+k$.
 
 \begin{eqw}
-    &\sum_{m, n = 0, n>m}^{\infty}\frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!}e^{i\Gamma(n^2 - m^2)} = \sum_{k=0}^{\infty}\sum_{m=0}^{\infty}\frac{\abs{A}^{2m+k}e^{i\phi k}}{m!(m+k)!}e^{i\Gamma k(2m+k)} = \\
-    &=\sum_{k=0}^{\infty}\left(\abs{A} e^{i\phi}\right)^{k}e^{i\Gamma k^2}\sum_{m=0}^{\infty}\frac{\left(\abs{A}e^{i\Gamma k}\right)^{2m}}{m!(m+k)!} = \sum_{k=0}^{\infty}e^{ik(\phi - 2\Gamma)+i\Gamma k^2}I_{k}\left(\abs{A}e^{i\Gamma k}\right)=\\
-    &=\frac{1}{\pi}\sum_{k=0}^{\infty}e^{ik(\phi - 2\Gamma)+i\Gamma k^2}\int\limits_0^{\pi}\cos\left(k x\right)\exp\left(\abs{A}e^{i\Gamma k}\cos(x)\right)dx
+    &\sum_{m, n = 0, n\geq m}^{\infty}\frac{\abs{A}^{n+m}e^{i\phi(n-m)}}{m!n!}e^{i\Gamma(n^2 - m^2)} = \sum_{k=0}^{\infty}\sum_{m=0}^{\infty}\frac{\abs{A}^{2m+k}e^{i\phi k}}{m!(m+k)!}e^{i\Gamma k(2m+k)} = \\
+    &=\sum_{k=0}^{\infty}e^{i\phi k}\sum_{m=0}^{\infty}\frac{\left(\abs{A}e^{i\Gamma k}\right)^{2m+k}}{m!(m+k)!} = \sum_{k=0}^{\infty}e^{ik\phi}I_{k}\left(2\abs{A}e^{i\Gamma k}\right)
 \end{eqw}
 Суммирование во второй строчке произведено при помощи модифицированной функции Бесселя $I_k$.
 
 Подставим данное соотношение в формулу для функции Вигнера. Это формула 13 в этом документе с точностью до следующих переобозначений:
 \begin{eqw}
      &\abs{A}e^{i\Phi_0} = 2\alpha\beta^*e^{-i\Gamma}\\
-     &A_k = e^{-2ik\Gamma+i\Gamma k^2}I_{k}\left(\abs{A}e^{i\Gamma k}\right)\\
-     &A_{-k} = A_k^*
+     &A_{k>0} = I_{k}\left(2\abs{A}e^{i\Gamma k}\right)e^{-2\abs{A}}\\
+     &A_{k<0} = A_{-k}^*\\
+     &A_k = I_{\abs{k}}\left(2\abs{A}e^{i\Gamma k}\right)e^{-2\abs{A}}
+\end{eqw}
+Для пущей точности, повторим вывод:
+\begin{eqw}
+    W(\beta) &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}\sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}\left|Fn(2\alpha \beta^*e^{i\Gamma(2m-1)}, e^{i\Gamma})\right|^2\\
+    &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+    \sum\limits_k A_k
+    \sum\limits_{m=0}^{\infty} \frac{\left(-|\alpha|^2\right)^m}{m!}e^{ik\times\left(\Phi_0+2im\Gamma\right)}\\
+    &= \frac{2}{\pi}e^{\abs{\alpha}^2-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+    \sum\limits_k A_k e^{ik\Phi_0}
+    \exp\left(-\abs{\alpha}^2 e^{2ik\Gamma}\right)\\
+    &= \frac{2}{\pi}e^{-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+    \sum\limits_k A_k e^{ik\Phi_0}
+    \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})\right)\\
+    &=  \frac{2}{\pi}e^{-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+    \sum\limits_k I_{k}\left(4\abs{\alpha\beta^*}e^{i\Gamma k}\right) e^{ik\Phi_0}
+    \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})-4\abs{\alpha\beta^*}\right)
+\end{eqw}
+
+Главный вопрос, который остался: какую точность мы получим, если просуммируем только первые $K$ слагаемых ряда Фурье. Для проверки вычислений проверим условие нормировки. При этом при интегрировании по $\Phi_0$ убьются все слагаемые при $k\neq 0$, что приведёт нас к интегралу:
+
+\begin{eqw}
+     \int W(\beta) d^2\beta = \frac{2}{\pi}\int r\; dr d\Phi_0 A_0 e^{-2\left(r- \abs{\alpha}\right)^2} = 4\int\limits_0^{\infty} dr \times r e^{-2(r-\abs{\alpha})^2}I_0(4\abs{\alpha}r)e^{-4\abs{\alpha}r} = 1
+\end{eqw}
+
+При больших $z$ известно асимптотическое разложение $I_k(z)$:
+\begin{eqw}
+     I_k(z) \sim 
+     \frac{e^z}{\sqrt{2\pi z}}\sum_m \frac{(k,m)}{(-2z)^m} + \frac{e^{-z}}{\sqrt{-2\pi z}}\sum_m \frac{(k,m)}{(2z)^m}\\
+\end{eqw}
+\begin{eqw}
+    (k, m) = \frac{\Gamma\left(k+m+\frac{1}{2}\right)}{m!\Gamma\left(k-m+\frac{1}{2}\right)} &\sim \frac{(m-1)!}{\pi}\left(1+\frac{4k^2-1}{m}+\dots\right)\text{, при }m\gg k\\
+    &\sim \frac{k^{2m}}{m!}\left(1+\frac{m(4m^2-1)}{12k^2}+\dots\right)\text{, при }k\gg m\\
+    &\sim k^m \exp\left(m f(t)+\dots \right)\text{, при } m = t k,\;\; t\in(0, 1)\\
+    &f(t) = -\frac{(1-t) \log (1-t)}{t}-\log (t)+\frac{(t+1)\log (t+1)}{t}-1
+\end{eqw}
+
+Из асимптотики при $k\gg m$ видим, что можно учитывать 1-2 остаточных члена при $k\lesssim \sqrt{\abs{z}}$. При $k\sim\sqrt{\abs{z}}$ все члены становятся примерно одного порядка, что делает асимптотическое разложение применимым уже так себе. 
+
+Запишем приближённое выражение для $W$ только с нулевым членом асимптотики:
+\begin{eqw}
+     W(\beta) &\approx \frac{2}{\pi}e^{-2\left(\abs{\beta} - \abs{\alpha}\right)^2}
+     \sum\limits_k \frac{e^{ik(\Phi_0-\Gamma/2)}}{\sqrt{2\pi 4\abs{\alpha\beta^*}}}
+     \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})-4\abs{\alpha\beta^*}(1-e^{i\Gamma k})\right)
+\end{eqw}
+
+При $\abs{\beta}>\abs{\alpha}$ данное выражение ведёт себя прекрасно, ибо аргумент под экспонентой оказывается меньше 0. Однако при $\abs{\beta}<\abs{\alpha}$ аргумент под экспонентой оказывается больше 0 вплоть до $k\sim\frac{2}{\Gamma}\arccos\left(\sqrt{\abs{\frac{\beta}{\alpha}}}\right)$. К счастью пиковое значение невилируется экспонентой за знаком суммы. Приведу наилучшее найденное мной значение для модифицированной функции Бесселя:
+\begin{eqw}
+     I_k(z) = \frac{\exp\left(z-\frac{k^2}{2z}+\frac{k^4}{24z^3}+\dots\right)}{\sqrt{2\pi z}} + \frac{\exp\left(-z+\frac{k^2}{2z}-\frac{k^4}{24z^3}+\dots\right)}{\sqrt{-2\pi z}}
+\end{eqw}
+Оно работает даже при $k\sim\abs{z}^{1/2}$!!! Используем это для вычислений:
+\begin{eqw}
+    W(\beta) &\approx \frac{2}{\pi}
+    \sum\limits_k \frac{e^{ik(\Phi_0-\Gamma/2)}}{\sqrt{2\pi 4\abs{\alpha\beta^*}}}
+    \exp\left(\abs{\alpha}^2 (1-e^{2ik\Gamma})-4\abs{\alpha\beta^*}(1-e^{i\Gamma k})-2\left(\abs{\beta} - \abs{\alpha}\right)^2-
+    \frac{k^2 e^{-ik\Gamma}}{8\abs{\alpha\beta^*}}+\frac{k^4 e^{-3ik\Gamma}}{24\abs{4\alpha\beta^*}^3}\right)
+\end{eqw}
+
+\begin{eqw}
+    &\abs{\alpha}^2 (1-e^{2ik\Gamma})-4\abs{\alpha\beta^*}(1-e^{i\Gamma k})-2\left(\abs{\beta} - \abs{\alpha}\right)^2 =\\ 
+    &= -2\abs{\alpha}^2 \left(\frac{\abs{\beta}}{\abs{\alpha}}-\cos(k\Gamma)\right)^2+2i\abs{\alpha}^2
+    \left(2\frac{\abs{\beta}}{\abs{\alpha}} - \cos(k\Gamma)\right)\sin(k\Gamma)
+\end{eqw}
+
+\begin{eqw}
+    &W(\beta) \approx \frac{2}{\pi}
+    \sum\limits_k \frac{e^{ik(\Phi_0-\Gamma/2)}}{\sqrt{2\pi 4\abs{\alpha\beta^*}}}\times\\
+    &\exp\left(-2\abs{\alpha}^2 \left(\left(\frac{\abs{\beta}}{\abs{\alpha}}-\cos(k\Gamma)\right)^2-i
+    \left(2\frac{\abs{\beta}}{\abs{\alpha}} - \cos(k\Gamma)\right)\sin(k\Gamma)\right) -
+    \frac{k^2 e^{-ik\Gamma}}{8\abs{\alpha\beta^*}}+\frac{k^4 e^{-3ik\Gamma}}{24\abs{4\alpha\beta^*}^3}\right)
+\end{eqw}
+
+Как видно из последнего выражения, максимум достигается при $k\sim\frac{1}{\Gamma}\arccos\left(\frac{\abs{\beta}}{\abs{\alpha}}\right)$, что при малых отклонениях $\beta\lesssim\alpha$ сводится к $k\sim\frac{1}{\Gamma}\sqrt{\frac{2(\abs{\alpha}-\abs{\beta})}{\alpha}}$. 
+
+В ходе длительных поисков выяснилось, что можно использовать другую превосходную форму для оценки асимптотики функции Бесселя:
+\begin{eqw}
+     I_k(z) &= \frac{\exp\left(\sqrt{z^2+k^2}-k\log\left(\frac{k}{z}+\sqrt{1+\frac{k^2}{z^2}}\right)\right)}{\sqrt{2\pi\sqrt{k^2+z^2}}}+...\\
+    &= \frac{e^z}{\sqrt{2\pi}}\frac{\exp\left(\sqrt{z^2+k^2}-z-k\log\left(\frac{k}{z}+\sqrt{1+\frac{k^2}{z^2}}\right)\right)}{\sqrt[4]{k^2+z^2}}+\dots\\
+    AsI_k(z) &= \sqrt{z^2+k^2}-k\log\left(\frac{k}{z}+\sqrt{1+\frac{k^2}{z^2}}\right) - \frac{1}{4}\log\left(z^2+k^2\right)\\
+    I_k(z) &\approx \frac{\exp\left(AsI_k(z)\right)}{\sqrt{2\pi}}
+\end{eqw}
+В многоточии сокрыто схожее разложение со взятием корня со знаком $-$. И ещё разок перепишем асимптотику для $W(\beta)$:
+\begin{eqw}
+    &W(\beta) \approx \frac{2}{\pi\sqrt{2\pi}}
+    \sum\limits_k \exp\left(ik\Phi_0+AsI_k(4\abs{\alpha\beta}e^{ik\Gamma})+\abs{\alpha}^2 (1-e^{2ik\Gamma})-4\abs{\alpha\beta^*}\right)
 \end{eqw}
 \end{document}

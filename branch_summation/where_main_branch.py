@@ -47,7 +47,7 @@ def plot_best_k(x_step_params, y_step_params, k_sign, alpha: int | float =1):
     # Z = [i+k for i, k in it.product(np.arange(x_step_params[2]), np.arange(y_step_params[2]))]
     ax = plt.gca()
     ax.pcolor(X, Y, K,
-              cmap='inferno', shading='nearest', alpha=alpha)
+              cmap='cool', shading='nearest', alpha=alpha)
 
 
 def plot_sign_f(f, x_step_params, y_step_params):
@@ -127,9 +127,48 @@ def mplot_difference_with_borders(Z_range, freq):
     plot_difference((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), -1, alpha=0.5)
 
 
+def mplot_annotations_for_k_bar():
+    # Z_range = 10
+    axes = plt.gca()
+    for k, (x, y) in enumerate(((0,0),(-1.8, -2.54), (-6, -6.5), (-10, -10))):
+        axes.annotate(r'$\bar{k}='+str(k)+r'$', xy=(x, y), xytext=(x + 0.4, y + 0.2))
+
+def mplot_difference_less_eps(Z_range, freq, eps):
+    _diff_less_eps(eps, (-Z_range, Z_range, freq), (-Z_range, Z_range, freq), 1, alpha=1)
+
+
+def _diff_less_eps(eps, x_step_params, y_step_params, k_sign, alpha: int | float = 1):
+    X, Y = np.mgrid[x_step_params[0]:x_step_params[1]:complex(0, x_step_params[2]),
+           y_step_params[0]:y_step_params[1]:complex(0, y_step_params[2])]
+    Z = X + 1j*Y
+    diff = np.zeros((x_step_params[2], y_step_params[2]))
+    for i in range(x_step_params[2]):
+        for j in range(y_step_params[2]):
+            # if np.abs(Z[i, j]) < 2:
+            #     diff[i, j] = -10
+            #     continue
+            k_mean_abs, k_range = np.int_((np.abs(Z[i, j])+np.abs(np.angle(Z[i, j])-np.pi/2*k_sign)) / (2 * np.pi)), 3
+            k_arr = np.arange(np.max((0, k_mean_abs - k_range)), k_mean_abs + k_range + 1) * k_sign
+            z_k = np.array([1j * sc.special.lambertw(Z[i, j], k=k) for k in k_arr])
+            f_in_z_k = z_k ** 2 / 2j + z_k
+            vals = np.real(f_in_z_k * (-k_sign))
+
+            if np.min(np.abs(vals[1:] - vals[:-1])) < eps:
+                diff[i, j] = -1
+            else:
+                diff[i, j] = _best_k_slow(X[i, j] + 1j * Y[i, j], k_sign)
+
+    ax = plt.gca()
+    ax.pcolor(X, Y, diff,
+              cmap='cool', shading='nearest', alpha=alpha)
+    print(np.max(diff), np.argmax(diff))
 
 if __name__ == '__main__':
-    Z_range, freq = 20, 400
-    plot_difference((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), -1, alpha=1)
-    plot_where_biggest_f(Z_range, -1)
+    Z_range, freq = 11, 600
+    # plot_difference((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), 1, alpha=1)
+    # plot_where_biggest_f(Z_range, -1)
+    plot_best_k((-Z_range, Z_range, freq), (-Z_range, Z_range, freq), 1, alpha=1)
+
+    mplot_difference_less_eps(Z_range, freq, 0.02)
+    mplot_annotations_for_k_bar()
     plt.show()

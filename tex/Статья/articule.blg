@@ -1,46 +1,46 @@
-This is BibTeX, Version 0.99d (TeX Live 2022/Arch Linux)
+This is BibTeX, Version 0.99d (TeX Live 2023/Arch Linux)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: articule.aux
 The style file: unsrt.bst
 Database file #1: references.bib
-You've used 1 entry,
+You've used 4 entries,
             1791 wiz_defined-function locations,
-            453 strings with 3657 characters,
-and the built_in function-call counts, 193 in all, are:
-= -- 15
-> -- 4
-< -- 0
-+ -- 2
-- -- 1
-* -- 14
-:= -- 38
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 1
+            467 strings with 3996 characters,
+and the built_in function-call counts, 680 in all, are:
+= -- 55
+> -- 20
+< -- 1
++ -- 9
+- -- 5
+* -- 40
+:= -- 108
+add.period$ -- 11
+call.type$ -- 4
+change.case$ -- 2
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 9
-empty$ -- 21
-format.name$ -- 1
-if$ -- 39
+cite$ -- 4
+duplicate$ -- 33
+empty$ -- 81
+format.name$ -- 5
+if$ -- 153
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 1
-pop$ -- 1
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 22
+num.names$ -- 3
+pop$ -- 13
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 3
+skip$ -- 17
 stack$ -- 0
-substring$ -- 9
-swap$ -- 1
-text.length$ -- 0
+substring$ -- 27
+swap$ -- 5
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 2
-width$ -- 2
-write$ -- 13
+while$ -- 5
+width$ -- 5
+write$ -- 42

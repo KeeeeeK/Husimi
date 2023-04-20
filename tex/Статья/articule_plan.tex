@@ -1,0 +1,73 @@
+\documentclass[a4paper, 12pt]{article}
+
+%Русский язык
+\renewcommand{\familydefault}{\sfdefault}%шрифт
+\usepackage[T2A]{fontenc} %кодировка
+\usepackage[utf8]{inputenc} %кодировка исходного кода
+\usepackage[english,russian]{babel} %локализация и переносы
+%отступы 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=3cm,bindingoffset=0cm]{geometry}
+\usepackage{indentfirst}
+%Вставка картинок
+\usepackage{graphicx}
+\graphicspath{}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%Таблицы
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{booktabs}
+
+% Cсылки
+\usepackage{hyperref}
+\bibliographystyle{unsrt}
+%Математика
+\usepackage{physics}
+\usepackage{amssymb}
+
+\DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\Real}{Re}
+\DeclareMathOperator*{\Imag}{Im}
+%%Окружение для многострочных уравнений
+\newenvironment{eqw}{\begin{equation} \begin{aligned}}   
+    {\end{aligned}    \end{equation}}
+\newenvironment{eqw*}{\begin{equation*} \begin{aligned}}   
+    {\end{aligned}    \end{equation*}}
+%Заголовок
+\author{Нугманов Булат}
+\title{Статья}
+\begin{document}
+\maketitle
+\section*{План}
+\begin{itemize}
+    \item Вступление 
+    \begin{enumerate}
+        \item Вакуум генерирует когерентные состояния
+        \item Важность генерации некогерентные состояний: ссылки на quantum computation, квантовую связь ... \textcolor{red}{на что ещё?} \textcolor{blue}{интерферометры для повышения чувствительности, грав-волны}
+        \item Основные механизмы генерации некогерентные состояний: нелинейная среда ... \textcolor{red}{что-нибудь ещё?} \textcolor{blue}{см следующий пункт} 
+        \item Использование нелинейных кристаллов: $\chi^{(2)}$, $\chi^{(3)}$. \textcolor{red}{какие-нибудь ссылки на использование высших порядков нелинейности} \textcolor{blue}{ФЯ не знает, может быть и есть работы по слабым нелинейным эффектам высших порядков. Джзефсоновские переходы настолько нелинейны, что их не описывают с помощью $\chi^{(n)}$. Однако смотрят на исходящее СВЧ излучение, а не светят на него.}\textcolor{green}{Интересно, но отвлекает от темы}
+        \item Меры неклассичности: соотношение между дисперсией и средним числом фотонов
+        \item $\chi^{(2)}$ не придаёт негативности, но позволяет снизить дисперсию. $\chi^{(3)}$ даёт негативность. Подмешивание с гауссовым светом даёт меньшую дисперсию.  Ссылка на китагаву и перечисленных в BalKhal ещё авторов. \textcolor{red}{А можно ли мешать не с гауссовым светом, а с чем-то иным?} \textcolor{blue}{Можно, но не факт, что при этом сохранится негативность. Можно поискать статьи --- ФЯ не знает о таком.}\textcolor{green}{Интересно, но отвлекает от темы}
+        \item Использование $\chi^{(3)}$ --- в резонаторе и напрямую через кристалл. 
+        \item Хорошо бы ещё оформить в таблицу экспериментальные достижения из BalKhal и более новые исследования. Одним из столбцов можно сделать особенности эксперимента или практического применения.
+    \end{enumerate}
+    \item Основная часть\\
+    Про каждую из ветвей мысли из Supplemental material надо указать: начало, основные шаги и заключение.
+    \begin{enumerate}
+        \item Гамильтониан света в кристалле, пренебрежение остальными модами. Разложение получившегося состояния по фоковским. В \cite{milburn1986quantum} приведён и гамильтониан, и функция Хусими.
+        \begin{eqw}
+            \hat H = \hbar \omega_0 \hat n + \gamma \hat n(\hat n + 1)
+        \end{eqw}
+        Переходя к вращающимся амплитудам и вводя обозначение $\Gamma = \gamma t$, где $t$ --- время прохождения света через кристалл, получаем состояние на выходе из кристалла:
+        \begin{eqw}
+            |\psi\rangle = e^{-|\alpha|^2}\sum\limits_{n=0}^{\infty}\frac{\alpha^n}{\sqrt{n!}}e^{i\Gamma n(n+1)}\ket{n}
+        \end{eqw}
+        \item Изучение функции Хусими гораздо проще, чем функции Вигнера, потому что её можно свести к зависимости от двух парамтров
+        \item Использование введённой функции $F$ + ссылка на Supplemental material = графики функции Хусими при различных $\alpha, \; \Gamma$.
+        \item Обсуждение основных параметров, от которых зависит картинка. Закручивание функции Хусими на полный поворот --- \textit{вполне достижимая картинка в эксперименте?}
+    \end{enumerate}
+    \item Заключение\\
+    Бла-бла. Мы всё сделали, всё получилось.
+\end{itemize}
+\nocite{*}
+\bibliography{references}
+\end{document}

@@ -21,8 +21,9 @@
 \usepackage{hyperref}
 \bibliographystyle{unsrt}
 %Математика
-\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools }
-\DeclareMathOperator*{\Res}{Res}
+\usepackage{physics}
+\usepackage{amssymb}
+% \DeclareMathOperator*{\Res}{Res}
 \DeclareMathOperator*{\sign}{sign}
 \DeclareMathOperator*{\Real}{Re}
 \DeclareMathOperator*{\Imag}{Im}
@@ -296,8 +297,17 @@ when $\Gamma\in \mathbb{R}$, $A\in \mathbb{C}$ and $|\Gamma| \ll 1$.
     \frac{1}{\sqrt{R}}\left(1-\frac{1}{4 R^2} + \frac{5}{32 R^4}+\dots\right)
     \exp\left(\frac{R}{2|\Gamma|} - \frac{\left(\delta -\Gamma\right)^2}{4R|\Gamma|}+\dots\right),
 \end{eqw}
-где ввели обозначение $\delta = \Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma$.
+где ввели обозначение $\delta = \Phi + 2\pi \bar k +  \left(R+\frac{\pi}{2} \right)\sign\Gamma$. $n\sim\left|{A}\right|$
 
+\begin{eqw}
+    \exp\left(i\Gamma n^2\right) \sim
+    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{i z^2}{4\Gamma} + i n z\right) dz
+\end{eqw}
+Применим данную формулу для ряда \eqref{F def}:
+\begin{eqw}
+    \sum\limits_{n=0}^{\infty} \frac{A^n e^{i\Gamma n^2}}{n!} \sim
+    \int\limits_{-\infty}^{\infty} \exp\left(-\frac{i z^2}{4\Gamma} +  A e^{iz}\right) dz
+\end{eqw}
 \nocite{*}
 \bibliography{references}
 \end{document}
